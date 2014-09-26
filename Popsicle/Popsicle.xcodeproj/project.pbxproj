@@ -13,6 +13,19 @@
 		CE1F008F19D5C5A000B98BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F008E19D5C5A000B98BF8 /* Images.xcassets */; };
 		CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */; };
 		CE1F009E19D5C5A000B98BF8 /* PopsicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */; };
+		DB1B379A19D612AD00EC5ACF /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B379919D612AD00EC5ACF /* Regex.swift */; };
+		DB1B37C919D62A1200EC5ACF /* HTMLParsingFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = DB1B37C819D62A1200EC5ACF /* HTMLParsingFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB1B37D519D62A1300EC5ACF /* HTMLParsingFrameworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37D419D62A1300EC5ACF /* HTMLParsingFrameworkTests.m */; };
+		DB1B37D819D62A1300EC5ACF /* HTMLParsingFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1B37C419D62A1200EC5ACF /* HTMLParsingFramework.framework */; };
+		DB1B37D919D62A1300EC5ACF /* HTMLParsingFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB1B37C419D62A1200EC5ACF /* HTMLParsingFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DB1B37EA19D62A1F00EC5ACF /* TFHpple.h in Headers */ = {isa = PBXBuildFile; fileRef = DB1B37E319D62A1F00EC5ACF /* TFHpple.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB1B37EB19D62A1F00EC5ACF /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37E419D62A1F00EC5ACF /* TFHpple.m */; };
+		DB1B37EC19D62A1F00EC5ACF /* TFHppleElement.h in Headers */ = {isa = PBXBuildFile; fileRef = DB1B37E519D62A1F00EC5ACF /* TFHppleElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB1B37ED19D62A1F00EC5ACF /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37E619D62A1F00EC5ACF /* TFHppleElement.m */; };
+		DB1B37EE19D62A1F00EC5ACF /* XPathQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = DB1B37E719D62A1F00EC5ACF /* XPathQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB1B37EF19D62A1F00EC5ACF /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37E819D62A1F00EC5ACF /* XPathQuery.m */; };
+		DB1B37F119D62A2900EC5ACF /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1B37F019D62A2900EC5ACF /* libxml2.dylib */; };
+		DB1B37F319D62A9900EC5ACF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1B37F219D62A9900EC5ACF /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +36,42 @@
 			remoteGlobalIDString = CE1F008119D5C5A000B98BF8;
 			remoteInfo = Popsicle;
 		};
+		DB1B37CF19D62A1300EC5ACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F008119D5C5A000B98BF8;
+			remoteInfo = Popsicle;
+		};
+		DB1B37D619D62A1300EC5ACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB1B37C319D62A1200EC5ACF;
+			remoteInfo = HTMLParsingFramework;
+		};
+		DB1B37DA19D62A1300EC5ACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB1B37C319D62A1200EC5ACF;
+			remoteInfo = HTMLParsingFramework;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB1B37DF19D62A1300EC5ACF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DB1B37D919D62A1300EC5ACF /* HTMLParsingFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE1F008219D5C5A000B98BF8 /* Popsicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popsicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +84,21 @@
 		CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopsicleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F009C19D5C5A000B98BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopsicleTests.swift; sourceTree = "<group>"; };
+		DB1B379919D612AD00EC5ACF /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		DB1B37C419D62A1200EC5ACF /* HTMLParsingFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTMLParsingFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB1B37C719D62A1200EC5ACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB1B37C819D62A1200EC5ACF /* HTMLParsingFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTMLParsingFramework.h; sourceTree = "<group>"; };
+		DB1B37CE19D62A1300EC5ACF /* HTMLParsingFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTMLParsingFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB1B37D319D62A1300EC5ACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB1B37D419D62A1300EC5ACF /* HTMLParsingFrameworkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTMLParsingFrameworkTests.m; sourceTree = "<group>"; };
+		DB1B37E319D62A1F00EC5ACF /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		DB1B37E419D62A1F00EC5ACF /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		DB1B37E519D62A1F00EC5ACF /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		DB1B37E619D62A1F00EC5ACF /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		DB1B37E719D62A1F00EC5ACF /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		DB1B37E819D62A1F00EC5ACF /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		DB1B37F019D62A2900EC5ACF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxml2.dylib; sourceTree = "<group>"; };
+		DB1B37F219D62A9900EC5ACF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,10 +106,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB1B37D819D62A1300EC5ACF /* HTMLParsingFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CE1F009419D5C5A000B98BF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB1B37C019D62A1200EC5ACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1B37F319D62A9900EC5ACF /* Foundation.framework in Frameworks */,
+				DB1B37F119D62A2900EC5ACF /* libxml2.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB1B37CB19D62A1300EC5ACF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -59,6 +139,9 @@
 		CE1F007919D5C5A000B98BF8 = {
 			isa = PBXGroup;
 			children = (
+				DB1B37C519D62A1200EC5ACF /* HTMLParsingFramework */,
+				DB1B37D119D62A1300EC5ACF /* HTMLParsingFrameworkTests */,
+				DB1B37A819D6273D00EC5ACF /* Frameworks */,
 				CE1F008419D5C5A000B98BF8 /* Popsicle */,
 				CE1F009A19D5C5A000B98BF8 /* PopsicleTests */,
 				CE1F008319D5C5A000B98BF8 /* Products */,
@@ -70,6 +153,8 @@
 			children = (
 				CE1F008219D5C5A000B98BF8 /* Popsicle.app */,
 				CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */,
+				DB1B37C419D62A1200EC5ACF /* HTMLParsingFramework.framework */,
+				DB1B37CE19D62A1300EC5ACF /* HTMLParsingFrameworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +168,7 @@
 				CE1F008E19D5C5A000B98BF8 /* Images.xcassets */,
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
+				DB1B379919D612AD00EC5ACF /* Regex.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -112,7 +198,79 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DB1B37A819D6273D00EC5ACF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B37F219D62A9900EC5ACF /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB1B37C519D62A1200EC5ACF /* HTMLParsingFramework */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B37C819D62A1200EC5ACF /* HTMLParsingFramework.h */,
+				DB1B37F019D62A2900EC5ACF /* libxml2.dylib */,
+				DB1B37E919D62A1F00EC5ACF /* hpple */,
+				DB1B37C619D62A1200EC5ACF /* Supporting Files */,
+			);
+			path = HTMLParsingFramework;
+			sourceTree = "<group>";
+		};
+		DB1B37C619D62A1200EC5ACF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B37C719D62A1200EC5ACF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB1B37D119D62A1300EC5ACF /* HTMLParsingFrameworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B37D419D62A1300EC5ACF /* HTMLParsingFrameworkTests.m */,
+				DB1B37D219D62A1300EC5ACF /* Supporting Files */,
+			);
+			path = HTMLParsingFrameworkTests;
+			sourceTree = "<group>";
+		};
+		DB1B37D219D62A1300EC5ACF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B37D319D62A1300EC5ACF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB1B37E919D62A1F00EC5ACF /* hpple */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B37E319D62A1F00EC5ACF /* TFHpple.h */,
+				DB1B37E419D62A1F00EC5ACF /* TFHpple.m */,
+				DB1B37E519D62A1F00EC5ACF /* TFHppleElement.h */,
+				DB1B37E619D62A1F00EC5ACF /* TFHppleElement.m */,
+				DB1B37E719D62A1F00EC5ACF /* XPathQuery.h */,
+				DB1B37E819D62A1F00EC5ACF /* XPathQuery.m */,
+			);
+			name = hpple;
+			path = ../../Frameworks/HTMLParsing/HTMLParsing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DB1B37C119D62A1200EC5ACF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1B37EA19D62A1F00EC5ACF /* TFHpple.h in Headers */,
+				DB1B37EE19D62A1F00EC5ACF /* XPathQuery.h in Headers */,
+				DB1B37C919D62A1200EC5ACF /* HTMLParsingFramework.h in Headers */,
+				DB1B37EC19D62A1F00EC5ACF /* TFHppleElement.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		CE1F008119D5C5A000B98BF8 /* Popsicle */ = {
@@ -122,10 +280,13 @@
 				CE1F007E19D5C5A000B98BF8 /* Sources */,
 				CE1F007F19D5C5A000B98BF8 /* Frameworks */,
 				CE1F008019D5C5A000B98BF8 /* Resources */,
+				DB1B37DF19D62A1300EC5ACF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DB1B37D719D62A1300EC5ACF /* PBXTargetDependency */,
+				DB1B37DB19D62A1300EC5ACF /* PBXTargetDependency */,
 			);
 			name = Popsicle;
 			productName = Popsicle;
@@ -150,6 +311,42 @@
 			productReference = CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DB1B37C319D62A1200EC5ACF /* HTMLParsingFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB1B37DC19D62A1300EC5ACF /* Build configuration list for PBXNativeTarget "HTMLParsingFramework" */;
+			buildPhases = (
+				DB1B37BF19D62A1200EC5ACF /* Sources */,
+				DB1B37C019D62A1200EC5ACF /* Frameworks */,
+				DB1B37C119D62A1200EC5ACF /* Headers */,
+				DB1B37C219D62A1200EC5ACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HTMLParsingFramework;
+			productName = HTMLParsingFramework;
+			productReference = DB1B37C419D62A1200EC5ACF /* HTMLParsingFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DB1B37CD19D62A1300EC5ACF /* HTMLParsingFrameworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB1B37E019D62A1300EC5ACF /* Build configuration list for PBXNativeTarget "HTMLParsingFrameworkTests" */;
+			buildPhases = (
+				DB1B37CA19D62A1300EC5ACF /* Sources */,
+				DB1B37CB19D62A1300EC5ACF /* Frameworks */,
+				DB1B37CC19D62A1300EC5ACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB1B37D019D62A1300EC5ACF /* PBXTargetDependency */,
+			);
+			name = HTMLParsingFrameworkTests;
+			productName = HTMLParsingFrameworkTests;
+			productReference = DB1B37CE19D62A1300EC5ACF /* HTMLParsingFrameworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -163,6 +360,13 @@
 						CreatedOnToolsVersion = 6.0.1;
 					};
 					CE1F009619D5C5A000B98BF8 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = CE1F008119D5C5A000B98BF8;
+					};
+					DB1B37C319D62A1200EC5ACF = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					DB1B37CD19D62A1300EC5ACF = {
 						CreatedOnToolsVersion = 6.0.1;
 						TestTargetID = CE1F008119D5C5A000B98BF8;
 					};
@@ -183,6 +387,8 @@
 			targets = (
 				CE1F008119D5C5A000B98BF8 /* Popsicle */,
 				CE1F009619D5C5A000B98BF8 /* PopsicleTests */,
+				DB1B37C319D62A1200EC5ACF /* HTMLParsingFramework */,
+				DB1B37CD19D62A1300EC5ACF /* HTMLParsingFrameworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -205,6 +411,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB1B37C219D62A1200EC5ACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB1B37CC19D62A1300EC5ACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -214,6 +434,7 @@
 			files = (
 				CE1F008A19D5C5A000B98BF8 /* ViewController.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
+				DB1B379A19D612AD00EC5ACF /* Regex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +446,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB1B37BF19D62A1200EC5ACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1B37ED19D62A1F00EC5ACF /* TFHppleElement.m in Sources */,
+				DB1B37EF19D62A1F00EC5ACF /* XPathQuery.m in Sources */,
+				DB1B37EB19D62A1F00EC5ACF /* TFHpple.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB1B37CA19D62A1300EC5ACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB1B37D519D62A1300EC5ACF /* HTMLParsingFrameworkTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -232,6 +471,21 @@
 			isa = PBXTargetDependency;
 			target = CE1F008119D5C5A000B98BF8 /* Popsicle */;
 			targetProxy = CE1F009819D5C5A000B98BF8 /* PBXContainerItemProxy */;
+		};
+		DB1B37D019D62A1300EC5ACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F008119D5C5A000B98BF8 /* Popsicle */;
+			targetProxy = DB1B37CF19D62A1300EC5ACF /* PBXContainerItemProxy */;
+		};
+		DB1B37D719D62A1300EC5ACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB1B37C319D62A1200EC5ACF /* HTMLParsingFramework */;
+			targetProxy = DB1B37D619D62A1300EC5ACF /* PBXContainerItemProxy */;
+		};
+		DB1B37DB19D62A1300EC5ACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB1B37C319D62A1200EC5ACF /* HTMLParsingFramework */;
+			targetProxy = DB1B37DA19D62A1300EC5ACF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -388,6 +642,96 @@
 			};
 			name = Release;
 		};
+		DB1B37DD19D62A1300EC5ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = HTMLParsingFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HTMLParsingFramework",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DB1B37DE19D62A1300EC5ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = HTMLParsingFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HTMLParsingFramework",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DB1B37E119D62A1300EC5ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HTMLParsingFrameworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Popsicle.app/Popsicle";
+			};
+			name = Debug;
+		};
+		DB1B37E219D62A1300EC5ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HTMLParsingFrameworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Popsicle.app/Popsicle";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -407,12 +751,30 @@
 				CE1F00A319D5C5A000B98BF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE1F00A419D5C5A000B98BF8 /* Build configuration list for PBXNativeTarget "PopsicleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE1F00A519D5C5A000B98BF8 /* Debug */,
 				CE1F00A619D5C5A000B98BF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB1B37DC19D62A1300EC5ACF /* Build configuration list for PBXNativeTarget "HTMLParsingFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB1B37DD19D62A1300EC5ACF /* Debug */,
+				DB1B37DE19D62A1300EC5ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DB1B37E019D62A1300EC5ACF /* Build configuration list for PBXNativeTarget "HTMLParsingFrameworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB1B37E119D62A1300EC5ACF /* Debug */,
+				DB1B37E219D62A1300EC5ACF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
