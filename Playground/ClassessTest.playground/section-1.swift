@@ -150,7 +150,37 @@ func main () {
     
 }
 
+func writeToFile () {
+    var site_metadata_1 = SiteMetadata()
+    site_metadata_1.port = 30
+    
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    var storePath = documentsPath.stringByAppendingString("/metadata_file")
+
+    
+    var data = NSKeyedArchiver.archivedDataWithRootObject(site_metadata_1)
+    data.writeToFile(storePath, atomically: true)
+    
+    var ret_data = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as SiteMetadata
+    
+    
+    var device_1 = Device()
+    device_1.uid = "13131313"
+    
+    var storePathDevice = documentsPath.stringByAppendingString("/device_file")
+    
+    
+    var dataDevice = NSKeyedArchiver.archivedDataWithRootObject(device_1)
+    dataDevice.writeToFile(storePathDevice, atomically: true)
+    
+    print(device_1.uid)
+    var ret_device_data = NSKeyedUnarchiver.unarchiveObjectWithFile(storePathDevice) as Device
+    
+    
+}
+
 main()
+writeToFile()
 
 
 

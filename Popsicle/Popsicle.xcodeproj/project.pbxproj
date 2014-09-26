@@ -83,15 +83,13 @@
 		CE1F008419D5C5A000B98BF8 /* Popsicle */ = {
 			isa = PBXGroup;
 			children = (
+				CEEB020419D6225000B7D759 /* EncodedClasses */,
 				CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */,
 				CE1F008919D5C5A000B98BF8 /* ViewController.swift */,
 				CE1F008B19D5C5A000B98BF8 /* Main.storyboard */,
 				CE1F008E19D5C5A000B98BF8 /* Images.xcassets */,
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
-				CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */,
-				CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */,
-				CEFFF1BE19D5FEB900C10EB4 /* Device.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -119,6 +117,16 @@
 				CE1F009C19D5C5A000B98BF8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEEB020419D6225000B7D759 /* EncodedClasses */ = {
+			isa = PBXGroup;
+			children = (
+				CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */,
+				CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */,
+				CEFFF1BE19D5FEB900C10EB4 /* Device.swift */,
+			);
+			name = EncodedClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

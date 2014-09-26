@@ -9,17 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet var titleLabel: UILabel!
+
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("App Started")
-        
-        let site_metadata_1 = SiteMetadata()
-        site_metadata_1.port = 30
-        print(site_metadata_1.port)
-        let encoded_metadata = NSKeyedArchiver()
-        site_metadata_1.encodeWithCoder(encoded_metadata)
+        titleLabel.text = appDelegate.device?.uid
     }
 
     override func didReceiveMemoryWarning() {

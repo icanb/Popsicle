@@ -12,10 +12,37 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var device: Device?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        var storePath = documentsPath.stringByAppendingPathComponent("/device_self_file.sickle")
+        var checkValidation = NSFileManager.defaultManager()
+        
+        if (checkValidation.fileExistsAtPath(storePath))
+        {
+            // FILE AVAILABLE
+            var device_data = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as Device
+            self.device = device_data
+        }
+        else
+        {
+            // FILE NOT AVAILABLE
+            var new_device_data = Device()
+            new_device_data.uid = UIDevice.currentDevice().name
+
+            var data = NSKeyedArchiver.archivedDataWithRootObject(new_device_data)
+            data.writeToFile(storePath, atomically: true)
+            
+            self.device = new_device_data
+        }
+        
+        
         return true
     }
 
