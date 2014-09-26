@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.device = device_data
         }
         else
-        {
+        {   
             // FILE NOT AVAILABLE
             var new_device_data = Device()
             new_device_data.uid = UIDevice.currentDevice().name
