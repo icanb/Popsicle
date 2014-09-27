@@ -21,6 +21,9 @@
 		DB103AB919D76D1B0061BA94 /* HTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB103AB619D76D1B0061BA94 /* HTMLNode.swift */; };
 		DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB103AB719D76D1B0061BA94 /* HTMLParser.swift */; };
 		DB103ABC19D76DAC0061BA94 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB103ABB19D76DAC0061BA94 /* libxml2.dylib */; };
+		DB9F23D019D773CE0080AF0D /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F23CF19D773CE0080AF0D /* ActionRequestHandler.swift */; };
+		DB9F23D219D773CE0080AF0D /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = DB9F23D119D773CE0080AF0D /* Action.js */; };
+		DB9F23D619D773CE0080AF0D /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB9F23CB19D773CE0080AF0D /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +34,35 @@
 			remoteGlobalIDString = CE1F008119D5C5A000B98BF8;
 			remoteInfo = Popsicle;
 		};
+		DB9F23D319D773CE0080AF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB9F23CA19D773CE0080AF0D;
+			remoteInfo = Extension;
+		};
+		DB9F23D719D773CE0080AF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB9F23CA19D773CE0080AF0D;
+			remoteInfo = Extension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB9F23D519D773CE0080AF0D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DB9F23D619D773CE0080AF0D /* Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A6D0F12540B0A32118A487B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +86,10 @@
 		DB103AB719D76D1B0061BA94 /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		DB103AB819D76D1B0061BA94 /* Popsicle-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Popsicle-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		DB103ABB19D76DAC0061BA94 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		DB9F23CB19D773CE0080AF0D /* Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB9F23CE19D773CE0080AF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB9F23CF19D773CE0080AF0D /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		DB9F23D119D773CE0080AF0D /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +103,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CE1F009419D5C5A000B98BF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB9F23C819D773CE0080AF0D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,6 +134,7 @@
 				DB103AB519D76CFE0061BA94 /* HTMLParsing */,
 				CE1F008419D5C5A000B98BF8 /* Popsicle */,
 				CE1F009A19D5C5A000B98BF8 /* PopsicleTests */,
+				DB9F23CC19D773CE0080AF0D /* Extension */,
 				CE1F008319D5C5A000B98BF8 /* Products */,
 				E359C4D7C0BB1464BA431525 /* Pods */,
 				043541143012A44D13CF5FAD /* Frameworks */,
@@ -103,6 +146,7 @@
 			children = (
 				CE1F008219D5C5A000B98BF8 /* Popsicle.app */,
 				CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */,
+				DB9F23CB19D773CE0080AF0D /* Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +211,24 @@
 			name = HTMLParsing;
 			sourceTree = "<group>";
 		};
+		DB9F23CC19D773CE0080AF0D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DB9F23CF19D773CE0080AF0D /* ActionRequestHandler.swift */,
+				DB9F23D119D773CE0080AF0D /* Action.js */,
+				DB9F23CD19D773CE0080AF0D /* Supporting Files */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DB9F23CD19D773CE0080AF0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB9F23CE19D773CE0080AF0D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E359C4D7C0BB1464BA431525 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,10 +250,13 @@
 				CE1F007F19D5C5A000B98BF8 /* Frameworks */,
 				CE1F008019D5C5A000B98BF8 /* Resources */,
 				A46C54D6820339D72AB9B4D2 /* Copy Pods Resources */,
+				DB9F23D519D773CE0080AF0D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DB9F23D419D773CE0080AF0D /* PBXTargetDependency */,
+				DB9F23D819D773CE0080AF0D /* PBXTargetDependency */,
 			);
 			name = Popsicle;
 			productName = Popsicle;
@@ -216,6 +281,23 @@
 			productReference = CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DB9F23CA19D773CE0080AF0D /* Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB9F23DB19D773CE0080AF0D /* Build configuration list for PBXNativeTarget "Extension" */;
+			buildPhases = (
+				DB9F23C719D773CE0080AF0D /* Sources */,
+				DB9F23C819D773CE0080AF0D /* Frameworks */,
+				DB9F23C919D773CE0080AF0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Extension;
+			productName = Extension;
+			productReference = DB9F23CB19D773CE0080AF0D /* Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -231,6 +313,9 @@
 					CE1F009619D5C5A000B98BF8 = {
 						CreatedOnToolsVersion = 6.0.1;
 						TestTargetID = CE1F008119D5C5A000B98BF8;
+					};
+					DB9F23CA19D773CE0080AF0D = {
+						CreatedOnToolsVersion = 6.0.1;
 					};
 				};
 			};
@@ -249,6 +334,7 @@
 			targets = (
 				CE1F008119D5C5A000B98BF8 /* Popsicle */,
 				CE1F009619D5C5A000B98BF8 /* PopsicleTests */,
+				DB9F23CA19D773CE0080AF0D /* Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +354,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB9F23C919D773CE0080AF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB9F23D219D773CE0080AF0D /* Action.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +424,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB9F23C719D773CE0080AF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB9F23D019D773CE0080AF0D /* ActionRequestHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -337,6 +439,16 @@
 			isa = PBXTargetDependency;
 			target = CE1F008119D5C5A000B98BF8 /* Popsicle */;
 			targetProxy = CE1F009819D5C5A000B98BF8 /* PBXContainerItemProxy */;
+		};
+		DB9F23D419D773CE0080AF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB9F23CA19D773CE0080AF0D /* Extension */;
+			targetProxy = DB9F23D319D773CE0080AF0D /* PBXContainerItemProxy */;
+		};
+		DB9F23D819D773CE0080AF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB9F23CA19D773CE0080AF0D /* Extension */;
+			targetProxy = DB9F23D719D773CE0080AF0D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -509,6 +621,30 @@
 			};
 			name = Release;
 		};
+		DB9F23D919D773CE0080AF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB9F23DA19D773CE0080AF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -538,6 +674,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DB9F23DB19D773CE0080AF0D /* Build configuration list for PBXNativeTarget "Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB9F23D919D773CE0080AF0D /* Debug */,
+				DB9F23DA19D773CE0080AF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
