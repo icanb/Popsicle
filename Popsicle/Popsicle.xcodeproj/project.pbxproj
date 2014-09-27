@@ -17,11 +17,9 @@
 		CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */; };
 		CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */; };
 		CEFFF1BF19D5FEB900C10EB4 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BE19D5FEB900C10EB4 /* Device.swift */; };
-		E1EBE0A819D709590098CDFA /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EBE0A719D709590098CDFA /* ActionViewController.swift */; };
-		E1EBE0AA19D709590098CDFA /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1EBE0A919D709590098CDFA /* MainInterface.storyboard */; };
-		E1EBE0AD19D709590098CDFA /* PopsicleExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E1EBE0A319D709590098CDFA /* PopsicleExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E1EBE0B619D70E670098CDFA /* GetURL.js in Resources */ = {isa = PBXBuildFile; fileRef = E1EBE0B419D70E670098CDFA /* GetURL.js */; };
-		E1EBE0B719D70E670098CDFA /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1EBE0B519D70E670098CDFA /* TemplateIcon2x.png */; };
+		E12A076A19D7653100A23AA4 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12A076919D7653100A23AA4 /* ActionRequestHandler.swift */; };
+		E12A076C19D7653100A23AA4 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = E12A076B19D7653100A23AA4 /* Action.js */; };
+		E12A076F19D7653100A23AA4 /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E12A076519D7653100A23AA4 /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,19 +30,19 @@
 			remoteGlobalIDString = CE1F008119D5C5A000B98BF8;
 			remoteInfo = Popsicle;
 		};
-		E1EBE0AB19D709590098CDFA /* PBXContainerItemProxy */ = {
+		E12A076D19D7653100A23AA4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E1EBE0A219D709590098CDFA;
-			remoteInfo = PopsicleExtension;
+			remoteGlobalIDString = E12A076419D7653100A23AA4;
+			remoteInfo = Extension;
 		};
-		E1EBE0AE19D7095A0098CDFA /* PBXContainerItemProxy */ = {
+		E12A077019D7653100A23AA4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE1F007A19D5C5A000B98BF8 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E1EBE0A219D709590098CDFA;
-			remoteInfo = PopsicleExtension;
+			remoteGlobalIDString = E12A076419D7653100A23AA4;
+			remoteInfo = Extension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -55,7 +53,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E1EBE0AD19D709590098CDFA /* PopsicleExtension.appex in Embed App Extensions */,
+				E12A076F19D7653100A23AA4 /* Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,12 +77,10 @@
 		CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteMetadata.swift; sourceTree = "<group>"; };
 		CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageCache.swift; path = ../PageCache.swift; sourceTree = "<group>"; };
 		CEFFF1BE19D5FEB900C10EB4 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
-		E1EBE0A319D709590098CDFA /* PopsicleExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PopsicleExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1EBE0A619D709590098CDFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1EBE0A719D709590098CDFA /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
-		E1EBE0A919D709590098CDFA /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		E1EBE0B419D70E670098CDFA /* GetURL.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GetURL.js; sourceTree = "<group>"; };
-		E1EBE0B519D70E670098CDFA /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
+		E12A076519D7653100A23AA4 /* Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E12A076819D7653100A23AA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E12A076919D7653100A23AA4 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		E12A076B19D7653100A23AA4 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +99,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1EBE0A019D709590098CDFA /* Frameworks */ = {
+		E12A076219D7653100A23AA4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -126,7 +122,7 @@
 			children = (
 				CE1F008419D5C5A000B98BF8 /* Popsicle */,
 				CE1F009A19D5C5A000B98BF8 /* PopsicleTests */,
-				E1EBE0A419D709590098CDFA /* PopsicleExtension */,
+				E12A076619D7653100A23AA4 /* Extension */,
 				CE1F008319D5C5A000B98BF8 /* Products */,
 				E359C4D7C0BB1464BA431525 /* Pods */,
 				043541143012A44D13CF5FAD /* Frameworks */,
@@ -138,7 +134,7 @@
 			children = (
 				CE1F008219D5C5A000B98BF8 /* Popsicle.app */,
 				CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */,
-				E1EBE0A319D709590098CDFA /* PopsicleExtension.appex */,
+				E12A076519D7653100A23AA4 /* Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,22 +188,20 @@
 			name = EncodedClasses;
 			sourceTree = "<group>";
 		};
-		E1EBE0A419D709590098CDFA /* PopsicleExtension */ = {
+		E12A076619D7653100A23AA4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E1EBE0A719D709590098CDFA /* ActionViewController.swift */,
-				E1EBE0A919D709590098CDFA /* MainInterface.storyboard */,
-				E1EBE0A519D709590098CDFA /* Supporting Files */,
-				E1EBE0B419D70E670098CDFA /* GetURL.js */,
-				E1EBE0B519D70E670098CDFA /* TemplateIcon2x.png */,
+				E12A076919D7653100A23AA4 /* ActionRequestHandler.swift */,
+				E12A076B19D7653100A23AA4 /* Action.js */,
+				E12A076719D7653100A23AA4 /* Supporting Files */,
 			);
-			path = PopsicleExtension;
+			path = Extension;
 			sourceTree = "<group>";
 		};
-		E1EBE0A519D709590098CDFA /* Supporting Files */ = {
+		E12A076719D7653100A23AA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E1EBE0A619D709590098CDFA /* Info.plist */,
+				E12A076819D7653100A23AA4 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -238,8 +232,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E1EBE0AC19D709590098CDFA /* PBXTargetDependency */,
-				E1EBE0AF19D7095A0098CDFA /* PBXTargetDependency */,
+				E12A076E19D7653100A23AA4 /* PBXTargetDependency */,
+				E12A077119D7653100A23AA4 /* PBXTargetDependency */,
 			);
 			name = Popsicle;
 			productName = Popsicle;
@@ -264,21 +258,21 @@
 			productReference = CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E1EBE0A219D709590098CDFA /* PopsicleExtension */ = {
+		E12A076419D7653100A23AA4 /* Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1EBE0B219D7095A0098CDFA /* Build configuration list for PBXNativeTarget "PopsicleExtension" */;
+			buildConfigurationList = E12A077419D7653100A23AA4 /* Build configuration list for PBXNativeTarget "Extension" */;
 			buildPhases = (
-				E1EBE09F19D709590098CDFA /* Sources */,
-				E1EBE0A019D709590098CDFA /* Frameworks */,
-				E1EBE0A119D709590098CDFA /* Resources */,
+				E12A076119D7653100A23AA4 /* Sources */,
+				E12A076219D7653100A23AA4 /* Frameworks */,
+				E12A076319D7653100A23AA4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PopsicleExtension;
-			productName = PopsicleExtension;
-			productReference = E1EBE0A319D709590098CDFA /* PopsicleExtension.appex */;
+			name = Extension;
+			productName = Extension;
+			productReference = E12A076519D7653100A23AA4 /* Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -297,7 +291,7 @@
 						CreatedOnToolsVersion = 6.0.1;
 						TestTargetID = CE1F008119D5C5A000B98BF8;
 					};
-					E1EBE0A219D709590098CDFA = {
+					E12A076419D7653100A23AA4 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
 				};
@@ -317,7 +311,7 @@
 			targets = (
 				CE1F008119D5C5A000B98BF8 /* Popsicle */,
 				CE1F009619D5C5A000B98BF8 /* PopsicleTests */,
-				E1EBE0A219D709590098CDFA /* PopsicleExtension */,
+				E12A076419D7653100A23AA4 /* Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -340,13 +334,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1EBE0A119D709590098CDFA /* Resources */ = {
+		E12A076319D7653100A23AA4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1EBE0AA19D709590098CDFA /* MainInterface.storyboard in Resources */,
-				E1EBE0B619D70E670098CDFA /* GetURL.js in Resources */,
-				E1EBE0B719D70E670098CDFA /* TemplateIcon2x.png in Resources */,
+				E12A076C19D7653100A23AA4 /* Action.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,11 +398,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1EBE09F19D709590098CDFA /* Sources */ = {
+		E12A076119D7653100A23AA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1EBE0A819D709590098CDFA /* ActionViewController.swift in Sources */,
+				E12A076A19D7653100A23AA4 /* ActionRequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,15 +414,15 @@
 			target = CE1F008119D5C5A000B98BF8 /* Popsicle */;
 			targetProxy = CE1F009819D5C5A000B98BF8 /* PBXContainerItemProxy */;
 		};
-		E1EBE0AC19D709590098CDFA /* PBXTargetDependency */ = {
+		E12A076E19D7653100A23AA4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E1EBE0A219D709590098CDFA /* PopsicleExtension */;
-			targetProxy = E1EBE0AB19D709590098CDFA /* PBXContainerItemProxy */;
+			target = E12A076419D7653100A23AA4 /* Extension */;
+			targetProxy = E12A076D19D7653100A23AA4 /* PBXContainerItemProxy */;
 		};
-		E1EBE0AF19D7095A0098CDFA /* PBXTargetDependency */ = {
+		E12A077119D7653100A23AA4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E1EBE0A219D709590098CDFA /* PopsicleExtension */;
-			targetProxy = E1EBE0AE19D7095A0098CDFA /* PBXContainerItemProxy */;
+			target = E12A076419D7653100A23AA4 /* Extension */;
+			targetProxy = E12A077019D7653100A23AA4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -589,24 +581,24 @@
 			};
 			name = Release;
 		};
-		E1EBE0B019D7095A0098CDFA /* Debug */ = {
+		E12A077219D7653100A23AA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = PopsicleExtension/Info.plist;
+				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		E1EBE0B119D7095A0098CDFA /* Release */ = {
+		E12A077319D7653100A23AA4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = PopsicleExtension/Info.plist;
+				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -643,11 +635,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1EBE0B219D7095A0098CDFA /* Build configuration list for PBXNativeTarget "PopsicleExtension" */ = {
+		E12A077419D7653100A23AA4 /* Build configuration list for PBXNativeTarget "Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E1EBE0B019D7095A0098CDFA /* Debug */,
-				E1EBE0B119D7095A0098CDFA /* Release */,
+				E12A077219D7653100A23AA4 /* Debug */,
+				E12A077319D7653100A23AA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var device: Device?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        println("app didFinishLaunchingWithOptions")
         // Override point for customization after application launch.
         
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -43,6 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
+        return true
+    }
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        println("got URL")
+        println(url.host!.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding))
         return true
     }
 
