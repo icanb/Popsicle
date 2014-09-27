@@ -6,7 +6,6 @@
 /**
 * HTMLNode
 */
-
 class HTMLNode {
     enum HTMLNodeType : String {
         case HTMLUnkownNode     = ""
