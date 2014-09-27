@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
     @IBOutlet var tableView: UITableView!
@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         "</body>" +
     "</html>"
     
+    let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var sites:[SiteMetadata] = []
 
@@ -42,6 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         let stringUrl:String = "http://google.com"
         cacheHtmlPages(stringUrl)
 
+        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         self.sites = self.appDelegate.device!.cache
     }
 
@@ -69,8 +71,11 @@ class ViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell! {
-        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+    
+        var cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+
         
         cell.textLabel?.text = self.sites[indexPath.row].hostname
 
