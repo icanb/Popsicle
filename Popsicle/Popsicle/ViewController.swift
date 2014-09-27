@@ -43,7 +43,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let stringUrl:String = "http://google.com"
         cacheHtmlPages(stringUrl)
 
+        
+        // Configure the table
         self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
+        self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+
         self.sites = self.appDelegate.device!.cache
     }
 
@@ -52,7 +56,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    // Table Delegate methods
+    // Table View setup
+    
+    func tableView(tableView: UITableView,
+        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            return 70
+    }
+    
+    // Table Data Delegate methods
     
     // section setup
     
@@ -72,12 +83,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-    
-        var cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
-
         
-        cell.textLabel?.text = self.sites[indexPath.row].hostname
+        var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+
+        if (cell == nil) {
+            var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
+            cell = nibs[0] as UITableViewCell
+        }
+
+        var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+        siteNameLabel?.text = self.sites[indexPath.row].hostname
 
         return cell
     }
