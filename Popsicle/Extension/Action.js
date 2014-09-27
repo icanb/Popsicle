@@ -19,7 +19,7 @@ Action.prototype = {
         
         //arguments.completionFunction({ "currentBackgroundColor" : document.body.style.backgroundColor })
         
-        window.location = "Popsicle://" + document.baseURI;
+        window.location = "Popsicle://" + escape(document.baseURI);
     },
     
     finalize: function(arguments) {

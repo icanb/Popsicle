@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        println("app didFinishLaunchingWithOptions")
         // Override point for customization after application launch.
         
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -49,9 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        println("got URL")
-        println(url.host!.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding))
+        let targetURL:String = getTargetURL(url)
+        showAlert(targetURL) // println doesn't work here
         return true
+    }
+    
+    func getTargetURL(url: NSURL) -> String {
+        var strURL = (url.absoluteString!).stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        return (strURL).substringFromIndex(advance(strURL.startIndex, 11)) // get rid of "Popsicle://"
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -74,6 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func showAlert(str:String) {
+        var alert = UIAlertView(title: "yeah", message: str, delegate: self, cancelButtonTitle: "ok")
+        alert.show()
     }
 
 
