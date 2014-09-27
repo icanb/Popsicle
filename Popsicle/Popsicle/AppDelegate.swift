@@ -29,20 +29,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // FILE AVAILABLE
             var device_data = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as Device
             self.device = device_data
+            self.device!.storePath = storePath
+
+            print(device_data)
         }
         else
         {   
             // FILE NOT AVAILABLE
             var new_device_data = Device()
             new_device_data.uid = UIDevice.currentDevice().name
+            new_device_data.storePath = storePath
 
             var data = NSKeyedArchiver.archivedDataWithRootObject(new_device_data)
             data.writeToFile(storePath, atomically: true)
             
             self.device = new_device_data
         }
-        
-        
+
         return true
     }
 

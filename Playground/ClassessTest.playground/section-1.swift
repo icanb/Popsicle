@@ -3,6 +3,23 @@
 import UIKit
 import Foundation;
 
+class Storable:NSObject {
+    
+    var storePath: String?
+    
+    func updateStorage() {
+        if (storePath == nil) {
+            println("No store path")
+            return
+        }
+        
+        var data = NSKeyedArchiver.archivedDataWithRootObject(self)
+        data.writeToFile(self.storePath!, atomically: true)
+        
+    }
+}
+
+
 
 class SiteMetadata : NSObject, NSCoding {
     
@@ -75,7 +92,7 @@ class PageCache : NSObject, NSCoding {
     }
 }
 
-class Device : NSObject, NSCoding {
+class Device : Storable, NSCoding {
 
     var uid: String = ""
     var name: String = ""

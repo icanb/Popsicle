@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate {
     
-    @IBOutlet var titleLabel: UILabel!
+
+    @IBOutlet var tableView: UITableView!
 
     let tempHtmlString:String =
     "<!DOCTYPE html>" +
@@ -29,22 +30,58 @@ class ViewController: UIViewController {
     "</html>"
     
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var sites:[SiteMetadata] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("App Started")
-        titleLabel.text = appDelegate.device?.uid
+
+//        titleLabel.text = appDelegate.device?.uid
         
         let stringUrl:String = "http://google.com"
         cacheHtmlPages(stringUrl)
-        
+
+        self.sites = self.appDelegate.device!.cache
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // Table Delegate methods
+    
+    // section setup
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    // cell setup
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(section == 0) {
+            return self.sites.count
+        }
+        else {
+            return 0
+        }
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell! {
+        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        
+        cell.textLabel?.text = self.sites[indexPath.row].hostname
+
+        return cell
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("You selected cell #\(indexPath.row)!")
+    }
+    
+    
 
     func cacheHtmlPages(stringUrl: String) -> Void {
         let url = NSURL(string: stringUrl)

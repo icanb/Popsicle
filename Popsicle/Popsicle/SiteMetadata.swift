@@ -8,13 +8,14 @@
 
 import Foundation
 
-class SiteMetadata : NSObject, NSCoding {
+class SiteMetadata : Storable, NSCoding {
     
     var hostname:String = ""
     var port = 80
     var last_update: NSDate = NSDate.date()
     var directory_path:String = "/"
-    
+    var favicon:String = ""
+
     
     override init() {
         super.init()

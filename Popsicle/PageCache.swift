@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PageCache : NSObject, NSCoding {
+class PageCache : Storable, NSCoding {
     
     var full_url: String = ""
     var url_path: String = ""
