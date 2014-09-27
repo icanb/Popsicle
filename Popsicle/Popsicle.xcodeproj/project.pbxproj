@@ -26,6 +26,8 @@
 		DB1B37EF19D62A1F00EC5ACF /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37E819D62A1F00EC5ACF /* XPathQuery.m */; };
 		DB1B37F119D62A2900EC5ACF /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1B37F019D62A2900EC5ACF /* libxml2.dylib */; };
 		DB1B37F319D62A9900EC5ACF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1B37F219D62A9900EC5ACF /* Foundation.framework */; };
+		DB1B37FC19D742AB00EC5ACF /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37FB19D742AB00EC5ACF /* HTMLParser.swift */; };
+		DB1B37FE19D742B500EC5ACF /* HTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B37FD19D742B500EC5ACF /* HTMLNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,9 @@
 		DB1B37E819D62A1F00EC5ACF /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		DB1B37F019D62A2900EC5ACF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxml2.dylib; sourceTree = "<group>"; };
 		DB1B37F219D62A9900EC5ACF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DB1B37FB19D742AB00EC5ACF /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		DB1B37FD19D742B500EC5ACF /* HTMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLNode.swift; sourceTree = "<group>"; };
+		DB1B37FF19D742DB00EC5ACF /* Swift-HTML-Parser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Swift-HTML-Parser-Bridging-Header.h"; path = "Popsicle/Swift-HTML-Parser-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +174,9 @@
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
 				DB1B379919D612AD00EC5ACF /* Regex.swift */,
+				DB1B37FB19D742AB00EC5ACF /* HTMLParser.swift */,
+				DB1B37FD19D742B500EC5ACF /* HTMLNode.swift */,
+				DB1B37FF19D742DB00EC5ACF /* Swift-HTML-Parser-Bridging-Header.h */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -433,7 +441,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE1F008A19D5C5A000B98BF8 /* ViewController.swift in Sources */,
+				DB1B37FC19D742AB00EC5ACF /* HTMLParser.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
+				DB1B37FE19D742B500EC5ACF /* HTMLNode.swift in Sources */,
 				DB1B379A19D612AD00EC5ACF /* Regex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +553,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -580,6 +595,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -592,9 +612,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = Popsicle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Popsicle/Swift-HTML-Parser-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -602,9 +629,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = Popsicle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Popsicle/Swift-HTML-Parser-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -645,6 +679,7 @@
 		DB1B37DD19D62A1300EC5ACF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -668,6 +703,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -676,6 +713,7 @@
 		DB1B37DE19D62A1300EC5ACF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -695,6 +733,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
