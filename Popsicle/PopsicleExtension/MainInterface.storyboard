@@ -28,9 +28,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="characterWrap" numberOfLines="21" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tO-I6-N6T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="wait for it..." lineBreakMode="characterWrap" numberOfLines="21" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tO-I6-N6T">
                                 <rect key="frame" x="28" y="92" width="281" height="394"/>
-                                <string key="text">fgafj;eowfjaioejwfaeawe;fjaw;fijaew;fjfaewfaow;efioja;wfjaow;fijaeow;fj;wefgafj;eowfjaioejwfaeawe;fjaw;fijaew;fjfaewfaow;efioja;wfjaow;fijaeow;fj;wefgafj;eowfjaioejwfaeawe;fjaw;fijaew;fjfaewfaow;efioja;wfjaow;fijaeow;fj;wefgafj;eowfjaioejwfaeawe;fjaw;fijaew;fjfaewfaow;efioja;wfjaow;fijaeow;fj;wefgafj;eowfjaioejwfaeawe;fjaw;fijaew;fjfaewfaow;efioja;wfjaow;fijaeow;fj;we</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>

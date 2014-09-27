@@ -8,16 +8,18 @@
 
 import UIKit
 import MobileCoreServices
+import Foundation
 
 class ActionViewController: UIViewController {
     @IBOutlet weak var textView: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView.text = "\(self.extensionContext!.inputItems)"
+        //self.textView.text = "\(self.extensionContext!.inputItems)"
         
+        var world = "Hello"
+        NSLog("test: %@", world)
         
-    
         // Get the item[s] we're handling from the extension context.
         
         // For example, look for an image and place it into an image view.
@@ -29,8 +31,10 @@ class ActionViewController: UIViewController {
                 itemProvider.loadItemForTypeIdentifier(kUTTypePropertyList as NSString, options: nil, completionHandler: { (item, error) in
                     var results = item as NSDictionary
                     var baseURI = results.objectForKey(NSExtensionJavaScriptPreprocessingResultsKey)?.objectForKey("baseURI")
+                    
                     println("\(baseURI)")
                     self.textView.text = "\(baseURI)"
+                    println("js callback")
                 })
             }
         }
