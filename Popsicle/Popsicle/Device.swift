@@ -9,12 +9,12 @@
 
 import Foundation
 
-class Device : NSObject, NSCoding {
+class Device : Storable, NSCoding {
     
     var uid: String = ""
     var name: String = ""
     var cache: [SiteMetadata] = []
-    
+
     override init() {
         super.init()
     }
@@ -35,4 +35,7 @@ class Device : NSObject, NSCoding {
         aCoder.encodeObject(self.cache, forKey:"cache")
     }
 
+    func save() {
+        
+    }
 }
