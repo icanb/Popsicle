@@ -72,9 +72,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session = MCSession(peer: self.peerID)
         self.session.delegate = self
         
+        println("Peers:")
+        println(self.session.connectedPeers)
+        
+        var toBroadcast:[String] = []
+        for site in localSites {
+            toBroadcast.append(site.hostname)
+        }
+
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: [discoveryInfoSitesKey: "example.com,example.org,example.edu"],
+            discoveryInfo: [discoveryInfoSitesKey: ",".join(toBroadcast)],
             serviceType: self.serviceType)
+        
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
         
@@ -95,6 +104,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+        var alertController = UIAlertController(title: "MC", message: "Recieved invitation!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
+            println("We want to ACCEPT")
+        })
+        var rejectAction = UIAlertAction(title: "Reject", style: UIAlertActionStyle.Cancel, handler: {(UIAlertAction) in
+            println("We want to REJECT")
+        })
+        alertController.addAction(acceptAction)
+        alertController.addAction(rejectAction)
+        alertController.presentViewController(self, animated: true, completion: nil)
         showAlert("Received invitation from peer!!")
     }
     
@@ -120,12 +139,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.remoteSites[remoteSite] = peerID
                 }
             }
+            self.tableView.reloadData()
             println("self.remoteSites: \(self.remoteSites)")
         }
     }
     
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
         println("Lost peer: \(peerID)")
+        for (remoteHostname, remotePeerID) in self.remoteSites {
+            println("Looking at \(remoteHostname) - \(remotePeerID)")
+            if (remotePeerID == peerID) {
+                self.remoteSites.removeValueForKey(remoteHostname)
+                println("Removed \(remoteHostname) - \(remotePeerID))")
+            }
+        }
+        self.tableView.reloadData()
     }
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
@@ -186,9 +214,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else {
             return "PAGES AROUND"
         }
-
     }
-
     
     // cell setup
     
@@ -205,12 +231,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         // Remote path
         else {
-            var count = 0
-            for remoteSite in remoteSites {
-                println("remoteSite: \(remoteSite)")
-                count += 1
-            }
-            return count
+            return remoteSites.count
         }
     }
     
@@ -265,21 +286,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             image = image.resizableImageWithCapInsets(insets)
 
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = page?.url_path
+            siteNameLabel?.text = page?.title
     
             return cell
     
         }
-        else if (cellType == "localsite") {
-            // site cell
-            var indexRow = indexPath.row
-            
-            if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
-                indexRow = indexRow - self.nmrPages
-            }
-            
-            var site =  self.localSites[indexRow]
-            
+        else {
             
             var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
             
@@ -288,7 +300,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell = nibs[0] as UITableViewCell
             }
             
-            
             var image = UIImage(named: "site-cell-bg")
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
@@ -296,81 +307,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
-            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
             
-            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = site.hostname
+            var buttonFrame = button.frame
+            buttonFrame.size.width = cell.frame.size.width
+            button.frame = buttonFrame
             
-            return cell
-
-        }
-        else if (cellType == "remotesite") {
-            // remote
             
-            // site cell
             var indexRow = indexPath.row
+
+            if (cellType == "localsite") {
+                // site cell
             
-            if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
-                indexRow = indexRow - self.nmrPages
+                if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
+                    indexRow = indexRow - self.nmrPages
+                }
+            
+                var site =  self.localSites[indexRow]
+            
+            
+                var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                siteNameLabel?.text = site.hostname
+            
+                return cell
             }
-            
-            var site = self.remoteSites.keys.array[indexRow]
-            
-            
-            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
-            
-            if (cell == nil) {
-                var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
-                cell = nibs[0] as UITableViewCell
+            else {
+                // remote site cell
+                var remoteSite = self.remoteSites.keys.array[indexRow]
+                
+                var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                siteNameLabel?.text = remoteSite
+                
+                return cell
             }
-            
-            
-            var image = UIImage(named: "site-cell-bg")
-            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-            image = image.resizableImageWithCapInsets(insets)
-            
-            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-            button.setBackgroundImage(image, forState: UIControlState.Normal)
-            button.indexPath = indexPath
-            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
-            
-            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = site
-            
-            return cell
+
         }
 
-        
-        var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
-
-        if (cell == nil) {
-            var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
-            cell = nibs[0] as UITableViewCell
-        }
-
-        
-        var image = UIImage(named: "site-cell-bg")
-        var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-        image = image.resizableImageWithCapInsets(insets)
-        
-        var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-        button.setBackgroundImage(image, forState: UIControlState.Normal)
-        button.indexPath = indexPath
-        button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
-        
-        var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-        siteNameLabel?.text = self.localSites[indexPath.row].hostname
-
-        if (indexPath == expandedIndex) {
-            var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
-            pagesTable.hidden = false
-            pagesTable.userInteractionEnabled = true
-            var pagesViewController:PagesViewController = PagesViewController(site: self.localSites[indexPath.row],table:pagesTable)
-            pagesTable.delegate = pagesViewController
-            pagesTable.dataSource = pagesViewController
-    
-        }
-        return cell
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -388,6 +359,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var site =  self.localSites[indexRow]
             self.showWebViewWithSite(page!, site: site)
 
+        }
+        else if (cellType == "remotesite") {
+            let remotePeerID = self.remoteSites.values.array[indexPath.row]
+            let requestedHostname = self.remoteSites.keys.array[indexPath.row]
+            
+            println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
+            
+            self.browser.invitePeer(remotePeerID, toSession: self.session,
+                withContext: requestedHostname.dataUsingEncoding(NSUTF8StringEncoding), timeout: 0)
         }
         else {
             
@@ -420,12 +400,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
         
 //        showWebViewWithSite("http://www.yahoo.com")
-    }
-    
-    func siteTapped(sender:UIButtonForRow!) {
-        var indexPath:NSIndexPath? = sender.indexPath
-        self.expandedIndex = indexPath
-        self.tableView.reloadData()
     }
     
     func storageUpdated(key:String) {
