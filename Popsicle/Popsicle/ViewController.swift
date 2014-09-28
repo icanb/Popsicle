@@ -104,6 +104,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+        var alertController = UIAlertController(title: "MC", message: "Recieved invitation!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
+            println("We want to ACCEPT")
+        })
+        var rejectAction = UIAlertAction(title: "Reject", style: UIAlertActionStyle.Cancel, handler: {(UIAlertAction) in
+            println("We want to REJECT")
+        })
+        alertController.addAction(acceptAction)
+        alertController.addAction(rejectAction)
+        alertController.presentViewController(self, animated: true, completion: nil)
         showAlert("Received invitation from peer!!")
     }
     
@@ -204,9 +214,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else {
             return "PAGES AROUND"
         }
-
     }
-
     
     // cell setup
     
@@ -278,7 +286,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             image = image.resizableImageWithCapInsets(insets)
 
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = page?.url_path
+            siteNameLabel?.text = page?.title
     
             return cell
     
@@ -347,7 +355,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         }
         else if (cellType == "remotesite") {
-            println("Opening page!")
+            let remotePeerID = self.remoteSites.values.array[indexPath.row]
+            let requestedHostname = self.remoteSites.keys.array[indexPath.row]
+            
+            println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
+            
+            self.browser.invitePeer(remotePeerID, toSession: self.session,
+                withContext: requestedHostname.dataUsingEncoding(NSUTF8StringEncoding), timeout: 0)
         }
         else {
             
