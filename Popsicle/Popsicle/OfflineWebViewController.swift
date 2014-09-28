@@ -48,7 +48,6 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
         let url = NSURL(string: "http://www.google.com")
         webView.loadHTMLString(tempHtmlString1, baseURL: url)
         webView.delegate = self
-        println("ok")
         
         // Do any additional setup after loading the view.
     }
@@ -89,36 +88,3 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     }
 
 }
-
-//class CustomWebView: UIWebView, UIWebViewDelegate {
-//    var uiView = UIView()
-//    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        self.delegate = self
-//    }
-//    
-//    convenience init(frame:CGRect, request:NSURLRequest) {
-//        self.init(frame: frame)
-//        uiView.addSubview(self)
-//        loadRequest(request)
-//    }
-//    
-//    required init(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//}
-//
-//extension CustomWebView: UIWebViewDelegate {
-//    func webViewDidStartLoad(webView: UIWebView!) {
-//        println("webViewDidStartLoad")
-//    }
-//    
-//    func webViewDidFinishLoad(webView: UIWebView) {
-//        println("webViewDidFinishLoad")
-//    }
-//    
-//    func webView(webView: UIWebView!, didFailLoadWithError error: NSError!) {
-//        println("An error occurred while loading the webview")
-//    }
-//}

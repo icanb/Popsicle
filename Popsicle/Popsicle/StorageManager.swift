@@ -64,4 +64,41 @@ class StorageManager {
     func getSites() {
         
     }
+    
+    func cacheHtmlPages(stringUrl: String) -> Void {
+        let url = NSURL(string: stringUrl)
+        
+        // TODO: recursively get shit from links.
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
+            //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+            let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+            var hyperlinks = self.getHyperlinksFromHtml(response)
+            // println(hyperlinks)
+        }
+        
+        task.resume()
+        
+    }
+    
+    func getHyperlinksFromHtml(htmlString: String) -> Array<String> {
+        
+        var err : NSError?
+        var parser = HTMLParser(html: htmlString, error: &err)
+        if err != nil {
+            println(err)
+            exit(1)
+        }
+        
+        var bodyNode = parser.body
+        
+        var hyperlinkList: [String] = []
+        
+        if let inputNodes = bodyNode?.findChildTags("a") {
+            for node in inputNodes {
+                hyperlinkList.append(node.getAttributeNamed("href"))
+            }
+        }
+        
+        return hyperlinkList
+    }
 }

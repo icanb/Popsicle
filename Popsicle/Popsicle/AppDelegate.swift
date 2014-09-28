@@ -91,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showAlert(str:String) {
+        println("asdfasdfasfasdfasfasdfa")
         var alert = UIAlertView(title: "yeah", message: str, delegate: self, cancelButtonTitle: "ok")
         alert.show()
     }
