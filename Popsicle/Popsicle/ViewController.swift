@@ -272,16 +272,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return cell
     
         }
-        else if (cellType == "localsite") {
-            // site cell
-            var indexRow = indexPath.row
-            
-            if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
-                indexRow = indexRow - self.nmrPages
-            }
-            
-            var site =  self.localSites[indexRow]
-            
+        else {
             
             var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
             
@@ -289,7 +280,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
                 cell = nibs[0] as UITableViewCell
             }
-            
             
             var image = UIImage(named: "site-cell-bg")
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
@@ -299,83 +289,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
             
-            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = site.hostname
+            var buttonFrame = button.frame
+            buttonFrame.size.width = cell.frame.size.width
+            button.frame = buttonFrame
             
-            return cell
-
-        }
-        else if (cellType == "remotesite") {
-            // remote
             
-            // site cell
             var indexRow = indexPath.row
+
+            if (cellType == "localsite") {
+                // site cell
             
-            if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
-                indexRow = indexRow - self.nmrPages
+                if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
+                    indexRow = indexRow - self.nmrPages
+                }
+            
+                var site =  self.localSites[indexRow]
+            
+            
+                var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                siteNameLabel?.text = site.hostname
+            
+                return cell
             }
-            
-            var site = self.remoteSites.keys.array[indexRow]
-            
-            
-            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
-            
-            if (cell == nil) {
-                var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
-                cell = nibs[0] as UITableViewCell
+            else {
+                // remote site cell
+                var remoteSite = self.remoteSites.keys.array[indexRow]
+                
+                var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                siteNameLabel?.text = remoteSite
+                
+                return cell
             }
-            
-            
-            var image = UIImage(named: "site-cell-bg")
-            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-            image = image.resizableImageWithCapInsets(insets)
-            
-            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-            button.setBackgroundImage(image, forState: UIControlState.Normal)
-            button.indexPath = indexPath
-            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
-            
-            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = site
-            
-            return cell
+
         }
 
-        
-        var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
-
-        if (cell == nil) {
-            var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
-            cell = nibs[0] as UITableViewCell
-        }
-
-        
-        var image = UIImage(named: "site-cell-bg")
-        var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-        image = image.resizableImageWithCapInsets(insets)
-        
-        var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-        button.setBackgroundImage(image, forState: UIControlState.Normal)
-        button.indexPath = indexPath
-        button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
-        
-        var buttonFrame = button.frame
-        buttonFrame.size.width = cell.frame.size.width
-        button.frame = buttonFrame
-        
-        var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-        siteNameLabel?.text = self.localSites[indexPath.row].hostname
-
-        if (indexPath == expandedIndex) {
-            var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
-            pagesTable.hidden = false
-            pagesTable.userInteractionEnabled = true
-            var pagesViewController:PagesViewController = PagesViewController(site: self.localSites[indexPath.row],table:pagesTable)
-            pagesTable.delegate = pagesViewController
-            pagesTable.dataSource = pagesViewController
-    
-        }
-        return cell
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
