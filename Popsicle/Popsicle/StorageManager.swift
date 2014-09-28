@@ -133,6 +133,10 @@ class StorageManager {
             
         page?.storePath = storePath            
         page!.updateStorage()
+            
+        site?.pages.append(page!)
+        print(site?.pages)
+        site?.updateStorage()
 
     }
     
