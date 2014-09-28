@@ -106,8 +106,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
         
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: context)
-        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName")
-        let requestedHostname = unarchiver.decodeObjectForKey("hostname")
+        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String
+        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String
         
         var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
@@ -391,8 +391,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let contextDict = ["displayName": remotePeerID.displayName, "hostname": requestedHostname]
             
-            self.browser.invitePeer(remotePeerID, toSession: self.session,
-                withContext: NSKeyedArchiver.archivedDataWithRootObject(contextDict), timeout: 0)
+            let data = NSMutableData()
+            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+            archiver.encodeObject(remotePeerID.displayName, forKey: "displayName")
+            archiver.encodeObject(requestedHostname, forKey: "hostname")
+            archiver.finishEncoding()
+            
+            self.browser.invitePeer(remotePeerID, toSession: self.session, withContext: data, timeout: 0)
         }
         else {
             
