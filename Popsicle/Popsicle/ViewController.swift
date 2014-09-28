@@ -99,7 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         
         var image = UIImage(named: "site-cell-bg")
-        var insets = UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
+        var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
         image = image.resizableImageWithCapInsets(insets)
         
         var button:UIButton = cell.viewWithTag(2) as UIButton
