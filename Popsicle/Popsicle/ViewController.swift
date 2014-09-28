@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     
     @IBOutlet var tableView: UITableView!
 
@@ -35,6 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var peerID: MCPeerID!
     var session: MCSession!
     var browser: MCNearbyServiceBrowser!
+    var advertiser: MCNearbyServiceAdvertiser!
     
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -65,24 +66,45 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session = MCSession(peer: self.peerID)
         self.session.delegate = self
         
-        var assistant = MCAdvertiserAssistant(serviceType: self.serviceType,
-            discoveryInfo: ["foo": "bar"], // we're gonna want to fux with this later on
-            session: self.session)
-        assistant.start()
+        self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
+            discoveryInfo: nil,
+            serviceType: self.serviceType)
+        self.advertiser.delegate = self
+        self.advertiser.startAdvertisingPeer()
         
-        var browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
+        self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
         browser.delegate = self
         browser.startBrowsingForPeers()
     }
     
-    // MCNearbyServiceBrowserDelegate methods
-
+    func showAlert(message: NSString!) {
+        println("showAlert(): \(message)")
+        UIAlertView(title: "MC", message: message, delegate: nil, cancelButtonTitle: "K.").show()
+    }
+    
+    // Advertiser methods
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
+        showAlert("did NOT start advertising")
+    }
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+        showAlert("Received invitation from peer!!")
+    }
+    
+    // Browser methods
+    
     func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+        showAlert("did NOT start browsing for peers")
         println(error)
     }
     
     func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
-        println("Found peer: \(peerID)")
+        if (peerID.displayName == UIDevice.currentDevice().name) {
+            println("found ourselves... ignoring")
+        } else {
+            showAlert("Found peer: \(peerID)")
+        }
     }
     
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
