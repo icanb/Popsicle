@@ -32,6 +32,7 @@
 		DB9F23D619D773CE0080AF0D /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB9F23CB19D773CE0080AF0D /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */; };
 		DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */; };
+		E1D413AA19D8CE36000D540D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F008E19D5C5A000B98BF8 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB9F23D219D773CE0080AF0D /* Action.js in Resources */,
+				E1D413AA19D8CE36000D540D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +658,8 @@
 		DB9F23D919D773CE0080AF0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-3";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -670,6 +674,8 @@
 		DB9F23DA19D773CE0080AF0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-3";
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
