@@ -13,31 +13,41 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lQy-WG-fcG" id="CU8-XS-hdj">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unnamed site" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVc-wD-mgF">
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Unnamed site" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVc-wD-mgF">
                         <rect key="frame" x="48" y="29" width="239" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIm-kT-YOf" customClass="UIButtonForRow" customModule="Popsicle" customModuleProvider="target">
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIm-kT-YOf" customClass="UIButtonForRow" customModule="Popsicle" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <tableView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UAC-iI-j1U">
+                    <tableView hidden="YES" clipsSubviews="YES" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UAC-iI-j1U">
                         <rect key="frame" x="0.0" y="67" width="300" height="35"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.37696896559999998" blue="0.69769430710000002" alpha="1" colorSpace="calibratedRGB"/>
                     </tableView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="UAC-iI-j1U" firstAttribute="top" secondItem="FVc-wD-mgF" secondAttribute="bottom" constant="70" id="676-z5-QND"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vIm-kT-YOf" secondAttribute="bottomMargin" id="6fh-0c-jw5"/>
+                    <constraint firstItem="UAC-iI-j1U" firstAttribute="top" secondItem="FVc-wD-mgF" secondAttribute="bottom" constant="70" id="9hQ-kc-Rpg"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="UAC-iI-j1U" secondAttribute="bottom" id="MsP-WH-fhb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vIm-kT-YOf" secondAttribute="trailingMargin" id="N5I-Zx-flX"/>
                     <constraint firstAttribute="leadingMargin" secondItem="vIm-kT-YOf" secondAttribute="leadingMargin" id="S5Z-1G-pac"/>
                     <constraint firstAttribute="topMargin" secondItem="vIm-kT-YOf" secondAttribute="topMargin" constant="-10" id="br9-u8-aFh"/>
+                    <constraint firstItem="FVc-wD-mgF" firstAttribute="top" secondItem="CU8-XS-hdj" secondAttribute="topMargin" constant="40" id="ilE-Wl-2D4"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="676-z5-QND"/>
+                        <exclude reference="9hQ-kc-Rpg"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="139.5" y="154"/>
