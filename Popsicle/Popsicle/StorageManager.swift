@@ -57,8 +57,70 @@ class StorageManager {
         return true;
     }
     
-    func savePage() {
+    func getSiteWithHostname(host hostName:String?) -> SiteMetadata? {
         
+        for site in self.device!.cache {
+            if (site.hostname == hostName) {
+                return site;
+            }
+        }
+        
+        return nil
+    }
+
+    
+    func getPageWithHostnameUrl(host hostName:String?, full_url:String?) -> PageCache? {
+        
+        var site:SiteMetadata? = getSiteWithHostname(host:hostName)
+        
+        for page in site!.pages {
+            if(page.full_url == full_url) {
+                return page
+            }
+        }
+    
+        return nil
+    }
+
+    func getPageWithUrl(site:SiteMetadata, full_url:String?) -> PageCache? {
+        
+        for page in site.pages {
+            if(page.full_url == full_url) {
+                return page
+            }
+        }
+        
+        return nil
+    }
+
+    func savePage(host hostName:String?,
+        port portNmr:String?,
+        full_url fullUrl:String?,
+        parameters param:[String],
+        title titleStr:String?,
+        html htmlStr:String?) {
+            
+            
+        var site:SiteMetadata? = getSiteWithHostname(host: hostName)
+        
+        if (site == nil) {
+            saveSite(host: hostName, port: portNmr)
+            site = getSiteWithHostname(host: hostName)
+        }
+        
+        var page:PageCache? = getPageWithUrl(site!, full_url: fullUrl)
+            
+        if (page == nil) {
+            page = PageCache()
+            page?.full_url = fullUrl!
+            page?.parameters = param
+        }
+            
+        page?.title = titleStr!
+        page?.html = htmlStr!
+        page?.last_update = NSDate.date()
+    
+
     }
     
     func getSites() {

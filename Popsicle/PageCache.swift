@@ -18,7 +18,6 @@ class PageCache : Storable, NSCoding {
     var parameters: [String] = []
     var last_update:NSDate = NSDate.date()
 
-
     override init() {
         super.init()
     }

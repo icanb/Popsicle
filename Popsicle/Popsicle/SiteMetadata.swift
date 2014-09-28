@@ -15,8 +15,8 @@ class SiteMetadata : Storable, NSCoding {
     var last_update: NSDate = NSDate.date()
     var directory_path:String = "/"
     var favicon:String = ""
+    var pages: [PageCache] = []
 
-    
     override init() {
         super.init()
     }
@@ -29,7 +29,7 @@ class SiteMetadata : Storable, NSCoding {
         self.port = aDecoder.decodeObjectForKey("port") as String!
         self.last_update = aDecoder.decodeObjectForKey("last_update") as NSDate
         self.directory_path = aDecoder.decodeObjectForKey("directory_path") as String!
-        
+        self.pages = aDecoder.decodeObjectForKey("pages") as [PageCache]
     }
     
     
@@ -39,7 +39,7 @@ class SiteMetadata : Storable, NSCoding {
         aCoder.encodeObject(self.port, forKey:"port")
         aCoder.encodeObject(self.last_update, forKey:"last_update")
         aCoder.encodeObject(self.directory_path, forKey:"directory_path")
-        
+        aCoder.encodeObject(self.pages, forKey:"pages")
     }
     
 }
