@@ -103,11 +103,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func showAlert(str:String) {
-        println("asdfasdfasfasdfasfasdfa")
-        var alert = UIAlertView(title: "yeah", message: str, delegate: self, cancelButtonTitle: "ok")
-        alert.show()
-    }
+//    func showAlert(str:String) {
+//        println("asdfasdfasfasdfasfasdfa")
+//        var alert = UIAlertView(title: "yeah", message: str, delegate: self, cancelButtonTitle: "ok")
+//        alert.show()
+//    }
 
 
 }
