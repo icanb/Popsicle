@@ -197,7 +197,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
             pagesTable.hidden = false
             pagesTable.userInteractionEnabled = true
-            pagesTable.delegate = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
+            var pagesViewController:PagesViewController = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
+            pagesTable.delegate = pagesViewController
+            pagesTable.dataSource = pagesViewController
+            
+//            var tableFrame = pagesTable.frame
+//            tableFrame.size.height = tableFrame.size.height + 70
+//            tableFrame.origin.y = tableFrame.origin.y - 70
+//            pagesTable.frame = tableFrame
 
         }
 
@@ -208,7 +215,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("You selected cell #\(indexPath.row)!")
         
         self.expandedIndex = indexPath
-        self.tableView.reloadData()
+        
+        // disabled temporarily so the app doesn't crash
+        //self.tableView.reloadData()
+        
+        showWebViewWithSite("http://www.yahoo.com")
     }
     
     func siteTapped(sender:UIButtonForRow!) {
@@ -225,6 +236,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableView.reloadData()
         }
 
+    }
+    
+    func showWebViewWithSite(URL: String) {
+        let webViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
+        webViewController.initialURL = URL
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 
 }
