@@ -104,16 +104,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
-        var alertController = UIAlertController(title: "MC", message: "Recieved invitation!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: context)
+        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String
+        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String
+        
+        var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
             println("We want to ACCEPT")
+            invitationHandler(true, self.session)
+            
         })
         var rejectAction = UIAlertAction(title: "Reject", style: UIAlertActionStyle.Cancel, handler: {(UIAlertAction) in
             println("We want to REJECT")
+            
+            invitationHandler(false, self.session)
         })
-        alertController.addAction(acceptAction)
         alertController.addAction(rejectAction)
-        alertController.presentViewController(self, animated: true, completion: nil)
+        alertController.addAction(acceptAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
         showAlert("Received invitation from peer!!")
     }
     
@@ -157,7 +166,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
-        println("PEER \(peerID) CHANGED STATE TO \(state)")
+        if (state == MCSessionState.Connected) {
+            println("Connected to peer \(peerID)!")
+        }
+        else if (state == MCSessionState.Connecting) {
+            println("Connecting... to peer \(peerID)")
+        }
+        else if (state == MCSessionState.NotConnected) {
+            println("Disconnected from peer \(peerID)")
+        } else {
+            println("Unknown state change for peer \(peerID)")
+        }
     }
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
@@ -215,6 +234,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return "PAGES AROUND"
         }
     }
+
+//func tableView(_ tableView: UITableView,
+// viewForHeaderInSection section: Int) -> UIView?
+
     
     // cell setup
     
@@ -281,13 +304,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             
-            var image = UIImage(named: "site-cell-bg")
-            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+            var image = UIImage(named: "full-page-cell")
+            var insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
             image = image.resizableImageWithCapInsets(insets)
 
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
             siteNameLabel?.text = page?.title
     
+            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            button.setBackgroundImage(image, forState: UIControlState.Normal)
+            button.indexPath = indexPath
+            
             return cell
     
         }
@@ -299,20 +326,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
                 cell = nibs[0] as UITableViewCell
             }
-            
-            var image = UIImage(named: "site-cell-bg")
+
+            var image = UIImage(named: "full-site-cell")
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
-            
+
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
-            
+
             var buttonFrame = button.frame
             buttonFrame.size.width = cell.frame.size.width
             button.frame = buttonFrame
-            
-            
+
+
             var indexRow = indexPath.row
 
             if (cellType == "localsite") {
@@ -352,6 +379,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (cellType == "page")  {
             // Open the page here
             var page = getPageWithIndexRow(indexPath)
+//            var sm:StorageManager = self.appDelegate.getStorageManager()
+//            var site = sm.getSiteWithHostname(host: page.)
+            var indexRow = indexPath.row
+            indexRow = indexRow - self.expandedIndex!.row - 1
+            var site =  self.localSites[indexRow]
+            self.showWebViewWithSite(page!, site: site)
 
         }
         else if (cellType == "remotesite") {
@@ -360,8 +393,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
-            self.browser.invitePeer(remotePeerID, toSession: self.session,
-                withContext: requestedHostname.dataUsingEncoding(NSUTF8StringEncoding), timeout: 0)
+            let contextDict = ["displayName": remotePeerID.displayName, "hostname": requestedHostname]
+            
+            let data = NSMutableData()
+            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+            archiver.encodeObject(remotePeerID.displayName, forKey: "displayName")
+            archiver.encodeObject(requestedHostname, forKey: "hostname")
+            archiver.finishEncoding()
+            
+            self.browser.invitePeer(remotePeerID, toSession: self.session, withContext: data, timeout: 0)
         }
         else {
             
@@ -405,9 +445,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
-    func showWebViewWithSite(URL: String) {
+    func showWebViewWithSite(page: PageCache, site: SiteMetadata) {
+        println("showwebview goddamnit")
         let webViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
-        webViewController.initialURL = URL
+        webViewController.initialPage = page
+        webViewController.rooSite = site
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
 

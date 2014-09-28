@@ -11,45 +11,24 @@ import UIKit
 class OfflineWebViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet var webView: UIWebView!
-    var initialURL = "http://urlnotinitialized"
     var appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
     
-    let tempHtmlString1:String =
-    "<!DOCTYPE html>" +
-        "<html>" +
-        "<head>" +
-        "<title>Home Page</title>" +
-        "</head>" +
-        "<body>" +
-        "<h1>Home Page</h1>" +
-        "<p><a href='index.html'>home</a></p>" +
-        "<p><a href='html/about.html'>about</a></p>" +
-        "<p><a href='html/services.html'>services</a></p>" +
-        "<p><a href='html/contact.html'>contact</a></p>" +
-        "</body>" +
-    "</html>"
-
-    let tempHtmlString2:String =
-    "<!DOCTYPE html>" +
-        "<html>" +
-        "<head>" +
-        "<title>Home Page</title>" +
-        "</head>" +
-        "<body>" +
-        "<h1>HIJACK SUCCESS</h1>" +
-        "<p><a href='index.html'>home</a></p>" +
-        "<p><a href='html/about.html'>about</a></p>" +
-        "<p><a href='html/services.html'>services</a></p>" +
-        "<p><a href='html/contact.html'>contact</a></p>" +
-        "</body>" +
-    "</html>"
-
-    
+    var initialPage:PageCache?
+    var rooSite:SiteMetadata?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = NSURL(string: self.initialURL)
-        webView.loadHTMLString(tempHtmlString1, baseURL: url)
+        let html = self.initialPage?.html
+        var urlStr = self.initialPage?.full_url
+        var url:NSURL
+        if (urlStr != nil) {
+            url = NSURL(string: urlStr!)
+        } else {
+            println("SHIT WENT DOWN")
+            exit(1)
+        }
+        webView.loadHTMLString(html, baseURL: url)
         webView.delegate = self
         
         // Do any additional setup after loading the view.
@@ -67,33 +46,22 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     
     func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
         
-        println("--> STARTING LOAD")
-        let url = NSURL(string: "http://www.google.com")
-        println(request.URL)
-        
-        
         if (navigationType == UIWebViewNavigationType.LinkClicked) {
-            println("here")
             webView.stopLoading()
-            loadLocalPageWithURL("http://www.google.com")
-            //webView.loadHTMLString(tempHtmlString2, baseURL: url)
+            var page = self.rooSite?.getPageFromFullURL(request.URL.absoluteString!)
+            if (page != nil) {
+                println("CACHE HIT!!!")
+                let html = page?.html
+                webView.loadHTMLString(html, baseURL: request.URL)
+                
+            } else {
+                var alert = UIAlertView(title: "Uh oh!", message: "Seems like this page is not cached, sorry!", delegate: self, cancelButtonTitle: "OK")
+                alert.show()
+            }
+            return true
+        } else {
             return true
         }
-        
-        
-        return true
-    }
-    
-    func loadLocalPageWithURL(URL: String) {
-        var storageManager = appDelegate.storageManager?
-        storageManager?.printAllSites()
-        
-        var hostURL = NSURLComponents.componentsWithString(URL)
-        var page: PageCache! = storageManager?.getPageWithHostnameUrl(host: hostURL.host, full_url: URL)
-        
-        println(page?.full_url)
-        
-        webView.loadHTMLString(page?.html, baseURL: NSURL(string: hostURL.host!))
     }
     
     func webViewDidStartLoad(webView: UIWebView!) {
