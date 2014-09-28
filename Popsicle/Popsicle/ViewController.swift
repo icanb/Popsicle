@@ -177,6 +177,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
+
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+        if (section == 0) {
+            return "AVAILABLE PAGES"
+        }
+        else {
+            return "PAGES AROUND"
+        }
+
+    }
+
     
     // cell setup
     
