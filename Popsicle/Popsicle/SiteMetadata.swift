@@ -29,6 +29,7 @@ class SiteMetadata : Storable, NSCoding {
         self.port = aDecoder.decodeObjectForKey("port") as String!
         self.last_update = aDecoder.decodeObjectForKey("last_update") as NSDate
         self.directory_path = aDecoder.decodeObjectForKey("directory_path") as String!
+        println(aDecoder.decodeObjectForKey("pages"))
         self.pages = aDecoder.decodeObjectForKey("pages") as [PageCache]
     }
     

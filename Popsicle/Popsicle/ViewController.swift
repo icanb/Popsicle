@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCBrowserViewControllerDelegate {
     
-
     @IBOutlet var tableView: UITableView!
 
     var expandedIndex:NSIndexPath?
@@ -31,6 +31,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         "</body>" +
     "</html>"
     
+    let serviceType = "popsicle"
+    var peerID: MCPeerID!
+    var session: MCSession!
+    var browser: MCBrowserViewController!
+    
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var sites:[SiteMetadata] = []
@@ -49,15 +54,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Configure the table
         self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-
+        
         self.sites = self.appDelegate.device!.cache
         self.appDelegate.device!.subscribeForUpdate(self, key: "current_device")
+        
+        // Initialize MC stuff
+        self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
+        println("Peer ID is '\(self.peerID.displayName)'")
+        
+        self.session = MCSession(peer: self.peerID)
+        
+        var assistant = MCAdvertiserAssistant(serviceType: self.serviceType,
+            discoveryInfo: nil, // we're gonna want to fux with this later on
+            session: self.session)
+        assistant.start()
+        
+        self.browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
+        self.browser.delegate = self
+        
+        self.presentViewController(self.browser, animated: false, completion: ({
+            println("presentViewController dismissed");
+        }))
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
+        println("Did finish")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!) {
+        println("Was cancelled")
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Table View setup
