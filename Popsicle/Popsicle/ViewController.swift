@@ -320,12 +320,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var pagesViewController:PagesViewController = PagesViewController(site: self.localSites[indexPath.row],table:pagesTable)
             pagesTable.delegate = pagesViewController
             pagesTable.dataSource = pagesViewController
-            
-//            var tableFrame = pagesTable.frame
-//            tableFrame.size.height = tableFrame.size.height + 70
-//            tableFrame.origin.y = tableFrame.origin.y - 70
-//            pagesTable.frame = tableFrame
-
+    
         }
         return cell
     }
@@ -333,9 +328,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("You selected cell #\(indexPath.row)!")
         
-        self.expandedIndex = indexPath
-        self.selectedSite = self.localSites[indexPath.row]
-        self.nmrPages = self.selectedSite!.pages.count
+        var cellType:String = getCellType(indexPath)
+
+        if (cellType == "page")  {
+            // Open the page here
+        }
+        else {
+            
+            if (self.expandedIndex == nil) {
+                // nothing is expanded
+                self.expandedIndex = indexPath
+                self.selectedSite = self.localSites[indexPath.row]
+                self.nmrPages = self.selectedSite!.pages.count
+            }
+            else if (self.expandedIndex == indexPath) {
+                // tapped on already expanded
+                self.expandedIndex = nil
+                self.selectedSite = nil
+                self.nmrPages = 0
+            }
+            else {
+                // tapped on a different site
+                self.expandedIndex = indexPath
+                self.selectedSite = self.localSites[indexPath.row]
+                self.nmrPages = self.selectedSite!.pages.count
+            }
+            
+            self.tableView.reloadData()
+        }
+
         
         print(self.selectedSite?.pages)
         
