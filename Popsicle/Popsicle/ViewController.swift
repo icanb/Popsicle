@@ -12,22 +12,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 
     @IBOutlet var tableView: UITableView!
-
-    let tempHtmlString:String =
-    "<!DOCTYPE html>" +
-        "<html>" +
-        "<head>" +
-        "<title>Home Page</title>" +
-        "</head>" +
-        "<body>" +
-        "<img src='images/logo.png'>" +
-        "<h1>Home Page</h1>" +
-        "<p><a href='index.html'>home</a></p>" +
-        "<p><a href='html/about.html'>about</a></p>" +
-        "<p><a href='html/services.html'>services</a></p>" +
-        "<p><a href='html/contact.html'>contact</a></p>" +
-        "</body>" +
-    "</html>"
     
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
