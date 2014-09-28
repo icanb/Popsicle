@@ -11,6 +11,7 @@ import UIKit
 class OfflineWebViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet var webView: UIWebView!
+    var initialURL = "http://urlnotinitialized"
     
     let tempHtmlString1:String =
     "<!DOCTYPE html>" +
@@ -41,11 +42,12 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
         "<p><a href='html/contact.html'>contact</a></p>" +
         "</body>" +
     "</html>"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = NSURL(string: "http://www.google.com")
+        let url = NSURL(string: self.initialURL)
         webView.loadHTMLString(tempHtmlString1, baseURL: url)
         webView.delegate = self
         
