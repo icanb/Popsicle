@@ -27,6 +27,8 @@
 		DB9F23D019D773CE0080AF0D /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F23CF19D773CE0080AF0D /* ActionRequestHandler.swift */; };
 		DB9F23D219D773CE0080AF0D /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = DB9F23D119D773CE0080AF0D /* Action.js */; };
 		DB9F23D619D773CE0080AF0D /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB9F23CB19D773CE0080AF0D /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */; };
+		DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		DB9F23CE19D773CE0080AF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB9F23CF19D773CE0080AF0D /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
 		DB9F23D119D773CE0080AF0D /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
+		DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineWebViewController.swift; sourceTree = "<group>"; };
+		DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfflineWebViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,8 @@
 				CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */,
 				CE1F008919D5C5A000B98BF8 /* ViewController.swift */,
 				CE1F008B19D5C5A000B98BF8 /* Main.storyboard */,
+				DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */,
+				DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */,
 				CE1F008E19D5C5A000B98BF8 /* Images.xcassets */,
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
@@ -355,6 +361,7 @@
 			files = (
 				CE1F008D19D5C5A000B98BF8 /* Main.storyboard in Resources */,
 				CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */,
+				DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */,
 				CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */,
 				CE1F008F19D5C5A000B98BF8 /* Images.xcassets in Resources */,
 			);
@@ -419,6 +426,7 @@
 				CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
 				CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */,
+				DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */,
 				CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */,
 				CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */,
 				DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */,
