@@ -106,8 +106,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
         
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: context)
-        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String
-        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String
+        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String!
+        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String!
         
         var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
