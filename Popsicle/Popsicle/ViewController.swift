@@ -63,6 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("Peer ID is '\(self.peerID.displayName)'")
         
         self.session = MCSession(peer: self.peerID)
+        self.session.delegate = self
         
         var assistant = MCAdvertiserAssistant(serviceType: self.serviceType,
             discoveryInfo: ["foo": "bar"], // we're gonna want to fux with this later on
