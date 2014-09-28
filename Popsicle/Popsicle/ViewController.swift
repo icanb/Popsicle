@@ -78,7 +78,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: [discoveryInfoSitesKey: toBroadcast],
+            discoveryInfo: [discoveryInfoSitesKey: ",".join(toBroadcast)],
             serviceType: self.serviceType)
         
         self.advertiser.delegate = self
