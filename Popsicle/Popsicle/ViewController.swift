@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCBrowserViewControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
     
     @IBOutlet var tableView: UITableView!
 
@@ -71,12 +71,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
         self.browser.delegate = self
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         self.presentViewController(self.browser, animated: false, completion: ({
             println("presentViewController dismissed");
         }))
-
     }
+    
+    // MCBrowserViewControllerDelegate methods
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
         println("Did finish")
@@ -86,6 +89,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!) {
         println("Was cancelled")
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MCSessionDelegate methods
+    
+    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
+        println("PEER \(peerID) CHANGED STATE TO \(state)")
+    }
+    
+    func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
+        println("didRecieveData")
+    }
+    
+    func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
+        println("didRecieveStream")
+    }
+    
+    func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
+        println("didStartReceivingResourceWithName")
+    }
+    
+    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
+        println("didFinishReceivingResourceWithName")
+    }
+    
+    func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
+        println("didRecieveCertificate")
     }
     
     // Table View setup
