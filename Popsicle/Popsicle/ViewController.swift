@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.presentViewController(self.browser, animated: false, completion: ({
             println("presentViewController dismissed");
         }))
-
+        
     }
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
@@ -162,6 +162,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.expandedIndex = indexPath
         self.tableView.reloadData()
+        
+        showWebViewWithSite("http://www.yahoo.com")
     }
     
     func siteTapped(sender:UIButtonForRow!) {
@@ -178,6 +180,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableView.reloadData()
         }
 
+    }
+    
+    func showWebViewWithSite(URL: String) {
+        let webViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
+        webViewController.initialURL = URL
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 
 }
