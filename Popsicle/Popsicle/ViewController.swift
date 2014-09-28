@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
     
     @IBOutlet var tableView: UITableView!
 
@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let serviceType = "popsicle"
     var peerID: MCPeerID!
     var session: MCSession!
-    var browser: MCBrowserViewController!
+    var browser: MCNearbyServiceBrowser!
     
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -70,29 +70,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             session: self.session)
         assistant.start()
         
-        self.browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
-        self.browser.delegate = self
+        var browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
+        browser.delegate = self
+        browser.startBrowsingForPeers()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.presentViewController(self.browser, animated: false, completion: ({
-            println("presentViewController dismissed");
-        }))
+    // MCNearbyServiceBrowserDelegate methods
+
+    func browser(browser: MCNearbyServiceBrowser!, didNotStartBrowsingForPeers error: NSError!) {
+        println(error)
     }
     
-    // MCBrowserViewControllerDelegate methods
-    
-    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
-        println("Did finish")
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+        println("Found peer: \(peerID)")
     }
     
-    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!) {
-        println("Was cancelled")
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
+        println("Lost peer: \(peerID)")
     }
-    
-    // MCSessionDelegate methods
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
         println("PEER \(peerID) CHANGED STATE TO \(state)")
