@@ -72,11 +72,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session = MCSession(peer: self.peerID)
         self.session.delegate = self
         
+        println("Peers:")
+        println(self.session.connectedPeers)
+        
         var toBroadcast:[String] = []
         for site in localSites {
             toBroadcast.append(site.hostname)
         }
-        
+
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
             discoveryInfo: [discoveryInfoSitesKey: ",".join(toBroadcast)],
             serviceType: self.serviceType)
@@ -133,6 +136,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!) {
         println("Lost peer: \(peerID)")
+        for (remoteHostname, remotePeerID) in self.remoteSites {
+            println("Looking at \(remoteHostname) - \(remotePeerID)")
+            if (remotePeerID == peerID) {
+                self.remoteSites.removeValueForKey(remoteHostname)
+                println("Removed \(remoteHostname) - \(remotePeerID))")
+            }
+        }
+        self.tableView.reloadData()
     }
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
