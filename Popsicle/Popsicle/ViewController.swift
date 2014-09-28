@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet var tableView: UITableView!
 
+    var expandedIndex:NSIndexPath?
+
     let tempHtmlString:String =
     "<!DOCTYPE html>" +
         "<html>" +
@@ -90,6 +92,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView,
         heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            
+            if (self.expandedIndex == indexPath) {
+                return 490
+            }
+    
             return 70
     }
     
@@ -109,6 +116,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0) {
+            print(self.sites.count)
             return self.sites.count
         }
         else {
@@ -130,20 +138,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
         image = image.resizableImageWithCapInsets(insets)
         
-        var button:UIButton = cell.viewWithTag(2) as UIButton
+        var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
         button.setBackgroundImage(image, forState: UIControlState.Normal)
-
+        button.indexPath = indexPath
+        button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
+        
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
         siteNameLabel?.text = self.sites[indexPath.row].hostname
+
+        if (indexPath == expandedIndex) {
+            var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
+            pagesTable.hidden = false
+            pagesTable.userInteractionEnabled = true
+            pagesTable.delegate = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
+
+        }
 
         return cell
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("You selected cell #\(indexPath.row)!")
+        
+        self.expandedIndex = indexPath
+        self.tableView.reloadData()
     }
     
-        
+    func siteTapped(sender:UIButtonForRow!) {
+       
+        var indexPath:NSIndexPath? = sender.indexPath
+        self.expandedIndex = indexPath
+        self.tableView.reloadData()
+    }
+    
     func storageUpdated(key:String) {
         
         if (key == "current_device") {

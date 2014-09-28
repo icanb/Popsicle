@@ -17,6 +17,8 @@
 		CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4CE3919D771AE0042570D /* SiteCellView.xib */; };
 		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
 		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
+		CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */; };
+		CEA4CE4219D88CED0042570D /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE4119D88CED0042570D /* PagesViewController.swift */; };
 		CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE606B219D75BFA00ADD3FC /* Storable.swift */; };
 		CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */; };
 		CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */; };
@@ -86,6 +88,8 @@
 		CEA4CE3919D771AE0042570D /* SiteCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteCellView.xib; sourceTree = "<group>"; };
 		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
+		CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonForRow.swift; sourceTree = "<group>"; };
+		CEA4CE4119D88CED0042570D /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		CEE606B219D75BFA00ADD3FC /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteMetadata.swift; sourceTree = "<group>"; };
 		CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageCache.swift; path = ../PageCache.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
 				CEA4CE3B19D77B760042570D /* StorageManager.swift */,
 				CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */,
+				CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */,
+				CEA4CE4119D88CED0042570D /* PagesViewController.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -426,8 +432,10 @@
 				CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
 				CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */,
+				CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */,
 				DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */,
 				CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */,
+				CEA4CE4219D88CED0042570D /* PagesViewController.swift in Sources */,
 				CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */,
 				DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */,
 				DB103AB919D76D1B0061BA94 /* HTMLNode.swift in Sources */,

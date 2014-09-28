@@ -24,17 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        var storePath = documentsPath.stringByAppendingPathComponent("/device_self_file.sickle")
+        var storePath = documentsPath.stringByAppendingPathComponent("/device_self_file2.sickle")
         var checkValidation = NSFileManager.defaultManager()
         
         if (checkValidation.fileExistsAtPath(storePath))
         {
             // FILE AVAILABLE
-            var device_data = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as Device
+            var device_data:Device = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as Device
             self.device = device_data
             self.device!.storePath = storePath
 
             print(device_data)
+            print(device_data.cache)
         }
         else
         {   
@@ -58,8 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let targetURL:String = getTargetURL(url)
 
         var newUrlComponents:NSURLComponents = NSURLComponents.componentsWithString(targetURL)
-        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
+//        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
 
+        
+        
         return true
     }
     
