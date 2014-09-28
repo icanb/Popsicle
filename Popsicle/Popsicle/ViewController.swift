@@ -72,9 +72,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session = MCSession(peer: self.peerID)
         self.session.delegate = self
         
+        var toBroadcast:[String] = []
+        for site in localSites {
+            toBroadcast.append(site.hostname)
+        }
+        
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: [discoveryInfoSitesKey: "example.com,example.org,example.edu"],
+            discoveryInfo: [discoveryInfoSitesKey: toBroadcast],
             serviceType: self.serviceType)
+        
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
         
@@ -120,6 +126,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.remoteSites[remoteSite] = peerID
                 }
             }
+            self.tableView.reloadData()
             println("self.remoteSites: \(self.remoteSites)")
         }
     }
@@ -205,12 +212,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         // Remote path
         else {
-            var count = 0
-            for remoteSite in remoteSites {
-                println("remoteSite: \(remoteSite)")
-                count += 1
-            }
-            return count
+            return remoteSites.count
         }
     }
     
@@ -377,6 +379,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         if (cellType == "page")  {
             // Open the page here
+        }
+        else if (cellType == "remotesite") {
+            println("Opening page!")
         }
         else {
             
