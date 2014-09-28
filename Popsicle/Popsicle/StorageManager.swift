@@ -39,20 +39,28 @@ class StorageManager {
         var storePath = documentsPath.stringByAppendingPathComponent(fileName)
         var checkValidation = NSFileManager.defaultManager()
         
+        
         if (checkValidation.fileExistsAtPath(storePath)) {
-            print("WARNING: this should not happen")
+            println("WARNING: here")
+            var existingSite:SiteMetadata = self.getSiteWithHostname(host: hostName)!
+            existingSite.crawl()
+        } else {
+            // Create and save the site
+            var newSite:SiteMetadata = SiteMetadata()
+            newSite.hostname = hostName!
+            newSite.port = "80"
+            newSite.storePath = storePath
+            newSite.updateStorage()
+            newSite.crawl()
+
+            // Add the site to the cache and update
+            self.device!.cache.append(newSite)
+            self.device!.updateStorage()
         }
+
+
         
-        // Create and save the site
-        var newSite = SiteMetadata()
-        newSite.hostname = hostName!
-        newSite.port = "80"
-        newSite.storePath = storePath
-        newSite.updateStorage()
-        
-        // Add the site to the cache and update
-        self.device!.cache.append(newSite)
-        self.device!.updateStorage()
+
 
         return true;
     }
@@ -93,12 +101,7 @@ class StorageManager {
         return nil
     }
 
-    func savePage(host hostName:String?,
-        port portNmr:String?,
-        full_url fullUrl:String?,
-        parameters param:[String],
-        title titleStr:String?,
-        html htmlStr:String?) {
+    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> Void {
             
             
         var site:SiteMetadata? = getSiteWithHostname(host: hostName)
@@ -133,6 +136,9 @@ class StorageManager {
             
         page?.storePath = storePath            
         page!.updateStorage()
+        
+        site?.pages.append(page!)
+        site?.updateStorage()
 
     }
     
@@ -140,40 +146,4 @@ class StorageManager {
         
     }
     
-    func cacheHtmlPages(stringUrl: String) -> Void {
-        let url = NSURL(string: stringUrl)
-        
-        // TODO: recursively get shit from links.
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
-            //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
-            let response = NSString(data: data, encoding: NSUTF8StringEncoding)
-            var hyperlinks = self.getHyperlinksFromHtml(response)
-            // println(hyperlinks)
-        }
-        
-        task.resume()
-        
-    }
-    
-    func getHyperlinksFromHtml(htmlString: String) -> Array<String> {
-        
-        var err : NSError?
-        var parser = HTMLParser(html: htmlString, error: &err)
-        if err != nil {
-            println(err)
-            exit(1)
-        }
-        
-        var bodyNode = parser.body
-        
-        var hyperlinkList: [String] = []
-        
-        if let inputNodes = bodyNode?.findChildTags("a") {
-            for node in inputNodes {
-                hyperlinkList.append(node.getAttributeNamed("href"))
-            }
-        }
-        
-        return hyperlinkList
-    }
 }

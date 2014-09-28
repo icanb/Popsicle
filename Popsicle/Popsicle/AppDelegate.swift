@@ -55,11 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func getStorageManager() -> StorageManager {
+        return self.storageManager!
+    }
+    
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         let targetURL:String = getTargetURL(url)
 
         var newUrlComponents:NSURLComponents = NSURLComponents.componentsWithString(targetURL)
-//        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
+        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
 
         
         
