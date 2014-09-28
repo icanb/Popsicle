@@ -38,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var session: MCSession!
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
+    var peers = [String: [String]]()
     
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -68,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session.delegate = self
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: nil,
+            discoveryInfo: ["caches": "example.com,example.org"],
             serviceType: self.serviceType)
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
@@ -100,11 +101,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println(error)
     }
     
-    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject: AnyObject]!) {
         if (peerID.displayName == UIDevice.currentDevice().name) {
             println("found ourselves... ignoring")
         } else {
+            println(info)
             showAlert("Found peer: \(peerID)")
+            if let arry = info {
+                let array = arry["caches"]!.componentsSeparatedByString(",")
+                self.peers[peerID.displayName] = ["hi"]
+            }
+            println(self.peers)
         }
     }
     
