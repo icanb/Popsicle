@@ -281,13 +281,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             
-            var image = UIImage(named: "site-cell-bg")
-            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+            var image = UIImage(named: "full-page-cell")
+            var insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
             image = image.resizableImageWithCapInsets(insets)
 
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
             siteNameLabel?.text = page?.title
     
+            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            button.setBackgroundImage(image, forState: UIControlState.Normal)
+            button.indexPath = indexPath
+            
             return cell
     
         }
@@ -299,20 +303,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
                 cell = nibs[0] as UITableViewCell
             }
-            
-            var image = UIImage(named: "site-cell-bg")
+
+            var image = UIImage(named: "full-site-cell")
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
-            
+
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
-            
+
             var buttonFrame = button.frame
             buttonFrame.size.width = cell.frame.size.width
             button.frame = buttonFrame
-            
-            
+
+
             var indexRow = indexPath.row
 
             if (cellType == "localsite") {
