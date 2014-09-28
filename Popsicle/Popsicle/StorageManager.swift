@@ -39,20 +39,28 @@ class StorageManager {
         var storePath = documentsPath.stringByAppendingPathComponent(fileName)
         var checkValidation = NSFileManager.defaultManager()
         
+        
         if (checkValidation.fileExistsAtPath(storePath)) {
-            print("WARNING: this should not happen")
+            println("WARNING: here")
+            var existingSite:SiteMetadata = self.getSiteWithHostname(host: hostName)!
+            existingSite.crawl()
+        } else {
+            // Create and save the site
+            var newSite:SiteMetadata = SiteMetadata()
+            newSite.hostname = hostName!
+            newSite.port = "80"
+            newSite.storePath = storePath
+            newSite.updateStorage()
+            newSite.crawl()
+
+            // Add the site to the cache and update
+            self.device!.cache.append(newSite)
+            self.device!.updateStorage()
         }
+
+
         
-        // Create and save the site
-        var newSite = SiteMetadata()
-        newSite.hostname = hostName!
-        newSite.port = "80"
-        newSite.storePath = storePath
-        newSite.updateStorage()
-        
-        // Add the site to the cache and update
-        self.device!.cache.append(newSite)
-        self.device!.updateStorage()
+
 
         return true;
     }
@@ -93,12 +101,7 @@ class StorageManager {
         return nil
     }
 
-    func savePage(host hostName:String?,
-        port portNmr:String?,
-        full_url fullUrl:String?,
-        parameters param:[String],
-        title titleStr:String?,
-        html htmlStr:String?) {
+    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> Void {
             
             
         var site:SiteMetadata? = getSiteWithHostname(host: hostName)
@@ -133,7 +136,7 @@ class StorageManager {
             
         page?.storePath = storePath            
         page!.updateStorage()
-            
+        
         site?.pages.append(page!)
         site?.updateStorage()
         self.device!.updateStorage()
@@ -188,4 +191,5 @@ class StorageManager {
             }
         }
     }
+
 }
