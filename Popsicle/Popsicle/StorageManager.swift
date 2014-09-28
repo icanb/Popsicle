@@ -101,7 +101,7 @@ class StorageManager {
         return nil
     }
 
-    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> Void {
+    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, url_path urlPath:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> Void {
             
             
         var site:SiteMetadata? = getSiteWithHostname(host: hostName)
