@@ -235,6 +235,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return ""
     }
 
+    func getPageWithIndexRow(indexPath:NSIndexPath) -> PageCache? {
+        var indexRow = indexPath.row
+        indexRow = indexRow - self.expandedIndex!.row - 1
+        print(indexRow)
+        return self.selectedSite?.pages[indexRow]
+    }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cellType:String = getCellType(indexPath)
@@ -243,11 +250,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (cellType == "page") {
             
             // Page Cell
-
-            var indexRow = indexPath.row
-            indexRow = indexRow - self.expandedIndex!.row - 1
-            print(indexRow)
-            var page =  self.selectedSite?.pages[indexRow]
+            var page = getPageWithIndexRow(indexPath)
 
             var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifierPage) as UITableViewCell
             
@@ -377,6 +380,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         if (cellType == "page")  {
             // Open the page here
+            var page = getPageWithIndexRow(indexPath)
+
         }
         else {
             
