@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func showAlert(message: NSString!) {
         println("showAlert(): \(message)")
-        UIAlertView(title: "MC", message: message, delegate: nil, cancelButtonTitle: "K.").show()
+//        UIAlertView(title: "MC", message: message, delegate: nil, cancelButtonTitle: "K.").show()
     }
     
     // Advertiser methods
@@ -113,14 +113,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             showAlert("Found peer: \(peerID)")
             if let infoDict = info as? Dictionary<String, String> {
                 if (infoDict.indexForKey(discoveryInfoSitesKey) == nil) {
-                    println("Remote peer's discovery infor didn't have \(discoveryInfoSitesKey) key")
+                    println("Remote peer's discovery info didn't have \(discoveryInfoSitesKey) key")
                     return
                 }
                 for remoteSite in infoDict[discoveryInfoSitesKey]!.componentsSeparatedByString(",") {
                     self.remoteSites[remoteSite] = peerID
                 }
             }
-            println("self.peers: \(self.remoteSites)")
+            println("self.remoteSites: \(self.remoteSites)")
         }
     }
     
@@ -303,6 +303,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else if (cellType == "remotesite") {
             // remote
+            
+            // site cell
+            var indexRow = indexPath.row
+            
+            if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
+                indexRow = indexRow - self.nmrPages
+            }
+            
+            var site = self.remoteSites.keys.array[indexRow]
+            
+            
+            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+            
+            if (cell == nil) {
+                var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
+                cell = nibs[0] as UITableViewCell
+            }
+            
+            
+            var image = UIImage(named: "site-cell-bg")
+            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+            image = image.resizableImageWithCapInsets(insets)
+            
+            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            button.setBackgroundImage(image, forState: UIControlState.Normal)
+            button.indexPath = indexPath
+            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
+            
+            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+            siteNameLabel?.text = site
+            
+            return cell
         }
 
         
