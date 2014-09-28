@@ -133,7 +133,10 @@ class StorageManager {
             
         page?.storePath = storePath            
         page!.updateStorage()
-
+            
+        site?.pages.append(page!)
+        site?.updateStorage()
+        self.device!.updateStorage()
     }
     
     func getSites() {
@@ -175,5 +178,14 @@ class StorageManager {
         }
         
         return hyperlinkList
+    }
+    
+    func printAllSites() {
+        for site in self.device!.cache {
+            println("SITE: \(site.hostname)")
+            for page in site.pages {
+                println(page.full_url)
+            }
+        }
     }
 }
