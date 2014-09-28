@@ -57,10 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         let targetURL:String = getTargetURL(url)
-
+        
         var newUrlComponents:NSURLComponents = NSURLComponents.componentsWithString(targetURL)
 //        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
-
+        self.storageManager?.savePage(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue, full_url: url.absoluteString, parameters: [], title: "TEST TITLE", html: "TEST HTML")
         
         
         return true

@@ -150,7 +150,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
             pagesTable.hidden = false
             pagesTable.userInteractionEnabled = true
-            pagesTable.delegate = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
+            var pagesViewController:PagesViewController = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
+            pagesTable.delegate = pagesViewController
+            pagesTable.dataSource = pagesViewController
+            
+//            var tableFrame = pagesTable.frame
+//            tableFrame.size.height = tableFrame.size.height + 70
+//            tableFrame.origin.y = tableFrame.origin.y - 70
+//            pagesTable.frame = tableFrame
 
         }
 
