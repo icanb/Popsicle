@@ -65,6 +65,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 70
     }
     
+    func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+        return 0;
+    }
+    
     // Table Data Delegate methods
     
     // section setup
@@ -92,6 +96,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
             cell = nibs[0] as UITableViewCell
         }
+
+        
+        var image = UIImage(named: "site-cell-bg")
+        var insets = UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
+        image = image.resizableImageWithCapInsets(insets)
+        
+        var button:UIButton = cell.viewWithTag(2) as UIButton
+        button.setBackgroundImage(image, forState: UIControlState.Normal)
 
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
         siteNameLabel?.text = self.sites[indexPath.row].hostname
