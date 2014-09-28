@@ -104,16 +104,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
-        var alertController = UIAlertController(title: "MC", message: "Recieved invitation!", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: context)
+        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName")
+        let requestedHostname = unarchiver.decodeObjectForKey("hostname")
+        
+        var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
             println("We want to ACCEPT")
+            invitationHandler(true, self.session)
+            
         })
         var rejectAction = UIAlertAction(title: "Reject", style: UIAlertActionStyle.Cancel, handler: {(UIAlertAction) in
             println("We want to REJECT")
+            
+            invitationHandler(false, self.session)
         })
-        alertController.addAction(acceptAction)
         alertController.addAction(rejectAction)
-        alertController.presentViewController(self, animated: true, completion: nil)
+        alertController.addAction(acceptAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
         showAlert("Received invitation from peer!!")
     }
     
@@ -157,7 +166,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
-        println("PEER \(peerID) CHANGED STATE TO \(state)")
+        if (state == MCSessionState.Connected) {
+            println("Connected to peer \(peerID)!")
+        }
+        else if (state == MCSessionState.Connecting) {
+            println("Connecting... to peer \(peerID)")
+        }
+        else if (state == MCSessionState.NotConnected) {
+            println("Disconnected from peer \(peerID)")
+        } else {
+            println("Unknown state change for peer \(peerID)")
+        }
     }
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
@@ -360,8 +379,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
+            let contextDict = ["displayName": remotePeerID.displayName, "hostname": requestedHostname]
+            
             self.browser.invitePeer(remotePeerID, toSession: self.session,
-                withContext: requestedHostname.dataUsingEncoding(NSUTF8StringEncoding), timeout: 0)
+                withContext: NSKeyedArchiver.archivedDataWithRootObject(contextDict), timeout: 0)
         }
         else {
             
