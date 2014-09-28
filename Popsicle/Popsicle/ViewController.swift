@@ -179,10 +179,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Remote path
         else {
             var count = 0
-            for remoteSite in self.remoteSites {
+            for remoteSite in remoteSites {
                 println("remoteSite: \(remoteSite)")
+                count += 1
             }
-            return 0
+            return count
         }
     }
 
