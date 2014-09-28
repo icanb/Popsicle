@@ -15,6 +15,8 @@
 		CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */; };
 		CE1F009E19D5C5A000B98BF8 /* PopsicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */; };
 		CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4CE3919D771AE0042570D /* SiteCellView.xib */; };
+		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
+		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
 		CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE606B219D75BFA00ADD3FC /* Storable.swift */; };
 		CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */; };
 		CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */; };
@@ -80,6 +82,8 @@
 		CE1F009C19D5C5A000B98BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopsicleTests.swift; sourceTree = "<group>"; };
 		CEA4CE3919D771AE0042570D /* SiteCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteCellView.xib; sourceTree = "<group>"; };
+		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
 		CEE606B219D75BFA00ADD3FC /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteMetadata.swift; sourceTree = "<group>"; };
 		CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageCache.swift; path = ../PageCache.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
 				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
+				CEA4CE3B19D77B760042570D /* StorageManager.swift */,
+				CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -412,11 +418,13 @@
 				CE1F008A19D5C5A000B98BF8 /* ViewController.swift in Sources */,
 				CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
+				CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */,
 				CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */,
 				CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */,
 				DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */,
 				DB103AB919D76D1B0061BA94 /* HTMLNode.swift in Sources */,
 				CEFFF1BF19D5FEB900C10EB4 /* Device.swift in Sources */,
+				CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +694,7 @@
 				DB9F23DA19D773CE0080AF0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

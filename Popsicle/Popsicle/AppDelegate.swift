@@ -13,7 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var device: Device?
-
+    var storageManager:StorageManager?
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Override point for customization after application launch.
@@ -46,13 +48,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.device = new_device_data
         }
-
+        
+        self.storageManager = StorageManager(device: self.device!)
+        
         return true
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         let targetURL:String = getTargetURL(url)
-        showAlert(targetURL) // println doesn't work here
+
+        var newUrlComponents:NSURLComponents = NSURLComponents.componentsWithString(targetURL)
+        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
+
         return true
     }
     

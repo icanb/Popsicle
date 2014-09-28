@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate {
     
 
     @IBOutlet var tableView: UITableView!
@@ -49,6 +49,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
 
         self.sites = self.appDelegate.device!.cache
+        self.appDelegate.device!.subscribeForUpdate(self, key: "current_device")
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -138,6 +140,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         return hyperlinkList
+    }
+    
+    func storageUpdated(key:String) {
+        
+        if (key == "current_device") {
+            self.sites = self.appDelegate.device!.cache
+            self.tableView.reloadData()
+        }
+
     }
 
 }

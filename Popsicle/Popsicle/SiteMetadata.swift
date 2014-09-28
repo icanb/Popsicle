@@ -11,7 +11,7 @@ import Foundation
 class SiteMetadata : Storable, NSCoding {
     
     var hostname:String = ""
-    var port = 80
+    var port:String = "80"
     var last_update: NSDate = NSDate.date()
     var directory_path:String = "/"
     var favicon:String = ""
@@ -26,7 +26,7 @@ class SiteMetadata : Storable, NSCoding {
         self.init()
         
         self.hostname = aDecoder.decodeObjectForKey("hostname") as String!
-        self.port = aDecoder.decodeIntegerForKey("port")
+        self.port = aDecoder.decodeObjectForKey("port") as String!
         self.last_update = aDecoder.decodeObjectForKey("last_update") as NSDate
         self.directory_path = aDecoder.decodeObjectForKey("directory_path") as String!
         
@@ -36,7 +36,7 @@ class SiteMetadata : Storable, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         
         aCoder.encodeObject(self.hostname, forKey:"hostname")
-        aCoder.encodeInteger(30, forKey:"port")
+        aCoder.encodeObject(self.port, forKey:"port")
         aCoder.encodeObject(self.last_update, forKey:"last_update")
         aCoder.encodeObject(self.directory_path, forKey:"directory_path")
         
