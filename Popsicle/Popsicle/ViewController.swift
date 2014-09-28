@@ -36,11 +36,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var session: MCSession!
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
-    var peers = [String: [String]]()
+    var remoteSites = [String: MCPeerID]()
     
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    var sites:[SiteMetadata] = []
+    var localSites:[SiteMetadata] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
-        self.sites = self.appDelegate.device!.cache
+        self.localSites = self.appDelegate.device!.cache
         self.appDelegate.device!.subscribeForUpdate(self, key: "current_device")
         
         // Initialize MC stuff
@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session.delegate = self
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: ["caches": "example.com,example.org"],
+            discoveryInfo: ["sites": "example.com,example.org,example.edu"],
             serviceType: self.serviceType)
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
@@ -106,11 +106,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             println(info)
             showAlert("Found peer: \(peerID)")
-            if let arry = info {
-                let array = arry["caches"]!.componentsSeparatedByString(",")
-                self.peers[peerID.displayName] = ["hi"]
+            if let infoDict = info as? Dictionary<String, String> {
+                for remoteSite in infoDict["sites"]!.componentsSeparatedByString(",") {
+                    self.remoteSites[remoteSite] = peerID
+                }
             }
-            println(self.peers)
+            println("self.peers: \(self.remoteSites)")
         }
     }
     
@@ -169,11 +170,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // cell setup
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Local caches
         if(section == 0) {
-            print(self.sites.count)
-            return self.sites.count
+            print(self.localSites.count)
+            return self.localSites.count
         }
+        // Remote path
         else {
+            var count = 0
+            for remoteSite in self.remoteSites {
+                println("remoteSite: \(remoteSite)")
+            }
             return 0
         }
     }
@@ -198,13 +205,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
         
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-        siteNameLabel?.text = self.sites[indexPath.row].hostname
+        siteNameLabel?.text = self.localSites[indexPath.row].hostname
 
         if (indexPath == expandedIndex) {
             var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
             pagesTable.hidden = false
             pagesTable.userInteractionEnabled = true
-            var pagesViewController:PagesViewController = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
+            var pagesViewController:PagesViewController = PagesViewController(site: self.localSites[indexPath.row],table:pagesTable)
             pagesTable.delegate = pagesViewController
             pagesTable.dataSource = pagesViewController
             
@@ -239,7 +246,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func storageUpdated(key:String) {
         
         if (key == "current_device") {
-            self.sites = self.appDelegate.device!.cache
+            self.localSites = self.appDelegate.device!.cache
             self.tableView.reloadData()
         }
 
