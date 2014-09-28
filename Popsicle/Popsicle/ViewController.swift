@@ -52,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         
         // Configure the table
-        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
+//        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
         self.sites = self.appDelegate.device!.cache
@@ -172,18 +172,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         siteNameLabel?.text = self.sites[indexPath.row].hostname
 
         if (indexPath == expandedIndex) {
-            var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
+            var pagesTable:UITableView! = UITableView()
+
             pagesTable.hidden = false
             pagesTable.userInteractionEnabled = true
             var pagesViewController:PagesViewController = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
             pagesTable.delegate = pagesViewController
             pagesTable.dataSource = pagesViewController
+            pagesTable.backgroundColor = UIColor.redColor()
             
-//            var tableFrame = pagesTable.frame
-//            tableFrame.size.height = tableFrame.size.height + 70
-//            tableFrame.origin.y = tableFrame.origin.y - 70
-//            pagesTable.frame = tableFrame
+            var tableFrame = cell.frame
+            tableFrame.size.height = 300
+            tableFrame.origin.y = 70
+            pagesTable.frame = tableFrame
 
+            cell.addSubview(pagesTable)
         }
 
         return cell
