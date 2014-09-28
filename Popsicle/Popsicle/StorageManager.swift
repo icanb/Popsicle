@@ -179,4 +179,13 @@ class StorageManager {
         
         return hyperlinkList
     }
+    
+    func printAllSites() {
+        for site in self.device!.cache {
+            println("SITE: \(site.hostname)")
+            for page in site.pages {
+                println(page.full_url)
+            }
+        }
+    }
 }

@@ -38,13 +38,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var session: MCSession!
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
-    var peers = [String: [String]]()
+    var remoteSites = [String: MCPeerID]()
     
     let cellIdentifier = "cellIdentifier"
     let cellIdentifierPage = "cellIdentifierPage"
 
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    var sites:[SiteMetadata] = []
+    var localSites:[SiteMetadata] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         self.tableView?.registerNib(UINib(nibName: "PageCellView", bundle: nil), forCellReuseIdentifier: cellIdentifierPage)
         
-        self.sites = self.appDelegate.device!.cache
+        self.localSites = self.appDelegate.device!.cache
         self.appDelegate.device!.subscribeForUpdate(self, key: "current_device")
         
         // Initialize MC stuff
@@ -72,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session.delegate = self
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: ["caches": "example.com,example.org"],
+            discoveryInfo: ["sites": "example.com,example.org,example.edu"],
             serviceType: self.serviceType)
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
@@ -110,11 +110,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             println(info)
             showAlert("Found peer: \(peerID)")
-            if let arry = info {
-                let array = arry["caches"]!.componentsSeparatedByString(",")
-                self.peers[peerID.displayName] = ["hi"]
+            if let infoDict = info as? Dictionary<String, String> {
+                for remoteSite in infoDict["sites"]!.componentsSeparatedByString(",") {
+                    self.remoteSites[remoteSite] = peerID
+                }
             }
-            println(self.peers)
+            println("self.peers: \(self.remoteSites)")
         }
     }
     
@@ -168,16 +169,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // cell setup
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Local caches
         if(section == 0) {
-            var count:Int = self.sites.count
+            print(self.localSites.count)
+            var count:Int = self.localSites.count
             if (expandedIndex != nil) {
                 count = count + self.nmrPages
             }
 
             return count
         }
+        // Remote path
         else {
-            return 0
+            var count = 0
+            for remoteSite in remoteSites {
+                println("remoteSite: \(remoteSite)")
+                count += 1
+            }
+            return count
         }
     }
     
@@ -241,7 +250,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 indexRow = indexRow - self.nmrPages
             }
             
-            var site =  self.sites[indexRow]
+            var site =  self.localSites[indexRow]
             
             
             var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
@@ -290,8 +299,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
         
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-        siteNameLabel?.text = self.sites[indexPath.row].hostname
+        siteNameLabel?.text = self.localSites[indexPath.row].hostname
 
+        if (indexPath == expandedIndex) {
+            var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
+            pagesTable.hidden = false
+            pagesTable.userInteractionEnabled = true
+            var pagesViewController:PagesViewController = PagesViewController(site: self.localSites[indexPath.row],table:pagesTable)
+            pagesTable.delegate = pagesViewController
+            pagesTable.dataSource = pagesViewController
+            
+//            var tableFrame = pagesTable.frame
+//            tableFrame.size.height = tableFrame.size.height + 70
+//            tableFrame.origin.y = tableFrame.origin.y - 70
+//            pagesTable.frame = tableFrame
+
+        }
         return cell
     }
     
@@ -299,7 +322,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("You selected cell #\(indexPath.row)!")
         
         self.expandedIndex = indexPath
-        self.selectedSite = self.sites[indexPath.row]
+        self.selectedSite = self.localSites[indexPath.row]
         self.nmrPages = self.selectedSite!.pages.count
         
         print(self.selectedSite?.pages)
@@ -319,7 +342,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func storageUpdated(key:String) {
         
         if (key == "current_device") {
-            self.sites = self.appDelegate.device!.cache
+            self.localSites = self.appDelegate.device!.cache
             self.tableView.reloadData()
         }
 
