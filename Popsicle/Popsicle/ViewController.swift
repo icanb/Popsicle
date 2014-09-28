@@ -151,7 +151,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView,
         heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return 70
+
+        var cellType:String = getCellType(indexPath)
+
+        if (cellType == "page") {
+            return 40
+        }
+        
+        return 70
     }
     
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
@@ -213,9 +220,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if (self.expandedIndex != nil &&
-            indexPath.section == 0 &&
-            indexPath.row > self.expandedIndex!.row && indexPath.row <= self.expandedIndex!.row + self.nmrPages) {
+        var cellType:String = getCellType(indexPath)
+
+
+        if (cellType == "page") {
             
             // Page Cell
 
@@ -242,7 +250,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return cell
     
         }
-        else if (indexPath.section == 0) {
+        else if (cellType == "localsite") {
             // site cell
             var indexRow = indexPath.row
             
@@ -276,7 +284,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return cell
 
         }
-        else if (indexPath.section == 1) {
+        else if (cellType == "remotesite") {
             // remote
         }
 
