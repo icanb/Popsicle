@@ -193,7 +193,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("You selected cell #\(indexPath.row)!")
         
         self.expandedIndex = indexPath
-        self.tableView.reloadData()
+        
+        // disabled temporarily so the app doesn't crash
+        //self.tableView.reloadData()
         
         showWebViewWithSite("http://www.yahoo.com")
     }
