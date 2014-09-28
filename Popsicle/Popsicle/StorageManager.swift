@@ -135,9 +135,8 @@ class StorageManager {
         page!.updateStorage()
             
         site?.pages.append(page!)
-        print(site?.pages)
         site?.updateStorage()
-
+        self.device!.updateStorage()
     }
     
     func getSites() {
