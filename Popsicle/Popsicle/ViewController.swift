@@ -278,7 +278,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             image = image.resizableImageWithCapInsets(insets)
 
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = page?.url_path
+            siteNameLabel?.text = page?.title
     
             return cell
     
