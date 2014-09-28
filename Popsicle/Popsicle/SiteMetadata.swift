@@ -32,7 +32,6 @@ class SiteMetadata : Storable, NSCoding {
         self.port = aDecoder.decodeObjectForKey("port") as String!
         self.last_update = aDecoder.decodeObjectForKey("last_update") as NSDate
         self.directory_path = aDecoder.decodeObjectForKey("directory_path") as String!
-        println(aDecoder.decodeObjectForKey("pages"))
         self.pages = aDecoder.decodeObjectForKey("pages") as [PageCache]
     }
     
@@ -47,14 +46,13 @@ class SiteMetadata : Storable, NSCoding {
     }
     
     func crawl() -> Bool {
-        println(self.hostname)
         if (self.hostname == "") {
             println ("no host name")
             return false
         }
         
         var count:Int = 5
-        var depth:Int = 2
+        var depth:Int = 3
         let stringUrl = self.sanitizeUrl(hostname, hostname: hostname, currentPath: nil)
         self.recursiveCrawl(stringUrl, primaryKey:stringUrl, countRemaining: count, depthRemaining: depth)
         
@@ -64,19 +62,16 @@ class SiteMetadata : Storable, NSCoding {
     
     func recursiveCrawl(stringUrl: String, primaryKey originalHyperlink:String, countRemaining count:Int, depthRemaining depth:Int) -> Void {
         if (depth == 0) {
-            println(self.pages)
             return
         }
         
         let url = NSURL(string: stringUrl)
-        println(url)
         var dynamicCount:Int = count
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
-//                        println(NSString(data: data, encoding: NSUTF8StringEncoding))
             let response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
-            var hyperlinks = self.getHyperlinksFromHtml(response)
+            var (hyperlinks, title) = self.parseHtml(response)
             var sm:StorageManager = self.appDelegate.getStorageManager()
-            sm.savePageYo(host: self.hostname, port: "80", full_url: stringUrl, parameters: [], title: "temp", html: response)
+            sm.savePageYo(host: self.hostname, port: "80", full_url: stringUrl, url_path: originalHyperlink, parameters: [], title: title, html: response)
             for hyperlink in hyperlinks {
                 if (dynamicCount < 0) {
                     break
@@ -84,7 +79,10 @@ class SiteMetadata : Storable, NSCoding {
                 if (self.getPage(hyperlink) == nil) {
                     dynamicCount--
                     let sanitizedHyperlink = self.sanitizeUrl(hyperlink, hostname: self.hostname, currentPath: stringUrl)
-                    self.recursiveCrawl(sanitizedHyperlink, primaryKey:hyperlink, countRemaining: count, depthRemaining: depth-1)
+                    if (sanitizedHyperlink != "") {
+                        self.recursiveCrawl(sanitizedHyperlink, primaryKey:hyperlink, countRemaining: count, depthRemaining: depth-1)
+                    }
+
                 }
 
             }
@@ -97,6 +95,16 @@ class SiteMetadata : Storable, NSCoding {
     func getPage(hyperlink:String) -> PageCache? {
         for page in self.pages {
             if (page.url_path == hyperlink) {
+                return page
+            }
+        }
+        
+        return nil
+    }
+
+    func getPageFromFullURL(url:String) -> PageCache? {
+        for page in self.pages {
+            if (page.full_url == url) {
                 return page
             }
         }
@@ -138,7 +146,7 @@ class SiteMetadata : Storable, NSCoding {
         return sanitizedUrl
     }
     
-    func getHyperlinksFromHtml(htmlString: String) -> Array<String> {
+    func parseHtml(htmlString: String) -> (Array<String>, String) {
         
         var err : NSError?
         var parser = HTMLParser(html: htmlString, error: &err)
@@ -148,6 +156,7 @@ class SiteMetadata : Storable, NSCoding {
 //        }
         
         var bodyNode = parser.body
+        var headNode = parser.head
         
         var hyperlinkList: [String] = []
         
@@ -157,7 +166,12 @@ class SiteMetadata : Storable, NSCoding {
             }
         }
         
-        return hyperlinkList
+        var titleNode:String = ""
+        if let titleNodes = headNode?.findChildTags("title") {
+            titleNode = titleNodes[0].contents
+        }
+        
+        return (hyperlinkList, titleNode)
     }
     
 }
