@@ -120,6 +120,19 @@ class StorageManager {
         page?.html = htmlStr!
         page?.last_update = NSDate.date()
     
+        var cleanPagename = fullUrl!.stringByReplacingOccurrencesOfString(".", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        var fileName = "/page_"+cleanPagename+".sickle"
+            
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        var storePath = documentsPath.stringByAppendingPathComponent(fileName)
+        var checkValidation = NSFileManager.defaultManager()
+            
+        if (checkValidation.fileExistsAtPath(storePath)) {
+            print("WARNING: this should not happen")
+        }
+            
+        page?.storePath = storePath            
+        page!.updateStorage()
 
     }
     
