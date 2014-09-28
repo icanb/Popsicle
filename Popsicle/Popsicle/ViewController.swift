@@ -63,7 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session = MCSession(peer: self.peerID)
         
         var assistant = MCAdvertiserAssistant(serviceType: self.serviceType,
-            discoveryInfo: nil, // we're gonna want to fux with this later on
+            discoveryInfo: ["foo": "bar"], // we're gonna want to fux with this later on
             session: self.session)
         assistant.start()
         
