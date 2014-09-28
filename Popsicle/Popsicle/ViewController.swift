@@ -381,6 +381,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (cellType == "page")  {
             // Open the page here
             var page = getPageWithIndexRow(indexPath)
+//            var sm:StorageManager = self.appDelegate.getStorageManager()
+//            var site = sm.getSiteWithHostname(host: page.)
+            var indexRow = indexPath.row
+            indexRow = indexRow - self.expandedIndex!.row - 1
+            var site =  self.localSites[indexRow]
+            self.showWebViewWithSite(page!, site: site)
 
         }
         else {
@@ -431,9 +437,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
-    func showWebViewWithSite(URL: String) {
+    func showWebViewWithSite(page: PageCache, site: SiteMetadata) {
+        println("showwebview goddamnit")
         let webViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
-        webViewController.initialURL = URL
+        webViewController.initialPage = page
+        webViewController.rooSite = site
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
 
