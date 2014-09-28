@@ -298,7 +298,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
-            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
             
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
             siteNameLabel?.text = site.hostname
@@ -360,6 +359,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         button.indexPath = indexPath
         button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
         
+        var buttonFrame = button.frame
+        buttonFrame.size.width = cell.frame.size.width
+        button.frame = buttonFrame
+        
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
         siteNameLabel?.text = self.localSites[indexPath.row].hostname
 
@@ -419,12 +422,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
         
 //        showWebViewWithSite("http://www.yahoo.com")
-    }
-    
-    func siteTapped(sender:UIButtonForRow!) {
-        var indexPath:NSIndexPath? = sender.indexPath
-        self.expandedIndex = indexPath
-        self.tableView.reloadData()
     }
     
     func storageUpdated(key:String) {
