@@ -38,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var session: MCSession!
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
+    let discoveryInfoSitesKey = "sites"
     var remoteSites = [String: MCPeerID]()
     
     let cellIdentifier = "cellIdentifier"
@@ -69,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session.delegate = self
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: ["sites": "example.com,example.org,example.edu"],
+            discoveryInfo: [discoveryInfoSitesKey: "example.com,example.org,example.edu"],
             serviceType: self.serviceType)
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
@@ -108,7 +109,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             println(info)
             showAlert("Found peer: \(peerID)")
             if let infoDict = info as? Dictionary<String, String> {
-                for remoteSite in infoDict["sites"]!.componentsSeparatedByString(",") {
+                if (infoDict.indexForKey(discoveryInfoSitesKey) == nil) {
+                    println("Remote peer's discovery infor didn't have \(discoveryInfoSitesKey) key")
+                }
+                for remoteSite in infoDict[discoveryInfoSitesKey]!.componentsSeparatedByString(",") {
                     self.remoteSites[remoteSite] = peerID
                 }
             }
