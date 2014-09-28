@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCBrowserViewControllerDelegate {
     
     @IBOutlet var tableView: UITableView!
 
@@ -68,16 +68,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         assistant.start()
         
         self.browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
+        self.browser.delegate = self
         
         self.presentViewController(self.browser, animated: false, completion: ({
             println("presentViewController dismissed");
         }))
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!) {
+        println("Did finish")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!) {
+        println("Was cancelled")
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Table View setup
