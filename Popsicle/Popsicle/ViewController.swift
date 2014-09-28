@@ -427,7 +427,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
-            let contextDict = ["displayName": remotePeerID.displayName, "hostname": requestedHostname]
+            let contextDict = ["displayName": self.peerID.displayName, "hostname": requestedHostname]
             
             let data = NSMutableData()
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
