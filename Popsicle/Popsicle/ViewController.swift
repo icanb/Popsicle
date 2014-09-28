@@ -168,17 +168,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Local caches
         if(section == 0) {
-<<<<<<< HEAD
             print(self.localSites.count)
-            return self.localSites.count
-=======
-            var count:Int = self.sites.count
+            var count:Int = self.localSites.count
             if (expandedIndex != nil) {
                 count = count + self.nmrPages
             }
 
             return count
->>>>>>> 55201f166968d128ae05547f84195a6ebed9c01d
         }
         // Remote path
         else {
@@ -233,7 +229,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 indexRow = indexRow - self.nmrPages
             }
             
-            var site =  self.sites[indexRow]
+            var site =  self.localSites[indexRow]
             
             
             var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
@@ -284,7 +280,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
         siteNameLabel?.text = self.localSites[indexPath.row].hostname
 
-<<<<<<< HEAD
         if (indexPath == expandedIndex) {
             var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
             pagesTable.hidden = false
@@ -299,9 +294,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            pagesTable.frame = tableFrame
 
         }
-
-=======
->>>>>>> 55201f166968d128ae05547f84195a6ebed9c01d
         return cell
     }
     
@@ -309,7 +301,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("You selected cell #\(indexPath.row)!")
         
         self.expandedIndex = indexPath
-        self.selectedSite = self.sites[indexPath.row]
+        self.selectedSite = self.localSites[indexPath.row]
         self.nmrPages = self.selectedSite!.pages.count
         
         print(self.selectedSite?.pages)
