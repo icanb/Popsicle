@@ -12,6 +12,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet var webView: UIWebView!
     var initialURL = "http://urlnotinitialized"
+    var appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
     
     let tempHtmlString1:String =
     "<!DOCTYPE html>" +
@@ -65,6 +66,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+        
         println("--> STARTING LOAD")
         let url = NSURL(string: "http://www.google.com")
         println(request.URL)
@@ -73,12 +75,25 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
         if (navigationType == UIWebViewNavigationType.LinkClicked) {
             println("here")
             webView.stopLoading()
-            webView.loadHTMLString(tempHtmlString2, baseURL: url)
+            loadLocalPageWithURL("http://www.google.com")
+            //webView.loadHTMLString(tempHtmlString2, baseURL: url)
             return true
         }
         
         
         return true
+    }
+    
+    func loadLocalPageWithURL(URL: String) {
+        var storageManager = appDelegate.storageManager?
+        storageManager?.printAllSites()
+        
+        var hostURL = NSURLComponents.componentsWithString(URL)
+        var page: PageCache! = storageManager?.getPageWithHostnameUrl(host: hostURL.host, full_url: URL)
+        
+        println(page?.full_url)
+        
+        webView.loadHTMLString(page?.html, baseURL: NSURL(string: hostURL.host!))
     }
     
     func webViewDidStartLoad(webView: UIWebView!) {
