@@ -14,6 +14,7 @@
 		CE1F008F19D5C5A000B98BF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F008E19D5C5A000B98BF8 /* Images.xcassets */; };
 		CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */; };
 		CE1F009E19D5C5A000B98BF8 /* PopsicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */; };
+		CE215C6E19D8ABF500DAFE8C /* PageCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */; };
 		CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4CE3919D771AE0042570D /* SiteCellView.xib */; };
 		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
 		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
@@ -85,6 +86,7 @@
 		CE1F009719D5C5A000B98BF8 /* PopsicleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopsicleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F009C19D5C5A000B98BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopsicleTests.swift; sourceTree = "<group>"; };
+		CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageCellView.xib; sourceTree = "<group>"; };
 		CEA4CE3919D771AE0042570D /* SiteCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteCellView.xib; sourceTree = "<group>"; };
 		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
@@ -177,11 +179,12 @@
 				CE1F008E19D5C5A000B98BF8 /* Images.xcassets */,
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
-				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
 				CEA4CE3B19D77B760042570D /* StorageManager.swift */,
 				CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */,
 				CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */,
 				CEA4CE4119D88CED0042570D /* PagesViewController.swift */,
+				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
+				CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				CE1F008D19D5C5A000B98BF8 /* Main.storyboard in Resources */,
 				CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */,
 				DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */,
+				CE215C6E19D8ABF500DAFE8C /* PageCellView.xib in Resources */,
 				CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */,
 				CE1F008F19D5C5A000B98BF8 /* Images.xcassets in Resources */,
 			);
