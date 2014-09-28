@@ -114,6 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let infoDict = info as? Dictionary<String, String> {
                 if (infoDict.indexForKey(discoveryInfoSitesKey) == nil) {
                     println("Remote peer's discovery infor didn't have \(discoveryInfoSitesKey) key")
+                    return
                 }
                 for remoteSite in infoDict[discoveryInfoSitesKey]!.componentsSeparatedByString(",") {
                     self.remoteSites[remoteSite] = peerID
