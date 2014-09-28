@@ -41,6 +41,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var peers = [String: [String]]()
     
     let cellIdentifier = "cellIdentifier"
+    let cellIdentifierPage = "cellIdentifierPage"
+
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var sites:[SiteMetadata] = []
 
@@ -57,6 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Configure the table
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        self.tableView?.registerNib(UINib(nibName: "PageCellView", bundle: nil), forCellReuseIdentifier: cellIdentifierPage)
         
         self.sites = self.appDelegate.device!.cache
         self.appDelegate.device!.subscribeForUpdate(self, key: "current_device")
@@ -177,23 +180,45 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 0
         }
     }
+    
+    // Unified way of determining the cell type
+    // - localsite
+    // - page
+    // - remotesite
+    func getCellType(indexPath:NSIndexPath) -> NSString {
+        
+        if (self.expandedIndex != nil &&
+            indexPath.section == 0 &&
+            indexPath.row > self.expandedIndex!.row && indexPath.row <= self.expandedIndex!.row + self.nmrPages) {
+                return "page"
+        }
+        else if (indexPath.section == 0) {
+            return "localsite"
+        }
+        else if (indexPath.section == 1) {
+            return "remotesite"
+        }
+        
+        return ""
+    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if (self.expandedIndex != nil &&
             indexPath.section == 0 &&
-            indexPath.row > self.expandedIndex!.row && indexPath.row < self.expandedIndex!.row + self.nmrPages) {
-        
+            indexPath.row > self.expandedIndex!.row && indexPath.row <= self.expandedIndex!.row + self.nmrPages) {
+            
+            // Page Cell
 
             var indexRow = indexPath.row
-            indexRow = indexRow - self.expandedIndex!.row
-                
+            indexRow = indexRow - self.expandedIndex!.row - 1
+            print(indexRow)
             var page =  self.selectedSite?.pages[indexRow]
 
-            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifierPage) as UITableViewCell
             
             if (cell == nil) {
-                var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
+                var nibs = NSBundle.mainBundle().loadNibNamed("PageCellView", owner: self, options: nil)
                 cell = nibs[0] as UITableViewCell
             }
             
@@ -201,14 +226,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var image = UIImage(named: "site-cell-bg")
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
-            
-            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-            button.setBackgroundImage(image, forState: UIControlState.Normal)
-            button.indexPath = indexPath
-            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
-            
+
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = "Page"
+            siteNameLabel?.text = page?.url_path
     
             return cell
     
