@@ -133,7 +133,10 @@ class StorageManager {
             
         page?.storePath = storePath            
         page!.updateStorage()
-
+            
+        site?.pages.append(page!)
+        site?.updateStorage()
+        self.device!.updateStorage()
     }
     
     func getSites() {

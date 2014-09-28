@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var tableView: UITableView!
 
     var expandedIndex:NSIndexPath?
+    var selectedSite:SiteMetadata?
+    var nmrPages = 0
 
     let tempHtmlString:String =
     "<!DOCTYPE html>" +
@@ -36,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var session: MCSession!
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
+    var peers = [String: [String]]()
     
     let cellIdentifier = "cellIdentifier"
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -53,7 +56,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         
         // Configure the table
-        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
         self.sites = self.appDelegate.device!.cache
@@ -67,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.session.delegate = self
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
-            discoveryInfo: nil,
+            discoveryInfo: ["caches": "example.com,example.org"],
             serviceType: self.serviceType)
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
@@ -99,11 +101,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println(error)
     }
     
-    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject: AnyObject]!) {
         if (peerID.displayName == UIDevice.currentDevice().name) {
             println("found ourselves... ignoring")
         } else {
+            println(info)
             showAlert("Found peer: \(peerID)")
+            if let arry = info {
+                let array = arry["caches"]!.componentsSeparatedByString(",")
+                self.peers[peerID.displayName] = ["hi"]
+            }
+            println(self.peers)
         }
     }
     
@@ -139,11 +147,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView,
         heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            
-            if (self.expandedIndex == indexPath) {
-                return 490
-            }
-    
             return 70
     }
     
@@ -163,8 +166,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0) {
-            print(self.sites.count)
-            return self.sites.count
+            var count:Int = self.sites.count
+            if (expandedIndex != nil) {
+                count = count + self.nmrPages
+            }
+
+            return count
         }
         else {
             return 0
@@ -172,6 +179,78 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if (self.expandedIndex != nil &&
+            indexPath.section == 0 &&
+            indexPath.row > self.expandedIndex!.row && indexPath.row < self.expandedIndex!.row + self.nmrPages) {
+        
+
+            var indexRow = indexPath.row
+            indexRow = indexRow - self.expandedIndex!.row
+                
+            var page =  self.selectedSite?.pages[indexRow]
+
+            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+            
+            if (cell == nil) {
+                var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
+                cell = nibs[0] as UITableViewCell
+            }
+            
+            
+            var image = UIImage(named: "site-cell-bg")
+            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+            image = image.resizableImageWithCapInsets(insets)
+            
+            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            button.setBackgroundImage(image, forState: UIControlState.Normal)
+            button.indexPath = indexPath
+            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
+            
+            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+            siteNameLabel?.text = "Page"
+    
+            return cell
+    
+        }
+        else if (indexPath.section == 0) {
+            // site cell
+            var indexRow = indexPath.row
+            
+            if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
+                indexRow = indexRow - self.nmrPages
+            }
+            
+            var site =  self.sites[indexRow]
+            
+            
+            var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
+            
+            if (cell == nil) {
+                var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
+                cell = nibs[0] as UITableViewCell
+            }
+            
+            
+            var image = UIImage(named: "site-cell-bg")
+            var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+            image = image.resizableImageWithCapInsets(insets)
+            
+            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            button.setBackgroundImage(image, forState: UIControlState.Normal)
+            button.indexPath = indexPath
+            button.addTarget(self, action: "siteTapped:", forControlEvents: .TouchUpInside)
+            
+            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+            siteNameLabel?.text = site.hostname
+            
+            return cell
+
+        }
+        else if (indexPath.section == 1) {
+            // remote
+        }
+
         
         var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
 
@@ -193,21 +272,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
         siteNameLabel?.text = self.sites[indexPath.row].hostname
 
-        if (indexPath == expandedIndex) {
-            var pagesTable:UITableView! = cell.viewWithTag(3) as UITableView
-            pagesTable.hidden = false
-            pagesTable.userInteractionEnabled = true
-            var pagesViewController:PagesViewController = PagesViewController(site: self.sites[indexPath.row],table:pagesTable)
-            pagesTable.delegate = pagesViewController
-            pagesTable.dataSource = pagesViewController
-            
-//            var tableFrame = pagesTable.frame
-//            tableFrame.size.height = tableFrame.size.height + 70
-//            tableFrame.origin.y = tableFrame.origin.y - 70
-//            pagesTable.frame = tableFrame
-
-        }
-
         return cell
     }
     
@@ -215,15 +279,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("You selected cell #\(indexPath.row)!")
         
         self.expandedIndex = indexPath
+        self.selectedSite = self.sites[indexPath.row]
+        self.nmrPages = self.selectedSite!.pages.count
+        
+        print(self.selectedSite?.pages)
         
         // disabled temporarily so the app doesn't crash
-        //self.tableView.reloadData()
+        self.tableView.reloadData()
         
-        showWebViewWithSite("http://www.yahoo.com")
+//        showWebViewWithSite("http://www.yahoo.com")
     }
     
     func siteTapped(sender:UIButtonForRow!) {
-       
         var indexPath:NSIndexPath? = sender.indexPath
         self.expandedIndex = indexPath
         self.tableView.reloadData()

@@ -39,7 +39,6 @@ class PagesViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // Configure the table
         self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.cellIdentifier)
-        self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
 
     }
     
@@ -71,14 +70,14 @@ class PagesViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as UITableViewCell
-        
-//        if (cell == nil) {
-//            var nibs = NSBundle.mainBundle().loadNibNamed("SiteCellView", owner: self, options: nil)
-//            cell = nibs[0] as UITableViewCell
-//        }
+        // 2
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
         
         
+        // 5
+        cell.textLabel?.text = "test"
+        
+
 //        var image = UIImage(named: "site-cell-bg")
 //        var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
 //        image = image.resizableImageWithCapInsets(insets)
