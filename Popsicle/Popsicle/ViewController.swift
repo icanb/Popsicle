@@ -383,8 +383,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            var site = sm.getSiteWithHostname(host: page.)
             var indexRow = indexPath.row
             indexRow = indexRow - self.expandedIndex!.row - 1
-            var site =  self.localSites[indexRow]
-            self.showWebViewWithSite(page!, site: site)
+            println(self.localSites)
+//            var site =  self.localSites[indexRow]
+            self.showWebViewWithSite(page!, site: self.selectedSite!)
 
         }
         else if (cellType == "remotesite") {
