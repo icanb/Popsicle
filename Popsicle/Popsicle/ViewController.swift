@@ -375,6 +375,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
 
+            if (indexPath == expandedIndex) {
+                var image = UIImage(named: "top-site-cell")
+                var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 0.0, right: 12.0)
+                image = image.resizableImageWithCapInsets(insets)
+            }
+
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
