@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func showAlert(message: NSString!) {
         println("showAlert(): \(message)")
-//        UIAlertView(title: "MC", message: message, delegate: nil, cancelButtonTitle: "K.").show()
+        UIAlertView(title: "MC", message: message, delegate: nil, cancelButtonTitle: "K.").show()
     }
     
     // Advertiser methods
@@ -179,43 +179,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return nil
     }
-    
-//    func sendSiteCache(hostname: String!, toPeer peerID: MCPeerID!) {
-//        println("I was asked to sendSiteCache of hostname \(hostname) to peer \(peerID.displayName)")
-//        if let localSite = getLocalSite(hostname)? {
-//            println("Sending localSite \(localSite.hostname) with pages \(localSite.pages.count) to \(peerID.displayName)")
-//            
-//            var data = NSKeyedArchiver.archivedDataWithRootObject(localSite)
-//            
-//            var error : NSError?
-//            
-//            self.session.sendData(data, toPeers: [peerID],
-//                withMode: MCSessionSendDataMode.Unreliable, error: &error)
-//            
-//            if error != nil {
-//                print("Error sending data: \(error?.localizedDescription)")
-//            }
-//        } else {
-//            println("Localsite NOT FOUND!!")
-//        }
-//    }
-//    
-//    func sendQueuedRequests() {
-//        for hostname in self.sendQueue {
-//            
-//            let msg = hostname.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-//            
-//            var error : NSError?
-//            
-//            self.session.sendData(msg, toPeers: self.session.connectedPeers,
-//                withMode: MCSessionSendDataMode.Reliable, error: &error)
-//            
-//            if error != nil {
-//                print("Error sending data: \(error?.localizedDescription)")
-//            }
-//        }
-//        
-//    }
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
         if (state == MCSessionState.Connected) {
