@@ -456,14 +456,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if (cellType == "localsite") {
                 // site cell
                 var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                var noSiteLabel:UILabel! = cell.viewWithTag(3) as UILabel
 
                 if (self.localSites.count == 0) {
                     siteNameLabel.hidden = true
-                    var noSiteLabel:UILabel! = cell.viewWithTag(3) as UILabel
                     noSiteLabel.hidden = false
                     return cell
                 }
-                
+                else {
+                    siteNameLabel.hidden = false
+                    noSiteLabel.hidden = true
+                }
+
                 if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
                     indexRow = indexRow - self.nmrPages
                 }
