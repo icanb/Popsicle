@@ -311,11 +311,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var label:UILabel = UILabel(frame: CGRectMake(8, 2, tableView.frame.size.width, 18))
         
-        label.font = UIFont.systemFontOfSize(10)
+        label.font = UIFont.boldSystemFontOfSize(9)
         label.text = title
         view.addSubview(label)
         view.backgroundColor = UIColor.clearColor()
-    
+
         return view
 
     }
@@ -501,7 +501,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             println(self.localSites)
 //            var site =  self.localSites[indexRow]
             self.showWebViewWithSite(page!, site: self.selectedSite!)
-
+            self.tableView.reloadData()
         }
         else if (cellType == "remotesite") {
             let remotePeerID = self.remoteSites.values.array[indexPath.row]
@@ -530,6 +530,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             archiver.finishEncoding()
             
             self.browser.invitePeer(remotePeerID, toSession: self.session, withContext: data, timeout: 0)
+            self.tableView.reloadData()
         }
         else {
             
@@ -552,16 +553,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.nmrPages = self.selectedSite!.pages.count
             }
             
-            self.tableView.reloadData()
+            if (self.nmrPages > 10)  {
+                self.nmrPages = 10
+            }
+
+            
+            self.tableView.reloadSections(NSIndexSet(index:0), withRowAnimation:UITableViewRowAnimation.Fade)
         }
 
-        
-        print(self.selectedSite?.pages)
-        
-        // disabled temporarily so the app doesn't crash
-        self.tableView.reloadData()
-        
-//        showWebViewWithSite("http://www.yahoo.com")
     }
     
     func storageUpdated(key:String) {

@@ -22,7 +22,7 @@ class StorageManager {
 
     }
 
-    func saveSite(host hostName:String?, port portNmr:String? = "80") -> Bool {
+    func saveSite(host hostName:String?, port portNmr:String? = "80", rootUrl:String?) -> Bool {
     
         for site in self.device!.cache {
             if (site.hostname == hostName) {
@@ -48,6 +48,7 @@ class StorageManager {
             // Create and save the site
             var newSite:SiteMetadata = SiteMetadata()
             newSite.hostname = hostName!
+            newSite.root_url = rootUrl!
             newSite.port = "80"
             newSite.storePath = storePath
             newSite.updateStorage()
@@ -101,13 +102,13 @@ class StorageManager {
         return nil
     }
 
-    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, url_path urlPath:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> Void {
+    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, url_path urlPath:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> PageCache {
             
             
         var site:SiteMetadata? = getSiteWithHostname(host: hostName)
         
         if (site == nil) {
-            saveSite(host: hostName, port: portNmr)
+            saveSite(host: hostName, port: portNmr, rootUrl: urlPath)
             site = getSiteWithHostname(host: hostName)
         }
         
@@ -140,6 +141,8 @@ class StorageManager {
         site?.pages.append(page!)
         site?.updateStorage()
         self.device!.updateStorage()
+        
+        return page!
     }
     
     func getSites() {

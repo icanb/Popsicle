@@ -15,6 +15,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     
     var initialPage:PageCache?
     var rooSite:SiteMetadata?
+    var history:[PageCache] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
         }
         webView.loadHTMLString(html, baseURL: url)
         webView.delegate = self
+        
+        addToHistory(self.initialPage!)
         
         // Do any additional setup after loading the view.
     }
@@ -55,6 +58,8 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
                 let html = page?.html
                 webView.loadHTMLString(html, baseURL: request.URL)
                 
+                addToHistory(page!)
+                
             } else {
                 var alert = UIAlertView(title: "Uh oh!", message: "Seems like this page is not cached, sorry!", delegate: self, cancelButtonTitle: "OK")
                 alert.show()
@@ -65,6 +70,10 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
+    func addToHistory(page:PageCache) {
+        history.append(page)
+    }
+    
     func webViewDidStartLoad(webView: UIWebView!) {
         println("Webview started Loading")
     }
@@ -72,5 +81,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView!) {
         println("Webview did finish load")
     }
-
+    @IBAction func pressedBackButton(sender: UIBarButtonItem) {
+        println("BAAAACK")
+    }
 }

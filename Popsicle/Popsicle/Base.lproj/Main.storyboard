@@ -109,7 +109,11 @@
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Izd-gE-lxx"/>
                                     <barButtonItem systemItem="refresh" id="3IM-5l-UaY"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ju8-CJ-UsC"/>
-                                    <barButtonItem title=" > " systemItem="rewind" id="BhK-1K-e0W"/>
+                                    <barButtonItem title=" > " systemItem="rewind" id="BhK-1K-e0W">
+                                        <connections>
+                                            <action selector="pressedBackButton:" destination="ZKJ-ZF-gKc" id="KUZ-Gg-hsB"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="R0V-FD-GF2"/>
                                     <barButtonItem systemItem="fastForward" id="85S-8y-bqD"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="5Se-1l-3wO"/>

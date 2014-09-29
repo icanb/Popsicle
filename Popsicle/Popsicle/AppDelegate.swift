@@ -33,9 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var device_data:Device = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as Device
             self.device = device_data
             self.device!.storePath = storePath
-
-            print(device_data)
-            print(device_data.cache)
         }
         else
         {   
@@ -63,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let targetURL:String = getTargetURL(url)
         
         var newUrlComponents:NSURLComponents = NSURLComponents.componentsWithString(targetURL)
-        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
+        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue, rootUrl:newUrlComponents.path)
 
 //        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
 //        self.storageManager?.savePage(host: newUrlComponents.host,

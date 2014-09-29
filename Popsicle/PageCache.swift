@@ -44,5 +44,6 @@ class PageCache : Storable, NSCoding {
         aCoder.encodeObject(self.last_update, forKey:"last_update")
 
     }
+    
 }
 
