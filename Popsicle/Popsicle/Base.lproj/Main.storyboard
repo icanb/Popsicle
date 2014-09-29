@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FPj-iF-3wA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FPj-iF-3wA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,7 +17,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uqV-BJ-nNI">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gou-bq-O8y">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="popsicle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddR-hs-PT3">
+                                        <rect key="frame" x="0.0" y="5" width="373" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="lxK-bU-vsY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ddR-hs-PT3" firstAttribute="leading" secondItem="Gou-bq-O8y" secondAttribute="leading" id="1zx-ZY-ad8"/>
+                                    <constraint firstAttribute="trailing" secondItem="ddR-hs-PT3" secondAttribute="trailing" id="Dqr-KU-bXH"/>
+                                    <constraint firstAttribute="bottom" secondItem="ddR-hs-PT3" secondAttribute="bottom" id="KrS-Q4-DFM"/>
+                                    <constraint firstItem="ddR-hs-PT3" firstAttribute="top" secondItem="Gou-bq-O8y" secondAttribute="top" constant="24" id="aVT-QT-JTC"/>
+                                    <constraint firstItem="ddR-hs-PT3" firstAttribute="width" secondItem="Gou-bq-O8y" secondAttribute="width" id="c4Q-ok-MYX"/>
+                                    <constraint firstAttribute="height" constant="58" id="lTC-ZG-hJd"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="KrS-Q4-DFM"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uqV-BJ-nNI">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -31,9 +59,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.62745098039215685" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="width" secondItem="Gou-bq-O8y" secondAttribute="width" id="EX0-FF-iQo"/>
+                            <constraint firstItem="Gou-bq-O8y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="EXk-S4-YHt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uqV-BJ-nNI" secondAttribute="trailing" constant="-3" id="JmP-Vz-mE0"/>
                             <constraint firstItem="uqV-BJ-nNI" firstAttribute="trailing" secondItem="wfy-db-euE" secondAttribute="trailing" id="N0N-HD-Kys"/>
-                            <constraint firstItem="uqV-BJ-nNI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bKw-kX-AVc"/>
+                            <constraint firstItem="uqV-BJ-nNI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="bKw-kX-AVc"/>
                             <constraint firstItem="uqV-BJ-nNI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-3" id="drL-6m-mLC"/>
                             <constraint firstAttribute="width" secondItem="uqV-BJ-nNI" secondAttribute="width" id="oPa-RD-K1C"/>
                             <constraint firstItem="uqV-BJ-nNI" firstAttribute="leading" secondItem="y3c-jy-aDJ" secondAttribute="leading" id="rEl-Ry-efs"/>
@@ -55,12 +85,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="803" y="177"/>
+            <point key="canvasLocation" x="851" y="176"/>
         </scene>
-        <!--Web View-->
+        <!--Offline Web View Controller-->
         <scene sceneID="oaB-IZ-HjF">
             <objects>
-                <viewController storyboardIdentifier="offlineWebViewController" title="Web View" id="ZKJ-ZF-gKc" customClass="OfflineWebViewController" customModule="Popsicle" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="offlineWebViewController" id="ZKJ-ZF-gKc" customClass="OfflineWebViewController" customModule="Popsicle" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pfh-HB-c2V"/>
                         <viewControllerLayoutGuide type="bottom" id="4bK-q6-ufD"/>
@@ -113,7 +143,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="FPj-iF-3wA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zcp-a1-cCT">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="zcp-a1-cCT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

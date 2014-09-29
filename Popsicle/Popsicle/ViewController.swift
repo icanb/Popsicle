@@ -53,7 +53,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("App Started")
 
-//        titleLabel.text = appDelegate.device?.uid
+//        [[UINavigationBar appearance] setTitleTextAttributes:
+//            [NSDictionary dictionaryWithObjectsAndKeys:
+//            [UIColor blackColor], UITextAttributeTextColor,
+//            [UIFont fontWithName:@"ArialMT" size:16.0], UITextAttributeFont,nil]];
+//
+//        UIBarButtonItem.appearance().tintColor = UIColor.magentaColor()
+//        UINavigationBar.appearance().titleTextAttributes = [UITextAttributeTextColor: UIColor.blueColor()]
+
+
         
         let stringUrl:String = "http://google.com"
 //        cacheHtmlPages(stringUrl)
@@ -249,7 +257,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 40
         }
         
-        return 70
+        return 64
     }
     
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
@@ -288,7 +296,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
         
-        var label:UILabel = UILabel(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
+        var label:UILabel = UILabel(frame: CGRectMake(8, 0, tableView.frame.size.width, 18))
         
         label.font = UIFont.systemFontOfSize(10)
         label.text = title
@@ -388,6 +396,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
             
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+
             return cell
     
         }
@@ -404,6 +414,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
 
+            if (indexPath == expandedIndex) {
+                var image = UIImage(named: "top-site-cell")
+                var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 0.0, right: 12.0)
+                image = image.resizableImageWithCapInsets(insets)
+            }
+
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
@@ -414,6 +430,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
             var indexRow = indexPath.row
+
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
 
             if (cellType == "localsite") {
                 // site cell
@@ -456,8 +474,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            var site = sm.getSiteWithHostname(host: page.)
             var indexRow = indexPath.row
             indexRow = indexRow - self.expandedIndex!.row - 1
-            var site =  self.localSites[indexRow]
-            self.showWebViewWithSite(page!, site: site)
+            println(self.localSites)
+//            var site =  self.localSites[indexRow]
+            self.showWebViewWithSite(page!, site: self.selectedSite!)
 
         }
         else if (cellType == "remotesite") {
