@@ -106,8 +106,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
         
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: context)
-        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String
-        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String
+        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String!
+        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String!
         
         var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
@@ -235,9 +235,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 
-//func tableView(_ tableView: UITableView,
-// viewForHeaderInSection section: Int) -> UIView?
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        var title = ""
+        if (section == 0) {
+            title = "AVAILABLE PAGES"
+        }
+        else {
+            title = "PAGES AROUND"
+        }
 
+        
+        var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
+        
+        var label:UILabel = UILabel(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
+        
+        label.font = UIFont.systemFontOfSize(10)
+        label.text = title
+        view.addSubview(label)
+        view.backgroundColor = UIColor.clearColor()
+    
+        return view
+        
+        
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+//        /* Create custom view to display section header... */
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 18)];
+//        [label setFont:[UIFont boldSystemFontOfSize:12]];
+//        NSString *string =[list objectAtIndex:section];
+//        /* Section header is in 0th index... */
+//        [label setText:string];
+//        [view addSubview:label];
+//        [view setBackgroundColor:[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]]; //your background color...
+//        return view;
+        
+        
+    }
     
     // cell setup
     
@@ -394,7 +428,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
-            let contextDict = ["displayName": remotePeerID.displayName, "hostname": requestedHostname]
+            let contextDict = ["displayName": self.peerID.displayName, "hostname": requestedHostname]
             
             let data = NSMutableData()
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
