@@ -71,7 +71,6 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     
     func addToHistory(page:PageCache) {
         history.append(page)
-        println("History: \(history)")
     }
     
     func webViewDidStartLoad(webView: UIWebView!) {
@@ -81,5 +80,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView!) {
         println("Webview did finish load")
     }
-
+    @IBAction func pressedBackButton(sender: UIBarButtonItem) {
+        println("BAAAACK")
+    }
 }
