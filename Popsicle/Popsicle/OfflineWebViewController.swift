@@ -57,7 +57,6 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
                 println("CACHE HIT!!!")
                 let html = page?.html
                 webView.loadHTMLString(html, baseURL: request.URL)
-                
                 addToHistory(page!)
                 
             } else {
@@ -81,7 +80,9 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     func webViewDidFinishLoad(webView: UIWebView!) {
         println("Webview did finish load")
     }
-    @IBAction func pressedBackButton(sender: UIBarButtonItem) {
-        println("BAAAACK")
+
+    @IBAction func goBack(sender: AnyObject) {
+        webView.goBack()
     }
+    
 }

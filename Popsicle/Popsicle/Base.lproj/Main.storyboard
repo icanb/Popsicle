@@ -111,7 +111,7 @@
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ju8-CJ-UsC"/>
                                     <barButtonItem title=" > " systemItem="rewind" id="BhK-1K-e0W">
                                         <connections>
-                                            <action selector="pressedBackButton:" destination="ZKJ-ZF-gKc" id="KUZ-Gg-hsB"/>
+                                            <action selector="goBack:" destination="ZKJ-ZF-gKc" id="EtW-yl-zIw"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="R0V-FD-GF2"/>
