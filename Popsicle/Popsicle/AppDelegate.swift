@@ -33,9 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var device_data:Device = NSKeyedUnarchiver.unarchiveObjectWithFile(storePath) as Device
             self.device = device_data
             self.device!.storePath = storePath
-
-            print(device_data)
-            print(device_data.cache)
         }
         else
         {   
