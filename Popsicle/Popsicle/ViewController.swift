@@ -52,7 +52,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("App Started")
 
-//        titleLabel.text = appDelegate.device?.uid
+//        [[UINavigationBar appearance] setTitleTextAttributes:
+//            [NSDictionary dictionaryWithObjectsAndKeys:
+//            [UIColor blackColor], UITextAttributeTextColor,
+//            [UIFont fontWithName:@"ArialMT" size:16.0], UITextAttributeFont,nil]];
+//
+//        UIBarButtonItem.appearance().tintColor = UIColor.magentaColor()
+//        UINavigationBar.appearance().titleTextAttributes = [UITextAttributeTextColor: UIColor.blueColor()]
+
+
         
         let stringUrl:String = "http://google.com"
 //        cacheHtmlPages(stringUrl)
@@ -249,7 +257,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
         
-        var label:UILabel = UILabel(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
+        var label:UILabel = UILabel(frame: CGRectMake(6, 0, tableView.frame.size.width, 18))
         
         label.font = UIFont.systemFontOfSize(10)
         label.text = title

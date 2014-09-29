@@ -15,6 +15,9 @@
 		CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */; };
 		CE1F009E19D5C5A000B98BF8 /* PopsicleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */; };
 		CE215C6E19D8ABF500DAFE8C /* PageCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */; };
+		CE215C7119D8D5EC00DAFE8C /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */; };
+		CE215C7219D8D5EC00DAFE8C /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */; };
+		CE215C7319D8D5EC00DAFE8C /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */; };
 		CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4CE3919D771AE0042570D /* SiteCellView.xib */; };
 		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
 		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
@@ -88,6 +91,7 @@
 		CE1F009C19D5C5A000B98BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopsicleTests.swift; sourceTree = "<group>"; };
 		CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageCellView.xib; sourceTree = "<group>"; };
+		CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
 		CEA4CE3919D771AE0042570D /* SiteCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteCellView.xib; sourceTree = "<group>"; };
 		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 		CE1F008419D5C5A000B98BF8 /* Popsicle */ = {
 			isa = PBXGroup;
 			children = (
+				CE215C6F19D8D5DA00DAFE8C /* Resources */,
 				CEEB020419D6225000B7D759 /* EncodedClasses */,
 				CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */,
 				CE1F008919D5C5A000B98BF8 /* ViewController.swift */,
@@ -213,6 +218,14 @@
 				CE1F009C19D5C5A000B98BF8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE215C6F19D8D5DA00DAFE8C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		CEEB020419D6225000B7D759 /* EncodedClasses */ = {
@@ -374,6 +387,7 @@
 				DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */,
 				CE215C6E19D8ABF500DAFE8C /* PageCellView.xib in Resources */,
 				CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */,
+				CE215C7119D8D5EC00DAFE8C /* Avenir.ttc in Resources */,
 				CE1F008F19D5C5A000B98BF8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE215C7219D8D5EC00DAFE8C /* Avenir.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +406,7 @@
 			files = (
 				DB9F23D219D773CE0080AF0D /* Action.js in Resources */,
 				E1D413AA19D8CE36000D540D /* Images.xcassets in Resources */,
+				CE215C7319D8D5EC00DAFE8C /* Avenir.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
