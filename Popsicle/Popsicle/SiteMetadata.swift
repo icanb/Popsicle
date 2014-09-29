@@ -12,6 +12,7 @@ import UIKit
 class SiteMetadata : Storable, NSCoding {
     
     var hostname:String = ""
+    var root_url = ""
     var port:String = "80"
     var last_update: NSDate = NSDate.date()
     var directory_path:String = "/"
@@ -29,6 +30,7 @@ class SiteMetadata : Storable, NSCoding {
         self.init()
         
         self.hostname = aDecoder.decodeObjectForKey("hostname") as String!
+//        self.root_url = aDecoder.decodeObjectForKey("root_url") as String!
         self.port = aDecoder.decodeObjectForKey("port") as String!
         self.last_update = aDecoder.decodeObjectForKey("last_update") as NSDate
         self.directory_path = aDecoder.decodeObjectForKey("directory_path") as String!
@@ -52,9 +54,10 @@ class SiteMetadata : Storable, NSCoding {
             return false
         }
         
-        var count:Int = 5
-        var depth:Int = 3
-        let stringUrl = self.sanitizeUrl(hostname, hostname: hostname, currentPath: nil)
+        var count:Int = 20
+        var depth:Int = 2
+        println(root_url)
+        let stringUrl = self.sanitizeUrl(hostname + root_url, hostname: hostname + root_url, currentPath: hostname)
         self.recursiveCrawl(stringUrl, primaryKey:stringUrl, countRemaining: count, depthRemaining: depth)
         
         return true
@@ -148,7 +151,7 @@ class SiteMetadata : Storable, NSCoding {
                 }
             }
         }
-        
+        println(sanitizedUrl)
         return sanitizedUrl
     }
     

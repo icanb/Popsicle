@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let targetURL:String = getTargetURL(url)
         
         var newUrlComponents:NSURLComponents = NSURLComponents.componentsWithString(targetURL)
-        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
+        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue, rootUrl:newUrlComponents.path)
 
 //        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue)
 //        self.storageManager?.savePage(host: newUrlComponents.host,

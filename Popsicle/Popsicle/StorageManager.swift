@@ -22,7 +22,7 @@ class StorageManager {
 
     }
 
-    func saveSite(host hostName:String?, port portNmr:String? = "80") -> Bool {
+    func saveSite(host hostName:String?, port portNmr:String? = "80", rootUrl:String?) -> Bool {
     
         for site in self.device!.cache {
             if (site.hostname == hostName) {
@@ -48,6 +48,7 @@ class StorageManager {
             // Create and save the site
             var newSite:SiteMetadata = SiteMetadata()
             newSite.hostname = hostName!
+            newSite.root_url = rootUrl!
             newSite.port = "80"
             newSite.storePath = storePath
             newSite.updateStorage()
@@ -107,7 +108,7 @@ class StorageManager {
         var site:SiteMetadata? = getSiteWithHostname(host: hostName)
         
         if (site == nil) {
-            saveSite(host: hostName, port: portNmr)
+            saveSite(host: hostName, port: portNmr, rootUrl: urlPath)
             site = getSiteWithHostname(host: hostName)
         }
         
