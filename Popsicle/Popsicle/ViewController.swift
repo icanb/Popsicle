@@ -395,6 +395,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             button.frame = buttonFrame
             button.setBackgroundImage(image, forState: UIControlState.Normal)
 
+            if (indexPath.row == self.expandedIndex!.row + self.nmrPages) {
+                var imageBottom = UIImage(named: "bottom-page-cell")
+                var insetsBottom = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+                imageBottom = imageBottom.resizableImageWithCapInsets(insetsBottom)
+                button.setBackgroundImage(imageBottom, forState: UIControlState.Normal)
+            }
+
             
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
             siteNameLabel?.text = page?.title
@@ -423,16 +430,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
-
-
-            if (indexPath.row == self.expandedIndex!.row + self.nmrPages) {
-                    return "page"
-                var imageBottom = UIImage(named: "bottom-page-cell")
-                var insetsBottom = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-                imageBottom = imageBottom(insets)
-                button.setBackgroundImage(imageBottom, forState: UIControlState.Normal)
-            }
-
 
 
             if (indexPath == expandedIndex) {
