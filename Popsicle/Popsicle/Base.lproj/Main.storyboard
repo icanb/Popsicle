@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gou-bq-O8y">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="popsicle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddR-hs-PT3">
                                         <rect key="frame" x="0.0" y="5" width="373" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="lxK-bU-vsY"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -35,9 +35,9 @@
                                     <constraint firstItem="ddR-hs-PT3" firstAttribute="leading" secondItem="Gou-bq-O8y" secondAttribute="leading" id="1zx-ZY-ad8"/>
                                     <constraint firstAttribute="trailing" secondItem="ddR-hs-PT3" secondAttribute="trailing" id="Dqr-KU-bXH"/>
                                     <constraint firstAttribute="bottom" secondItem="ddR-hs-PT3" secondAttribute="bottom" id="KrS-Q4-DFM"/>
-                                    <constraint firstItem="ddR-hs-PT3" firstAttribute="top" secondItem="Gou-bq-O8y" secondAttribute="top" constant="18" id="aVT-QT-JTC"/>
+                                    <constraint firstItem="ddR-hs-PT3" firstAttribute="top" secondItem="Gou-bq-O8y" secondAttribute="top" constant="24" id="aVT-QT-JTC"/>
                                     <constraint firstItem="ddR-hs-PT3" firstAttribute="width" secondItem="Gou-bq-O8y" secondAttribute="width" id="c4Q-ok-MYX"/>
-                                    <constraint firstAttribute="height" constant="50" id="lTC-ZG-hJd"/>
+                                    <constraint firstAttribute="height" constant="58" id="lTC-ZG-hJd"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -63,7 +63,7 @@
                             <constraint firstItem="Gou-bq-O8y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="EXk-S4-YHt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uqV-BJ-nNI" secondAttribute="trailing" constant="-3" id="JmP-Vz-mE0"/>
                             <constraint firstItem="uqV-BJ-nNI" firstAttribute="trailing" secondItem="wfy-db-euE" secondAttribute="trailing" id="N0N-HD-Kys"/>
-                            <constraint firstItem="uqV-BJ-nNI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="bKw-kX-AVc"/>
+                            <constraint firstItem="uqV-BJ-nNI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="bKw-kX-AVc"/>
                             <constraint firstItem="uqV-BJ-nNI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-3" id="drL-6m-mLC"/>
                             <constraint firstAttribute="width" secondItem="uqV-BJ-nNI" secondAttribute="width" id="oPa-RD-K1C"/>
                             <constraint firstItem="uqV-BJ-nNI" firstAttribute="leading" secondItem="y3c-jy-aDJ" secondAttribute="leading" id="rEl-Ry-efs"/>

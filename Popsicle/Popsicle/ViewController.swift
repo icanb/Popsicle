@@ -218,7 +218,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 40
         }
         
-        return 70
+        return 64
     }
     
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
@@ -257,7 +257,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
         
-        var label:UILabel = UILabel(frame: CGRectMake(6, 0, tableView.frame.size.width, 18))
+        var label:UILabel = UILabel(frame: CGRectMake(8, 0, tableView.frame.size.width, 18))
         
         label.font = UIFont.systemFontOfSize(10)
         label.text = title
@@ -357,6 +357,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
             
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+
             return cell
     
         }
@@ -383,6 +385,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
             var indexRow = indexPath.row
+
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
 
             if (cellType == "localsite") {
                 // site cell
