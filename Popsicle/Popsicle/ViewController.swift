@@ -257,7 +257,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
         
-        var label:UILabel = UILabel(frame: CGRectMake(8, 0, tableView.frame.size.width, 18))
+        var label:UILabel = UILabel(frame: CGRectMake(8, 2, tableView.frame.size.width, 18))
         
         label.font = UIFont.systemFontOfSize(10)
         label.text = title
@@ -346,18 +346,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             
-            var image = UIImage(named: "full-page-cell")
-            var insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-            image = image.resizableImageWithCapInsets(insets)
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
 
-            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = page?.title
-    
+            var image = UIImage(named: "full-page-cell")
+            var insets = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
+            image = image.resizableImageWithCapInsets(insets)
+            
+            var cellFrame = cell.frame
+            cellFrame.size.width = tableView.frame.size.width
+            cell.frame = cellFrame
+
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-            button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            var buttonFrame = button.frame
+            buttonFrame.size.width = cell.frame.size.width - 8
+            buttonFrame.origin.x = 4
+            button.frame = buttonFrame
+            button.setBackgroundImage(image, forState: UIControlState.Normal)
+
+            
+            var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+            siteNameLabel?.text = page?.title
 
             return cell
     
@@ -375,20 +385,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
             image = image.resizableImageWithCapInsets(insets)
 
-            if (indexPath == expandedIndex) {
-                var image = UIImage(named: "top-site-cell")
-                var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 0.0, right: 12.0)
-                image = image.resizableImageWithCapInsets(insets)
-            }
 
+            var cellFrame = cell.frame
+            cellFrame.size.width = tableView.frame.size.width
+            cell.frame = cellFrame
+            
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
 
+            if (indexPath == expandedIndex) {
+                var imageTop = UIImage(named: "top-site-cell")
+                var insetsTop = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 0.0, right: 12.0)
+                imageTop = imageTop.resizableImageWithCapInsets(insetsTop)
+                button.setBackgroundImage(imageTop, forState: UIControlState.Normal)
+            }
+    
             var buttonFrame = button.frame
-            buttonFrame.size.width = cell.frame.size.width
+            buttonFrame.size.width = cell.frame.size.width - 8
+            buttonFrame.origin.x = 4
             button.frame = buttonFrame
-
 
             var indexRow = indexPath.row
 
