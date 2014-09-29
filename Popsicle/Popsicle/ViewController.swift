@@ -327,11 +327,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
 
         
-        var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 36))
+        var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 38))
         
-        var label:UILabel = UILabel(frame: CGRectMake(20, 2, tableView.frame.size.width, 36))
+        var label:UILabel = UILabel(frame: CGRectMake(20, 2, tableView.frame.size.width, 38))
         
-        label.font = UIFont.boldSystemFontOfSize(11)
+        label.font = UIFont(name: "Avenir", size: CGFloat(11))
+        
+        //UIFont.boldSystemFontOfSize(11)
+        
         label.text = title
         view.addSubview(label)
         view.backgroundColor = UIColor.clearColor()
@@ -422,8 +425,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             button.indexPath = indexPath
             
             var buttonFrame = button.frame
-            buttonFrame.size.width = cell.frame.size.width - 8
-            buttonFrame.origin.x = 4
+            buttonFrame.size.width = cell.frame.size.width - 12
+            buttonFrame.origin.x = 6
             button.frame = buttonFrame
             button.setBackgroundImage(image, forState: UIControlState.Normal)
 
@@ -472,8 +475,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
     
             var buttonFrame = button.frame
-            buttonFrame.size.width = cell.frame.size.width - 8
-            buttonFrame.origin.x = 4
+            buttonFrame.size.width = cell.frame.size.width - 12
+            buttonFrame.origin.x = 6
             button.frame = buttonFrame
 
             var indexRow = indexPath.row
