@@ -21,6 +21,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
 
         let html = self.initialPage?.html
         var urlStr = self.initialPage?.full_url
+        self.title = self.initialPage?.title
         var url:NSURL
         if (urlStr != nil) {
             url = NSURL(string: urlStr!)
