@@ -251,6 +251,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var cellType:String = getCellType(indexPath)
 
         if (cellType == "page") {
+            if (self.expandedIndex != nil &&
+                indexPath.row == self.expandedIndex!.row + self.nmrPages) {
+                    return 44
+            }
             return 40
         }
 
@@ -258,10 +262,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 60
         }
             
-        if (self.expandedIndex != nil &&
-            indexPath.row == self.expandedIndex!.row + self.nmrPages) {
-            return 50
-        }
+
 
         return 64
     }
