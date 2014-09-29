@@ -40,6 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var advertiser: MCNearbyServiceAdvertiser!
     let discoveryInfoSitesKey = "sites"
     var remoteSites = [String: MCPeerID]()
+    var toSendWhenReady: SiteMetadata?
     
     let cellIdentifier = "cellIdentifier"
     let cellIdentifierPage = "cellIdentifierPage"
@@ -112,7 +113,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
             println("We want to ACCEPT")
+            // Step 1: Immediately reply "yes"
             invitationHandler(true, self.session)
+            // Step 2:
+            self.toSendWhenReady = self.getLocalSite(requestedHostname)
+            
+            println("When ready, will send \(self.toSendWhenReady)")
             
         })
         var rejectAction = UIAlertAction(title: "Reject", style: UIAlertActionStyle.Cancel, handler: {(UIAlertAction) in
@@ -165,9 +171,69 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
     }
     
+    func getLocalSite(hostname: String!) -> SiteMetadata? {
+        for localSite in self.localSites {
+            if (localSite.hostname == hostname) {
+                return localSite
+            }
+        }
+        return nil
+    }
+    
+//    func sendSiteCache(hostname: String!, toPeer peerID: MCPeerID!) {
+//        println("I was asked to sendSiteCache of hostname \(hostname) to peer \(peerID.displayName)")
+//        if let localSite = getLocalSite(hostname)? {
+//            println("Sending localSite \(localSite.hostname) with pages \(localSite.pages.count) to \(peerID.displayName)")
+//            
+//            var data = NSKeyedArchiver.archivedDataWithRootObject(localSite)
+//            
+//            var error : NSError?
+//            
+//            self.session.sendData(data, toPeers: [peerID],
+//                withMode: MCSessionSendDataMode.Unreliable, error: &error)
+//            
+//            if error != nil {
+//                print("Error sending data: \(error?.localizedDescription)")
+//            }
+//        } else {
+//            println("Localsite NOT FOUND!!")
+//        }
+//    }
+//    
+//    func sendQueuedRequests() {
+//        for hostname in self.sendQueue {
+//            
+//            let msg = hostname.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+//            
+//            var error : NSError?
+//            
+//            self.session.sendData(msg, toPeers: self.session.connectedPeers,
+//                withMode: MCSessionSendDataMode.Reliable, error: &error)
+//            
+//            if error != nil {
+//                print("Error sending data: \(error?.localizedDescription)")
+//            }
+//        }
+//        
+//    }
+    
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState) {
         if (state == MCSessionState.Connected) {
             println("Connected to peer \(peerID)!")
+            if let toSend = self.toSendWhenReady {
+                println("The time has come the walrus said!")
+                var data = NSKeyedArchiver.archivedDataWithRootObject(toSend)
+                
+                var error : NSError?
+                
+                self.session.sendData(data, toPeers: [peerID],
+                    withMode: MCSessionSendDataMode.Reliable, error: &error)
+                
+                if error != nil {
+                    print("Error sending data: \(error?.localizedDescription)")
+                }
+
+            }
         }
         else if (state == MCSessionState.Connecting) {
             println("Connecting... to peer \(peerID)")
@@ -180,23 +246,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
-        println("didRecieveData")
+        println("recieved data from \(peerID.displayName)!")
+        let recievedSite = NSKeyedUnarchiver.unarchiveObjectWithData(data) as SiteMetadata
+        
+        self.appDelegate.device!.cache.append(recievedSite)
+        self.appDelegate.device!.updateStorage()
+        self.session.disconnect()
     }
     
+    // Not used
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!) {
         println("didRecieveStream")
     }
     
+    // Not used
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!) {
         println("didStartReceivingResourceWithName")
     }
     
+    // Not used
     func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!) {
         println("didFinishReceivingResourceWithName")
     }
     
+    // Not used, but apparently gets called sometimes
     func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
-        println("didRecieveCertificate")
+        // security level >9000
+        certificateHandler(true)
     }
     
     // Table View setup
@@ -424,14 +500,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else if (cellType == "remotesite") {
             let remotePeerID = self.remoteSites.values.array[indexPath.row]
             let requestedHostname = self.remoteSites.keys.array[indexPath.row]
-            
+                
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
             let contextDict = ["displayName": self.peerID.displayName, "hostname": requestedHostname]
             
             let data = NSMutableData()
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(remotePeerID.displayName, forKey: "displayName")
+            archiver.encodeObject(self.peerID.displayName, forKey: "displayName")
             archiver.encodeObject(requestedHostname, forKey: "hostname")
             archiver.finishEncoding()
             
