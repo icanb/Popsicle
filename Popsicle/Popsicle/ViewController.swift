@@ -114,8 +114,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
         
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: context)
-        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String
-        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String
+        let remotePeerDisplayName = unarchiver.decodeObjectForKey("displayName") as String!
+        let requestedHostname = unarchiver.decodeObjectForKey("hostname") as String!
         
         var alertController = UIAlertController(title: "Request from \(remotePeerDisplayName)", message: "Share \(requestedHostname)?", preferredStyle: UIAlertControllerStyle.Alert)
         var acceptAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default, handler: {(UIAlertAction) in
@@ -425,8 +425,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            var site = sm.getSiteWithHostname(host: page.)
             var indexRow = indexPath.row
             indexRow = indexRow - self.expandedIndex!.row - 1
-            var site =  self.localSites[indexRow]
-            self.showWebViewWithSite(page!, site: site)
+            println(self.localSites)
+//            var site =  self.localSites[indexRow]
+            self.showWebViewWithSite(page!, site: self.selectedSite!)
 
         }
         else if (cellType == "remotesite") {
@@ -435,7 +436,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
-            let contextDict = ["displayName": remotePeerID.displayName, "hostname": requestedHostname]
+            let contextDict = ["displayName": self.peerID.displayName, "hostname": requestedHostname]
             
             let data = NSMutableData()
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
