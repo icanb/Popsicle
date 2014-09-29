@@ -70,8 +70,12 @@ class SiteMetadata : Storable, NSCoding {
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
             let response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
             var (hyperlinks, title) = self.parseHtml(response)
+            
+            // append CSS stuff in
+            var htmlWithCss = self.injectCSS(response, url:url)
+            
             var sm:StorageManager = self.appDelegate.getStorageManager()
-            sm.savePageYo(host: self.hostname, port: "80", full_url: stringUrl, url_path: originalHyperlink, parameters: [], title: title, html: response)
+            sm.savePageYo(host: self.hostname, port: "80", full_url: stringUrl, url_path: originalHyperlink, parameters: [], title: title, html: htmlWithCss)
             for hyperlink in hyperlinks {
                 if (dynamicCount < 0) {
                     break
@@ -172,6 +176,38 @@ class SiteMetadata : Storable, NSCoding {
         }
         
         return (hyperlinkList, titleNode)
+    }
+    
+    func injectCSS(html: String, url: NSURL) -> String {
+        var err : NSError?
+        var parser = HTMLParser(html: html, error: &err)
+        if err != nil {
+            exit(1)
+        }
+        
+        var headNode = parser.head
+        
+        var hyperlinkList: [String] = []
+        
+        if let inputNodes = headNode?.findChildTags("link") {
+            for node in inputNodes {
+                var CSS_URL = node.getAttributeNamed("href")
+                
+                if CSS_URL.rangeOfString(".css") != nil {
+                    CSS_URL = sanitizeUrl(CSS_URL, hostname: url.host!, currentPath: url.absoluteString)
+                    println("CSSURL:\(CSS_URL)")
+                    
+                    let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string:CSS_URL)) {(data, response, error) in
+                        //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                        let response = NSString(data: data, encoding: NSUTF8StringEncoding)
+//                        println("RESPONSE:\(response)")
+                    }
+                    
+                    task.resume()
+                }
+            }
+        }
+        return html
     }
     
 }
