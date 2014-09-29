@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var expandedIndex:NSIndexPath?
     var selectedSite:SiteMetadata?
     var nmrPages = 0
+    var nuxView:UIView?
 
     let tempHtmlString:String =
     "<!DOCTYPE html>" +
@@ -88,8 +89,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
         browser.delegate = self
         browser.startBrowsingForPeers()
+        
+        if !userCompletedTour() {
+            let subviewArray = NSBundle.mainBundle().loadNibNamed("NUXView", owner: self, options: nil)
+            self.nuxView = subviewArray[0] as? UIView
+            var button:UIButton = self.nuxView!.viewWithTag(1) as UIButton
+            button.addTarget(self, action: Selector("hideNUX"), forControlEvents: .TouchUpInside)
+            self.view.addSubview(self.nuxView!)
+
+        }
+
     }
     
+    func userCompletedTour() -> Bool {
+        var aVal:String? = NSUserDefaults.standardUserDefaults().objectForKey("aValue") as String?
+        return aVal == "1"
+    }
+    
+    
+    func hideNUX() {
+        
+        NSUserDefaults.standardUserDefaults().setObject("1", forKey:"aValue")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        if (self.nuxView != nil) {
+            self.nuxView!.removeFromSuperview()
+        }
+    }
+
     func showAlert(message: NSString!) {
         println("showAlert(): \(message)")
         UIAlertView(title: "MC", message: message, delegate: nil, cancelButtonTitle: "K.").show()
