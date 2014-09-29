@@ -327,9 +327,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
 
         
-        var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 18))
+        var view:UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 36))
         
-        var label:UILabel = UILabel(frame: CGRectMake(8, 2, tableView.frame.size.width, 18))
+        var label:UILabel = UILabel(frame: CGRectMake(20, 2, tableView.frame.size.width, 36))
         
         label.font = UIFont.boldSystemFontOfSize(11)
         label.text = title
