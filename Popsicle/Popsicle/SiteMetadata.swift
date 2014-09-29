@@ -61,17 +61,19 @@ class SiteMetadata : Storable, NSCoding {
         self.recursiveCrawl(stringUrl, primaryKey:stringUrl, countRemaining: count, depthRemaining: depth)
         
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string:"http://g.etfv.co/"+stringUrl)) {(data, response, error) in
-            //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
-            var response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
-            println(response)
-            
-            //page.html = page.html + "<style type='text/css'>" + response + "</style>"
-            //page.updateStorage()
-            //                        println("RESPONSE:\(response)")
-        }
-        
-        task.resume()
+//        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string:"http://g.etfv.co/"+stringUrl)) {(data, response, error) in
+//            //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+//            var response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
+//            println(response)
+//            self.favicon = response
+//            self.updateStorage()
+//            
+//            //page.html = page.html + "<style type='text/css'>" + response + "</style>"
+//            //page.updateStorage()
+//            //                        println("RESPONSE:\(response)")
+//        }
+//        
+//        task.resume()
         
         return true
         
