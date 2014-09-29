@@ -41,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let discoveryInfoSitesKey = "sites"
     var remoteSites = [String: MCPeerID]()
     var toSendWhenReady: SiteMetadata?
+    var currentlySpinning: UIActivityIndicatorView?
     
     let cellIdentifier = "cellIdentifier"
     let cellIdentifierPage = "cellIdentifierPage"
@@ -52,20 +53,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         NSLog("App Started")
-
-//        [[UINavigationBar appearance] setTitleTextAttributes:
-//            [NSDictionary dictionaryWithObjectsAndKeys:
-//            [UIColor blackColor], UITextAttributeTextColor,
-//            [UIFont fontWithName:@"ArialMT" size:16.0], UITextAttributeFont,nil]];
-//
-//        UIBarButtonItem.appearance().tintColor = UIColor.magentaColor()
-//        UINavigationBar.appearance().titleTextAttributes = [UITextAttributeTextColor: UIColor.blueColor()]
-
-
         
         let stringUrl:String = "http://google.com"
-//        cacheHtmlPages(stringUrl)
-
         
         // Configure the table
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -137,7 +126,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         alertController.addAction(rejectAction)
         alertController.addAction(acceptAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        showAlert("Received invitation from peer!!")
     }
     
     // Browser methods
@@ -151,15 +139,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (peerID.displayName == UIDevice.currentDevice().name) {
             println("found ourselves... ignoring")
         } else {
-            println(info)
-            showAlert("Found peer: \(peerID)")
+            println("Found peer: \(peerID)")
             if let infoDict = info as? Dictionary<String, String> {
                 if (infoDict.indexForKey(discoveryInfoSitesKey) == nil) {
                     println("Remote peer's discovery info didn't have \(discoveryInfoSitesKey) key")
                     return
                 }
                 for remoteSite in infoDict[discoveryInfoSitesKey]!.componentsSeparatedByString(",") {
-                    self.remoteSites[remoteSite] = peerID
+                    println("YOOOOO")
+                    println(remoteSite)
+                    if (countElements(remoteSite) > 0) {
+                        self.remoteSites[remoteSite] = peerID
+                    }
                 }
             }
             self.tableView.reloadData()
@@ -211,6 +202,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else if (state == MCSessionState.NotConnected) {
             println("Disconnected from peer \(peerID)")
+            self.currentlySpinning?.hidden = true
+            self.currentlySpinning?.stopAnimating()
         } else {
             println("Unknown state change for peer \(peerID)")
         }
@@ -223,6 +216,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.appDelegate.device!.cache.append(recievedSite)
         self.appDelegate.device!.updateStorage()
         self.session.disconnect()
+        self.currentlySpinning?.hidden = true
+        self.currentlySpinning?.stopAnimating()
+        self.currentlySpinning = nil
     }
     
     // Not used
@@ -259,6 +255,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         if (indexPath == expandedIndex) {
             return 60
+        }
+            
+        if (self.expandedIndex != nil &&
+            indexPath.row == self.expandedIndex!.row + self.nmrPages) {
+            return 50
         }
 
         return 64
@@ -302,7 +303,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var label:UILabel = UILabel(frame: CGRectMake(8, 2, tableView.frame.size.width, 18))
         
-        label.font = UIFont.boldSystemFontOfSize(9)
+        label.font = UIFont.boldSystemFontOfSize(11)
         label.text = title
         view.addSubview(label)
         view.backgroundColor = UIColor.clearColor()
@@ -316,7 +317,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Local caches
         if(section == 0) {
-            print(self.localSites.count)
+            if (self.localSites.count == 0) {
+                return 1
+            }
+
             var count:Int = self.localSites.count
             if (expandedIndex != nil) {
                 count = count + self.nmrPages
@@ -450,15 +454,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             if (cellType == "localsite") {
                 // site cell
-            
+                var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+
+                if (self.localSites.count == 0) {
+                    siteNameLabel.hidden = true
+                    var noSiteLabel:UILabel! = cell.viewWithTag(3) as UILabel
+                    noSiteLabel.hidden = false
+                    return cell
+                }
+                
                 if(self.expandedIndex != nil && indexRow > self.expandedIndex!.row) {
                     indexRow = indexRow - self.nmrPages
                 }
             
                 var site =  self.localSites[indexRow]
-            
-            
-                var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
                 siteNameLabel?.text = site.hostname
             
                 return cell
@@ -497,6 +506,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else if (cellType == "remotesite") {
             let remotePeerID = self.remoteSites.values.array[indexPath.row]
             let requestedHostname = self.remoteSites.keys.array[indexPath.row]
+
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            self.currentlySpinning = cell?.viewWithTag(4) as UIActivityIndicatorView
+            self.currentlySpinning!.hidden = false
+            self.currentlySpinning!.startAnimating()
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.currentlySpinning!.startAnimating()
+            })
                 
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
@@ -514,6 +532,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else {
             
             if (self.expandedIndex == nil) {
+                if (self.localSites.count == 0) {
+                    return;
+                }
                 // nothing is expanded
                 self.expandedIndex = indexPath
                 self.selectedSite = self.localSites[indexPath.row]
@@ -526,9 +547,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.nmrPages = 0
             }
             else {
-                // tapped on a different site
-                self.expandedIndex = indexPath
-                self.selectedSite = self.localSites[indexPath.row]
+
+                if (indexPath.row >= self.expandedIndex!.row + self.nmrPages) {
+                    // tapped on a different site
+                    self.expandedIndex = NSIndexPath(forRow: indexPath.row - self.nmrPages, inSection: indexPath.section)
+                    self.selectedSite = self.localSites[indexPath.row-self.nmrPages]
+                }
+                else {
+                    self.expandedIndex = NSIndexPath(forRow: indexPath.row, inSection: indexPath.section)
+                    self.selectedSite = self.localSites[indexPath.row]
+                }
+
                 self.nmrPages = self.selectedSite!.pages.count
             }
             
