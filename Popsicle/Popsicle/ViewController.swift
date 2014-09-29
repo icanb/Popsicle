@@ -41,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let discoveryInfoSitesKey = "sites"
     var remoteSites = [String: MCPeerID]()
     var toSendWhenReady: SiteMetadata?
+    var currentlySpinning: UIActivityIndicatorView?
     
     let cellIdentifier = "cellIdentifier"
     let cellIdentifierPage = "cellIdentifierPage"
@@ -151,15 +152,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (peerID.displayName == UIDevice.currentDevice().name) {
             println("found ourselves... ignoring")
         } else {
-            println(info)
-            showAlert("Found peer: \(peerID)")
+            println("Found peer: \(peerID)")
             if let infoDict = info as? Dictionary<String, String> {
                 if (infoDict.indexForKey(discoveryInfoSitesKey) == nil) {
                     println("Remote peer's discovery info didn't have \(discoveryInfoSitesKey) key")
                     return
                 }
                 for remoteSite in infoDict[discoveryInfoSitesKey]!.componentsSeparatedByString(",") {
-                    self.remoteSites[remoteSite] = peerID
+                    println("YOOOOO")
+                    println(remoteSite)
+                    if (countElements(remoteSite) > 0) {
+                        self.remoteSites[remoteSite] = peerID
+                    }
                 }
             }
             self.tableView.reloadData()
@@ -211,6 +215,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else if (state == MCSessionState.NotConnected) {
             println("Disconnected from peer \(peerID)")
+            self.currentlySpinning?.hidden = true
+            self.currentlySpinning?.stopAnimating()
         } else {
             println("Unknown state change for peer \(peerID)")
         }
@@ -223,6 +229,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.appDelegate.device!.cache.append(recievedSite)
         self.appDelegate.device!.updateStorage()
         self.session.disconnect()
+        self.currentlySpinning?.hidden = true
+        self.currentlySpinning?.stopAnimating()
+        self.currentlySpinning = nil
     }
     
     // Not used
@@ -497,6 +506,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else if (cellType == "remotesite") {
             let remotePeerID = self.remoteSites.values.array[indexPath.row]
             let requestedHostname = self.remoteSites.keys.array[indexPath.row]
+
+            
+//            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            self.currentlySpinning = cell?.viewWithTag(4) as UIActivityIndicatorView
+            self.currentlySpinning!.hidden = false
+            self.currentlySpinning!.startAnimating()
+//            self.currentlySpinning.
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.currentlySpinning!.startAnimating()
+            })
                 
             println("Sending invitation to \(remotePeerID) for \(requestedHostname)!")
             
