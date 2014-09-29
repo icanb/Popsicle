@@ -126,7 +126,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         alertController.addAction(rejectAction)
         alertController.addAction(acceptAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        showAlert("Received invitation from peer!!")
     }
     
     // Browser methods
@@ -509,13 +508,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let remotePeerID = self.remoteSites.values.array[indexPath.row]
             let requestedHostname = self.remoteSites.keys.array[indexPath.row]
 
-            
-//            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             let cell = tableView.cellForRowAtIndexPath(indexPath)
             self.currentlySpinning = cell?.viewWithTag(4) as UIActivityIndicatorView
             self.currentlySpinning!.hidden = false
             self.currentlySpinning!.startAnimating()
-//            self.currentlySpinning.
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.currentlySpinning!.startAnimating()
