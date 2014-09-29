@@ -256,7 +256,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (cellType == "page") {
             return 40
         }
-        
+
+        if (indexPath == expandedIndex) {
+            return 60
+        }
+
         return 64
     }
     
@@ -304,20 +308,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.backgroundColor = UIColor.clearColor()
     
         return view
-        
-        
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
-//        /* Create custom view to display section header... */
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 18)];
-//        [label setFont:[UIFont boldSystemFontOfSize:12]];
-//        NSString *string =[list objectAtIndex:section];
-//        /* Section header is in 0th index... */
-//        [label setText:string];
-//        [view addSubview:label];
-//        [view setBackgroundColor:[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]]; //your background color...
-//        return view;
-        
-        
+
     }
     
     // cell setup
@@ -432,6 +423,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
             button.setBackgroundImage(image, forState: UIControlState.Normal)
             button.indexPath = indexPath
+
+
+            if (indexPath.row == self.expandedIndex!.row + self.nmrPages) {
+                    return "page"
+                var imageBottom = UIImage(named: "bottom-page-cell")
+                var insetsBottom = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+                imageBottom = imageBottom(insets)
+                button.setBackgroundImage(imageBottom, forState: UIControlState.Normal)
+            }
+
+
 
             if (indexPath == expandedIndex) {
                 var imageTop = UIImage(named: "top-site-cell")
