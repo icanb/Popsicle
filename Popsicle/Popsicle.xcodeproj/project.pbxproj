@@ -22,7 +22,6 @@
 		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
 		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
 		CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */; };
-		CEA4CE4219D88CED0042570D /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE4119D88CED0042570D /* PagesViewController.swift */; };
 		CEC4DC4219D910770041CB27 /* NUXView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DC4119D910770041CB27 /* NUXView.xib */; };
 		CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE606B219D75BFA00ADD3FC /* Storable.swift */; };
 		CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */; };
@@ -97,7 +96,6 @@
 		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
 		CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonForRow.swift; sourceTree = "<group>"; };
-		CEA4CE4119D88CED0042570D /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		CEC4DC4119D910770041CB27 /* NUXView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NUXView.xib; sourceTree = "<group>"; };
 		CEE606B219D75BFA00ADD3FC /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteMetadata.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				CEA4CE3B19D77B760042570D /* StorageManager.swift */,
 				CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */,
 				CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */,
-				CEA4CE4119D88CED0042570D /* PagesViewController.swift */,
 				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
 				CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */,
 				CEC4DC4119D910770041CB27 /* NUXView.xib */,
@@ -461,7 +458,6 @@
 				CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */,
 				DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */,
 				CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */,
-				CEA4CE4219D88CED0042570D /* PagesViewController.swift in Sources */,
 				CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */,
 				DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */,
 				DB103AB919D76D1B0061BA94 /* HTMLNode.swift in Sources */,

@@ -12,27 +12,12 @@ import MultipeerConnectivity
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StorageUpdateDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var customNavigationView: UIView!
 
     var expandedIndex:NSIndexPath?
     var selectedSite:SiteMetadata?
     var nmrPages = 0
     var nuxView:UIView?
-
-    let tempHtmlString:String =
-    "<!DOCTYPE html>" +
-        "<html>" +
-        "<head>" +
-        "<title>Home Page</title>" +
-        "</head>" +
-        "<body>" +
-        "<img src='images/logo.png'>" +
-        "<h1>Home Page</h1>" +
-        "<p><a href='index.html'>home</a></p>" +
-        "<p><a href='html/about.html'>about</a></p>" +
-        "<p><a href='html/services.html'>services</a></p>" +
-        "<p><a href='html/contact.html'>contact</a></p>" +
-        "</body>" +
-    "</html>"
     
     let serviceType = "popsicle"
     var peerID: MCPeerID!
@@ -50,12 +35,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var localSites:[SiteMetadata] = []
 
+    var layoutConstraintsLandscape:NSLayoutConstraint?
+    var layoutConstraintsPortrait:NSLayoutConstraint?
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        NSLog("App Started")
-        
-        let stringUrl:String = "http://google.com"
         
         // Configure the table
         self.tableView?.registerNib(UINib(nibName: "SiteCellView", bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -99,6 +85,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         }
 
+        
+        self.layoutConstraintsLandscape = NSLayoutConstraint(
+            item: self.customNavigationView!,
+            attribute: NSLayoutAttribute.Height,
+            relatedBy:NSLayoutRelation.Equal,
+            toItem: nil,
+            attribute:NSLayoutAttribute.NotAnAttribute,
+            multiplier:1.0,
+            constant:38.0
+        )
+        
+        self.layoutConstraintsPortrait = NSLayoutConstraint(
+            item: self.customNavigationView!,
+            attribute: NSLayoutAttribute.Height,
+            relatedBy:NSLayoutRelation.Equal,
+            toItem: nil,
+            attribute:NSLayoutAttribute.NotAnAttribute,
+            multiplier:1.0,
+            constant:58.0
+        )
+        
+        self.customNavigationView.addConstraint(self.layoutConstraintsPortrait!)
     }
     
     func userCompletedTour() -> Bool {
@@ -533,7 +541,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            var site = sm.getSiteWithHostname(host: page.)
             var indexRow = indexPath.row
             indexRow = indexRow - self.expandedIndex!.row - 1
-            println(self.localSites)
 //            var site =  self.localSites[indexRow]
             self.showWebViewWithSite(page!, site: self.selectedSite!)
             self.tableView.reloadData()
@@ -616,12 +623,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func showWebViewWithSite(page: PageCache, site: SiteMetadata) {
-        println("showwebview goddamnit")
         let webViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
         webViewController.initialPage = page
         webViewController.rooSite = site
-        self.navigationController?.pushViewController(webViewController, animated: true)
+        
+        UIView.beginAnimations(nil, context:nil)
+        UIView.setAnimationCurve(UIViewAnimationCurve.EaseInOut)
+        UIView.setAnimationDuration(0.75)
+        self.navigationController?.pushViewController(webViewController, animated: false)
+
+        UIView.setAnimationTransition(UIViewAnimationTransition.FlipFromRight, forView:self.navigationController!.view, cache:false);
+        UIView.commitAnimations();
+        
+        
     }
+    
+    
+    /* Handle Rotation */
+    
+
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        let transitionToWide = size.width > size.height
+        
+        if (transitionToWide){
+            customNavigationView.addConstraint(layoutConstraintsLandscape!)
+            customNavigationView.removeConstraint(layoutConstraintsPortrait!)
+        }
+        else {
+            customNavigationView.addConstraint(layoutConstraintsPortrait!)
+            customNavigationView.removeConstraint(layoutConstraintsLandscape!)
+        }
+        
+        self.tableView.reloadData()
+    }
+
+    
 
 }
 

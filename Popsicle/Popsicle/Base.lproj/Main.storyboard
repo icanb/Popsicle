@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gou-bq-O8y">
+                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="58" translatesAutoresizingMaskIntoConstraints="NO" id="Gou-bq-O8y">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="popsicle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddR-hs-PT3">
@@ -34,14 +34,14 @@
                                 <constraints>
                                     <constraint firstItem="ddR-hs-PT3" firstAttribute="leading" secondItem="Gou-bq-O8y" secondAttribute="leading" id="1zx-ZY-ad8"/>
                                     <constraint firstAttribute="trailing" secondItem="ddR-hs-PT3" secondAttribute="trailing" id="Dqr-KU-bXH"/>
-                                    <constraint firstAttribute="bottom" secondItem="ddR-hs-PT3" secondAttribute="bottom" id="KrS-Q4-DFM"/>
+                                    <constraint firstAttribute="bottom" secondItem="ddR-hs-PT3" secondAttribute="bottom" constant="8" id="FXI-jr-bi5"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="58" id="Oc4-QG-BMq"/>
                                     <constraint firstItem="ddR-hs-PT3" firstAttribute="top" secondItem="Gou-bq-O8y" secondAttribute="top" constant="24" id="aVT-QT-JTC"/>
                                     <constraint firstItem="ddR-hs-PT3" firstAttribute="width" secondItem="Gou-bq-O8y" secondAttribute="width" id="c4Q-ok-MYX"/>
-                                    <constraint firstAttribute="height" constant="58" id="lTC-ZG-hJd"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="KrS-Q4-DFM"/>
+                                        <exclude reference="aVT-QT-JTC"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -81,6 +81,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="popsicle" id="wVz-zX-cay"/>
                     <connections>
+                        <outlet property="customNavigationView" destination="Gou-bq-O8y" id="Aj5-hu-HGX"/>
                         <outlet property="tableView" destination="uqV-BJ-nNI" id="jad-SB-AIq"/>
                     </connections>
                 </viewController>
