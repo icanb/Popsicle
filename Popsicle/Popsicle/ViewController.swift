@@ -79,6 +79,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if !userCompletedTour() {
             let subviewArray = NSBundle.mainBundle().loadNibNamed("NUXView", owner: self, options: nil)
             self.nuxView = subviewArray[0] as? UIView
+            self.nuxView?.frame = self.view.frame
             var button:UIButton = self.nuxView!.viewWithTag(1) as UIButton
             button.addTarget(self, action: Selector("hideNUX"), forControlEvents: .TouchUpInside)
             self.view.addSubview(self.nuxView!)
@@ -111,6 +112,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func userCompletedTour() -> Bool {
         var aVal:String? = NSUserDefaults.standardUserDefaults().objectForKey("aValue") as String?
+        return false
         return aVal == "1"
     }
     

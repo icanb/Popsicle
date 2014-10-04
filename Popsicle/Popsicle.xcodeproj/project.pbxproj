@@ -354,6 +354,7 @@
 					};
 					DB9F23CA19D773CE0080AF0D = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = H84TYMYF4U;
 					};
 				};
 			};
