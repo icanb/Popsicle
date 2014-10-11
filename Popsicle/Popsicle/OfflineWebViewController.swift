@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OfflineWebViewController: UIViewController, UIWebViewDelegate {
+class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewControllerTransitioningDelegate {
 
     @IBOutlet var webView: UIWebView!
     var appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
@@ -16,7 +16,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
     var initialPage:PageCache?
     var rooSite:SiteMetadata?
     var history:[PageCache] = []
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,10 +34,25 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
         webView.delegate = self
         
         addToHistory(self.initialPage!)
-        
-        // Do any additional setup after loading the view.
     }
 
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)  {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        self.commonInit()
+    }
+    
+    func commonInit() {
+        self.modalPresentationStyle = .Custom
+        self.transitioningDelegate = self
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -83,6 +98,37 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate {
 
     @IBAction func goBack(sender: AnyObject) {
         webView.goBack()
+    }
+    
+    // ---- UIViewControllerTransitioningDelegate methods
+    
+    func presentationControllerForPresentedViewController(presented: UIViewController!, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController!) -> UIPresentationController! {
+        
+        if presented == self {
+            return CustomPresentationController(presentedViewController: presented, presentingViewController: presenting)
+        }
+        
+        return nil
+    }
+    
+    func animationControllerForPresentedController(presented: UIViewController!, presentingController presenting: UIViewController!, sourceController source: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
+        
+        if presented == self {
+            return CustomPresentationAnimationController(isPresenting: true)
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
+        
+        if dismissed == self {
+            return CustomPresentationAnimationController(isPresenting: false)
+        }
+        else {
+            return nil
+        }
     }
     
 }

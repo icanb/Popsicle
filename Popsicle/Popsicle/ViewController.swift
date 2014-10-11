@@ -108,11 +108,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         )
         
         self.customNavigationView.addConstraint(self.layoutConstraintsPortrait!)
+
     }
+    
+    
     
     func userCompletedTour() -> Bool {
         var aVal:String? = NSUserDefaults.standardUserDefaults().objectForKey("aValue") as String?
-        return false
         return aVal == "1"
     }
     
@@ -625,19 +627,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func showWebViewWithSite(page: PageCache, site: SiteMetadata) {
-        let webViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
+        
+        let webViewController:OfflineWebViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
+        
         webViewController.initialPage = page
         webViewController.rooSite = site
         
-        UIView.beginAnimations(nil, context:nil)
-        UIView.setAnimationCurve(UIViewAnimationCurve.EaseInOut)
-        UIView.setAnimationDuration(0.75)
-        self.navigationController?.pushViewController(webViewController, animated: false)
+        self.presentViewController(webViewController, animated:true, completion: nil)
 
-        UIView.setAnimationTransition(UIViewAnimationTransition.FlipFromRight, forView:self.navigationController!.view, cache:false);
-        UIView.commitAnimations();
-        
-        
     }
     
     
