@@ -498,15 +498,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if (cellType == "localsite") {
                 // site cell
                 var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                var lastUpdatedLabel:UILabel! = cell.viewWithTag(6) as UILabel
                 var noSiteLabel:UILabel! = cell.viewWithTag(3) as UILabel
 
                 if (self.localSites.count == 0) {
                     siteNameLabel.hidden = true
+                    lastUpdatedLabel.hidden = true
                     noSiteLabel.hidden = false
                     return cell
                 }
                 else {
                     siteNameLabel.hidden = false
+                    lastUpdatedLabel.hidden = false
                     noSiteLabel.hidden = true
                 }
 
@@ -516,7 +519,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
                 var site =  self.localSites[indexRow]
                 siteNameLabel?.text = site.hostname
-            
+                lastUpdatedLabel?.text = getAgoString(site.last_update)
+
                 return cell
             }
             else {
@@ -533,6 +537,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
+    func getAgoString(when:NSDate) -> String {
+        
+        var now:NSDate = NSDate();
+        var interval:NSTimeInterval = when.timeIntervalSinceNow
+        
+        var second = 1;
+        var minute = second*60;
+        var hour = minute*60;
+        var day = hour*24;
+
+            // interval can be before (negative) or after (positive)
+        var num = abs(Int(interval))
+        var unit = "day";
+
+        if (num <= 20) {
+            return "Updated just now"
+        }
+        if (num >= day) {
+            num /= day;
+            if (num > 1) { unit = "days" };
+        } else if (num >= hour) {
+            num /= hour;
+            unit = (num > 1) ? "hours" : "hour";
+        } else if (num >= minute) {
+            num /= minute;
+            unit = (num > 1) ? "minutes" : "minute";
+        } else if (num >= second) {
+            num /= second;
+            unit = (num > 1) ? "seconds" : "second";
+        }
+
+        return NSString(format:"Updated %d %@ ago", num, unit);
+    }
+
+
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("You selected cell #\(indexPath.row)!")
         
