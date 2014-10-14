@@ -11,6 +11,8 @@ import UIKit
 class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewControllerTransitioningDelegate {
 
     @IBOutlet var webView: UIWebView!
+    @IBOutlet var downButton: UIBarButtonItem!
+
     var appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
     
     var initialPage:PageCache?
@@ -100,6 +102,10 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewContr
         webView.goBack()
     }
     
+    @IBAction func goDown(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil);
+    }
+
     // ---- UIViewControllerTransitioningDelegate methods
     
     func presentationControllerForPresentedViewController(presented: UIViewController!, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController!) -> UIPresentationController! {

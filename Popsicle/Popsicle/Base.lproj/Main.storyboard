@@ -102,13 +102,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sE8-ee-m6E">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnF-Vx-Fge">
+                            <toolbar clearsContextBeforeDrawing="NO" alpha="0.84999999999999987" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnF-Vx-Fge">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="uRd-xy-jdO"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Izd-gE-lxx"/>
                                     <barButtonItem systemItem="refresh" id="3IM-5l-UaY"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ju8-CJ-UsC"/>
                                     <barButtonItem title=" > " systemItem="rewind" id="BhK-1K-e0W">
@@ -118,25 +121,39 @@
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="R0V-FD-GF2"/>
                                     <barButtonItem systemItem="fastForward" id="85S-8y-bqD"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="5Se-1l-3wO"/>
-                                    <barButtonItem systemItem="stop" id="6Zd-3k-zbA"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="q9m-M6-L7W"/>
+                                    <barButtonItem style="plain" id="Qza-5i-l7a">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eGQ-OL-BT9">
+                                            <rect key="frame" x="238" y="7" width="40" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Down">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="goDown:" destination="ZKJ-ZF-gKc" eventType="touchUpInside" id="dRD-To-EKk"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
+                                <color key="tintColor" red="0.88777503189999996" green="0.42907579540000002" blue="0.2432248213" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4bK-q6-ufD" firstAttribute="top" secondItem="lnF-Vx-Fge" secondAttribute="bottom" id="0OK-P1-FUe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sE8-ee-m6E" secondAttribute="trailing" constant="-16" id="2qX-0R-xBW"/>
                             <constraint firstItem="sE8-ee-m6E" firstAttribute="top" secondItem="qex-63-QVN" secondAttribute="topMargin" id="3OS-VE-bJk"/>
                             <constraint firstItem="sE8-ee-m6E" firstAttribute="leading" secondItem="qex-63-QVN" secondAttribute="leadingMargin" constant="-16" id="4ei-m3-W1A"/>
-                            <constraint firstItem="lnF-Vx-Fge" firstAttribute="top" secondItem="sE8-ee-m6E" secondAttribute="bottom" id="GLB-a8-BbW"/>
-                            <constraint firstItem="lnF-Vx-Fge" firstAttribute="top" secondItem="sE8-ee-m6E" secondAttribute="bottom" id="Yzw-cC-Zng"/>
-                            <constraint firstItem="lnF-Vx-Fge" firstAttribute="bottom" secondItem="4bK-q6-ufD" secondAttribute="top" id="ob3-oW-cbu"/>
+                            <constraint firstItem="4bK-q6-ufD" firstAttribute="top" secondItem="sE8-ee-m6E" secondAttribute="bottom" id="9Kq-kd-1a9"/>
+                            <constraint firstItem="lnF-Vx-Fge" firstAttribute="leading" secondItem="qex-63-QVN" secondAttribute="leadingMargin" constant="-16" id="je9-xS-RkI"/>
                             <constraint firstItem="lnF-Vx-Fge" firstAttribute="leading" secondItem="4bK-q6-ufD" secondAttribute="leading" id="phj-SS-ETB"/>
                             <constraint firstItem="lnF-Vx-Fge" firstAttribute="trailing" secondItem="4bK-q6-ufD" secondAttribute="trailing" id="rR6-5i-5b2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lnF-Vx-Fge" secondAttribute="trailing" constant="-16" id="tm0-T8-ksL"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downButton" destination="Qza-5i-l7a" id="dd9-dE-L3c"/>
                         <outlet property="webView" destination="sE8-ee-m6E" id="e6D-VC-qb7"/>
                     </connections>
                 </viewController>

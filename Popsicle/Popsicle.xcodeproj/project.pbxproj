@@ -24,6 +24,8 @@
 		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
 		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
 		CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */; };
+		CEABA9E319EC839800AF11FA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEABA9E219EC839800AF11FA /* SystemConfiguration.framework */; };
+		CEABA9EB19EC872800AF11FA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CEABA9EA19EC872800AF11FA /* Reachability.m */; };
 		CEC4DC4219D910770041CB27 /* NUXView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DC4119D910770041CB27 /* NUXView.xib */; };
 		CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE606B219D75BFA00ADD3FC /* Storable.swift */; };
 		CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */; };
@@ -36,7 +38,6 @@
 		DB9F23D219D773CE0080AF0D /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = DB9F23D119D773CE0080AF0D /* Action.js */; };
 		DB9F23D619D773CE0080AF0D /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB9F23CB19D773CE0080AF0D /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */; };
-		DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */; };
 		E1D413AA19D8CE36000D540D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F008E19D5C5A000B98BF8 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,10 @@
 		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
 		CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonForRow.swift; sourceTree = "<group>"; };
+		CEABA9E219EC839800AF11FA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CEABA9E819EC869300AF11FA /* Popsicle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Popsicle-Bridging-Header.h"; sourceTree = "<group>"; };
+		CEABA9E919EC871900AF11FA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CEABA9EA19EC872800AF11FA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CEC4DC4119D910770041CB27 /* NUXView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NUXView.xib; sourceTree = "<group>"; };
 		CEE606B219D75BFA00ADD3FC /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteMetadata.swift; sourceTree = "<group>"; };
@@ -107,14 +112,12 @@
 		CEFFF1BE19D5FEB900C10EB4 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		DB103AB619D76D1B0061BA94 /* HTMLNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLNode.swift; sourceTree = "<group>"; };
 		DB103AB719D76D1B0061BA94 /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
-		DB103AB819D76D1B0061BA94 /* Popsicle-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Popsicle-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		DB103ABB19D76DAC0061BA94 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		DB9F23CB19D773CE0080AF0D /* Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB9F23CE19D773CE0080AF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB9F23CF19D773CE0080AF0D /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
 		DB9F23D119D773CE0080AF0D /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineWebViewController.swift; sourceTree = "<group>"; };
-		DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfflineWebViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEABA9E319EC839800AF11FA /* SystemConfiguration.framework in Frameworks */,
 				DB103ABC19D76DAC0061BA94 /* libxml2.dylib in Frameworks */,
 				A74748E270C300C0492D657B /* libPods.a in Frameworks */,
 			);
@@ -147,6 +151,7 @@
 		043541143012A44D13CF5FAD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEABA9E219EC839800AF11FA /* SystemConfiguration.framework */,
 				DB103ABB19D76DAC0061BA94 /* libxml2.dylib */,
 				0A6D0F12540B0A32118A487B /* libPods.a */,
 			);
@@ -179,13 +184,14 @@
 		CE1F008419D5C5A000B98BF8 /* Popsicle */ = {
 			isa = PBXGroup;
 			children = (
+				CEABA9EA19EC872800AF11FA /* Reachability.m */,
+				CEABA9E919EC871900AF11FA /* Reachability.h */,
 				CE215C6F19D8D5DA00DAFE8C /* Resources */,
 				CEEB020419D6225000B7D759 /* EncodedClasses */,
 				CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */,
 				CE1F008919D5C5A000B98BF8 /* ViewController.swift */,
 				CE1F008B19D5C5A000B98BF8 /* Main.storyboard */,
 				DB9F23E419D7E2400080AF0D /* OfflineWebViewController.swift */,
-				DB9F23E519D7E2400080AF0D /* OfflineWebViewController.xib */,
 				CE1F008E19D5C5A000B98BF8 /* Images.xcassets */,
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
 				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
@@ -197,6 +203,7 @@
 				CEC4DC4119D910770041CB27 /* NUXView.xib */,
 				CE97E7C519E976C0001AE315 /* CustomPresentationAnimationController.swift */,
 				CE97E7C719E98182001AE315 /* CustomPresentationController.swift */,
+				CEABA9E819EC869300AF11FA /* Popsicle-Bridging-Header.h */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -250,7 +257,6 @@
 			children = (
 				DB103AB619D76D1B0061BA94 /* HTMLNode.swift */,
 				DB103AB719D76D1B0061BA94 /* HTMLParser.swift */,
-				DB103AB819D76D1B0061BA94 /* Popsicle-Bridging-Header.h */,
 			);
 			name = HTMLParsing;
 			sourceTree = "<group>";
@@ -392,7 +398,6 @@
 				CE1F008D19D5C5A000B98BF8 /* Main.storyboard in Resources */,
 				CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */,
 				CEC4DC4219D910770041CB27 /* NUXView.xib in Resources */,
-				DB9F23E719D7E2400080AF0D /* OfflineWebViewController.xib in Resources */,
 				CE215C6E19D8ABF500DAFE8C /* PageCellView.xib in Resources */,
 				CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */,
 				CE215C7119D8D5EC00DAFE8C /* Avenir.ttc in Resources */,
@@ -467,6 +472,7 @@
 				CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */,
 				DB9F23E619D7E2400080AF0D /* OfflineWebViewController.swift in Sources */,
 				CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */,
+				CEABA9EB19EC872800AF11FA /* Reachability.m in Sources */,
 				CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */,
 				DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */,
 				DB103AB919D76D1B0061BA94 /* HTMLNode.swift in Sources */,
@@ -624,7 +630,7 @@
 				INFOPLIST_FILE = Popsicle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Popsicle-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Popsicle/Popsicle-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -642,7 +648,7 @@
 				INFOPLIST_FILE = Popsicle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Popsicle-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Popsicle/Popsicle-Bridging-Header.h";
 			};
 			name = Release;
 		};
