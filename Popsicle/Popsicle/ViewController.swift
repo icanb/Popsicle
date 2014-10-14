@@ -623,13 +623,48 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 // nothing is expanded
                 self.expandedIndex = indexPath
                 self.selectedSite = self.localSites[indexPath.row]
-                self.nmrPages = self.selectedSite!.pages.count
+                self.nmrPages = getNumberOfPages(self.selectedSite!)
+                
+                var expIndexInt = indexPath.row
+                var indexes:[NSIndexPath] = []
+                for ind in expIndexInt+1...expIndexInt+self.nmrPages {
+                    println(ind)
+                    indexes.append(NSIndexPath(forRow:ind, inSection:0))
+                }
+                
+                self.tableView.insertRowsAtIndexPaths(indexes,
+                    withRowAnimation: UITableViewRowAnimation.Fade)
+                
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
+                    withRowAnimation: UITableViewRowAnimation.Fade)
+                
+                return;
             }
             else if (self.expandedIndex == indexPath) {
+                
                 // tapped on already expanded
+                
+                var expIndexInt = indexPath.row
+                var indexes:[NSIndexPath] = []
+                
+                for ind in expIndexInt+1...(expIndexInt+self.nmrPages) {
+                    indexes.append(NSIndexPath(forRow:ind, inSection:0))
+                }
+        
+                
                 self.expandedIndex = nil
                 self.selectedSite = nil
                 self.nmrPages = 0
+                
+                self.tableView.deleteRowsAtIndexPaths(indexes,
+                    withRowAnimation: UITableViewRowAnimation.Fade)
+                
+                
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
+                    withRowAnimation: UITableViewRowAnimation.Fade)
+
+                
+                return;
             }
             else {
 
@@ -654,6 +689,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableView.reloadSections(NSIndexSet(index:0), withRowAnimation:UITableViewRowAnimation.Fade)
         }
 
+    }
+    
+    func getNumberOfPages(site: SiteMetadata) -> Int {
+        
+        var nmrPages = 0
+        
+        nmrPages = site.pages.count
+
+        if (nmrPages > 10)  {
+            nmrPages = 10
+        }
+
+        return nmrPages
     }
     
     func storageUpdated(key:String) {
