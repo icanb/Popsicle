@@ -344,9 +344,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var label:UILabel = UILabel(frame: CGRectMake(20, 2, tableView.frame.size.width, 38))
         
         label.font = UIFont(name: "Avenir", size: CGFloat(11))
-        
-        //UIFont.boldSystemFontOfSize(11)
-        
+
         label.text = title
         view.addSubview(label)
         view.backgroundColor = UIColor.clearColor()
@@ -364,10 +362,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return 1
             }
 
-            var count:Int = self.localSites.count
-            if (expandedIndex != nil) {
-                count = count + self.nmrPages
-            }
+            var count:Int = self.localSites.count + self.nmrPages
 
             return count
         }
@@ -617,10 +612,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         else {
             
             if (self.expandedIndex == nil) {
+                // nothing is expanded
+
                 if (self.localSites.count == 0) {
                     return;
                 }
-                // nothing is expanded
+                
                 self.expandedIndex = indexPath
                 self.selectedSite = self.localSites[indexPath.row]
                 self.nmrPages = getNumberOfPages(self.selectedSite!)
@@ -643,7 +640,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             else if (self.expandedIndex == indexPath) {
                 
                 // tapped on already expanded
-                
+                // delete the old rows
+            
                 var expIndexInt = indexPath.row
                 var indexes:[NSIndexPath] = []
                 
@@ -667,18 +665,61 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return;
             }
             else {
+                // tapped on a different site
+                // delete the old rows
+                // insert new rows
+                var prevInd = self.expandedIndex!.row;
+                var prevNmrPages = self.nmrPages;
 
+                var expIndexInt = indexPath.row
                 if (indexPath.row >= self.expandedIndex!.row + self.nmrPages) {
-                    // tapped on a different site
-                    self.expandedIndex = NSIndexPath(forRow: indexPath.row - self.nmrPages, inSection: indexPath.section)
-                    self.selectedSite = self.localSites[indexPath.row-self.nmrPages]
+                    expIndexInt = indexPath.row - prevNmrPages
                 }
-                else {
-                    self.expandedIndex = NSIndexPath(forRow: indexPath.row, inSection: indexPath.section)
-                    self.selectedSite = self.localSites[indexPath.row]
-                }
+                println(expIndexInt)
+    
+                    var indexesToDelete:[NSIndexPath] = []
 
-                self.nmrPages = self.selectedSite!.pages.count
+
+                    for ind in prevInd+1...(prevInd+self.nmrPages) {
+                        indexesToDelete.append(NSIndexPath(forRow:ind, inSection:0))
+                    }
+                    
+
+                    self.nmrPages = 0;
+                    // delete the old rows
+                    self.tableView.deleteRowsAtIndexPaths(indexesToDelete,
+                        withRowAnimation: UITableViewRowAnimation.Fade)
+                    
+                    self.expandedIndex = nil;
+                    // reload the selected row
+                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:prevInd, inSection:0)],
+                        withRowAnimation: UITableViewRowAnimation.Fade)
+                    
+                    // done shrinking the old stuff here
+                    
+                    // start expanding
+                    self.expandedIndex = NSIndexPath(forRow: expIndexInt, inSection: indexPath.section)
+//                    var expIndexInt = self.expandedIndex!.row
+
+
+                    self.selectedSite = self.localSites[expIndexInt]
+                    self.nmrPages = getNumberOfPages(self.selectedSite!)
+
+                    
+                    var indexesToInsert:[NSIndexPath] = []
+                    
+                    for ind in expIndexInt+1...(expIndexInt+self.nmrPages) {
+                        indexesToInsert.append(NSIndexPath(forRow:ind, inSection:0))
+                    }
+                    
+                    // insert the new rows
+                    self.tableView.insertRowsAtIndexPaths(indexesToInsert,
+                        withRowAnimation: UITableViewRowAnimation.Fade)
+                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
+                        withRowAnimation: UITableViewRowAnimation.Fade)
+                    
+                    return;
+                
             }
             
             if (self.nmrPages > 10)  {
