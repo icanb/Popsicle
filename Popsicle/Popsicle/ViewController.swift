@@ -506,6 +506,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 var settingsButton:UIButtonForRow = cell.viewWithTag(7) as UIButtonForRow
                 settingsButton.indexPath = indexPath
+                settingsButton.addTarget(self, action: Selector("showSettingsForSite:"), forControlEvents: .TouchUpInside)
+
+                
                 var settingsBtnFrame = settingsButton.frame;
                 settingsBtnFrame.origin.x =  bgButton.frame.size.width - 45
                 settingsButton.frame = settingsBtnFrame
@@ -790,6 +793,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
     }
+    
+    func showSettingsForSite(sender: UIButtonForRow) {
+
+        var row = sender.indexPath!.row
+        var site = self.localSites[row]
+        
+        
+        let siteSettingsModalViewController:SiteSettingsModalViewController = self.storyboard?.instantiateViewControllerWithIdentifier("siteSettingsModalViewController") as SiteSettingsModalViewController
+        
+//
+//        webViewController.initialPage = page
+//        webViewController.rooSite = site
+        
+        self.presentViewController(siteSettingsModalViewController, animated:true, completion: nil)
+        
+    }
+    
     
     func showWebViewWithSite(page: PageCache, site: SiteMetadata) {
         

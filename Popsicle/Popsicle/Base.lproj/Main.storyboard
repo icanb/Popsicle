@@ -159,7 +159,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYe-el-dsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1504" y="136"/>
+            <point key="canvasLocation" x="1512" y="176"/>
+        </scene>
+        <!--Site Settings Modal View Controller-->
+        <scene sceneID="FTQ-0P-cM5">
+            <objects>
+                <viewController storyboardIdentifier="siteSettingsModalViewController" id="HGz-gF-SZC" customClass="SiteSettingsModalViewController" customModule="Popsicle" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4J2-Mx-4fq"/>
+                        <viewControllerLayoutGuide type="bottom" id="1Cf-8k-i39"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xJG-m0-aMh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5k-0u-kHC">
+                                <rect key="frame" x="272" y="62" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EJr-Yo-BV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2204" y="176"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WlG-Zs-zw8">

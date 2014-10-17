@@ -6,7 +6,7 @@
 import UIKit
 
 
-class FlyFromTopControllerAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+class FlyFromTopAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     let isPresenting :Bool
     let duration :NSTimeInterval = 0.5

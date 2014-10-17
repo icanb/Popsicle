@@ -59,8 +59,8 @@ class FlyFromTopController: UIPresentationController {
         
         return frame
     }
-    
-    
+
+
     // ---- UIContentContainer protocol methods
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
