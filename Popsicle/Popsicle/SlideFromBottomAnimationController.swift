@@ -6,7 +6,7 @@
 import UIKit
 
 
-class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+class SlideFromBottomAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     let isPresenting :Bool
     let duration :NSTimeInterval = 0.5
@@ -57,7 +57,7 @@ class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedT
                 transitionContext.completeTransition(completed)
         })
     }
-    
+
     func animateDismissalWithTransitionContext(transitionContext: UIViewControllerContextTransitioning) {
         let presentedControllerView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
         let containerView = transitionContext.containerView()

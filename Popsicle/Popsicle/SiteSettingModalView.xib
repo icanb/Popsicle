@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SiteSettingsModalViewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="j0b-ZT-KKI">
+                    <rect key="frame" x="-8" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="j0b-ZT-KKI" secondAttribute="trailing" id="F7X-XQ-c6U"/>
+                <constraint firstAttribute="bottom" secondItem="j0b-ZT-KKI" secondAttribute="bottom" id="euI-BE-w45"/>
+                <constraint firstItem="j0b-ZT-KKI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iJ3-qi-kNq"/>
+                <constraint firstItem="j0b-ZT-KKI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mT5-U0-hAL"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

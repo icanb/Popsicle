@@ -5,11 +5,12 @@
 
 import UIKit
 
-class CustomPresentationController: UIPresentationController {
+
+class FlyFromTopController: UIPresentationController {
     
     lazy var dimmingView :UIView = {
         let view = UIView(frame: self.containerView!.bounds)
-        view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        view.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
         view.alpha = 0.0
         return view
         }()
@@ -50,15 +51,15 @@ class CustomPresentationController: UIPresentationController {
             self.dimmingView.removeFromSuperview()
         }
     }
-//    
-//    override func frameOfPresentedViewInContainerView() -> CGRect {
-//        // We don't want the presented view to fill the whole container view, so inset it's frame
-//        var frame = self.containerView.bounds;
-//        frame = CGRectInset(frame, 50.0, 50.0)
-//        
-//        return frame
-//    }
-//    
+    
+    override func frameOfPresentedViewInContainerView() -> CGRect {
+        // We don't want the presented view to fill the whole container view, so inset it's frame
+        var frame = self.containerView.bounds;
+        frame = CGRectInset(frame, 50.0, 50.0)
+        
+        return frame
+    }
+    
     
     // ---- UIContentContainer protocol methods
     

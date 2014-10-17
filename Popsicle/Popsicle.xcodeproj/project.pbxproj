@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A74748E270C300C0492D657B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6D0F12540B0A32118A487B /* libPods.a */; };
+		CE13134719F0A0FD00529935 /* FlyFromTopAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13134619F0A0FD00529935 /* FlyFromTopAnimationController.swift */; };
+		CE13134919F0A12900529935 /* FlyFromTopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13134819F0A12900529935 /* FlyFromTopController.swift */; };
+		CE13134B19F0A32400529935 /* SiteSettingModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE13134A19F0A32400529935 /* SiteSettingModalView.xib */; };
+		CE13134D19F0A39600529935 /* SiteSettingsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13134C19F0A39600529935 /* SiteSettingsModalViewController.swift */; };
 		CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */; };
 		CE1F008A19D5C5A000B98BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F008919D5C5A000B98BF8 /* ViewController.swift */; };
 		CE1F008D19D5C5A000B98BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F008B19D5C5A000B98BF8 /* Main.storyboard */; };
@@ -18,8 +22,8 @@
 		CE215C7119D8D5EC00DAFE8C /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */; };
 		CE215C7219D8D5EC00DAFE8C /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */; };
 		CE215C7319D8D5EC00DAFE8C /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */; };
-		CE97E7C619E976C0001AE315 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97E7C519E976C0001AE315 /* CustomPresentationAnimationController.swift */; };
-		CE97E7C819E98182001AE315 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97E7C719E98182001AE315 /* CustomPresentationController.swift */; };
+		CE97E7C619E976C0001AE315 /* SlideFromBottomAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97E7C519E976C0001AE315 /* SlideFromBottomAnimationController.swift */; };
+		CE97E7C819E98182001AE315 /* SlideFromBottomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97E7C719E98182001AE315 /* SlideFromBottomController.swift */; };
 		CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4CE3919D771AE0042570D /* SiteCellView.xib */; };
 		CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3B19D77B760042570D /* StorageManager.swift */; };
 		CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */; };
@@ -83,6 +87,10 @@
 		0A6D0F12540B0A32118A487B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		11AF724A54700CD19D902E75 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		339AB582AD411BD5A48D99D2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CE13134619F0A0FD00529935 /* FlyFromTopAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlyFromTopAnimationController.swift; sourceTree = "<group>"; };
+		CE13134819F0A12900529935 /* FlyFromTopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlyFromTopController.swift; sourceTree = "<group>"; };
+		CE13134A19F0A32400529935 /* SiteSettingModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteSettingModalView.xib; sourceTree = "<group>"; };
+		CE13134C19F0A39600529935 /* SiteSettingsModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSettingsModalViewController.swift; sourceTree = "<group>"; };
 		CE1F008219D5C5A000B98BF8 /* Popsicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popsicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F008619D5C5A000B98BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,8 +103,8 @@
 		CE1F009D19D5C5A000B98BF8 /* PopsicleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopsicleTests.swift; sourceTree = "<group>"; };
 		CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageCellView.xib; sourceTree = "<group>"; };
 		CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
-		CE97E7C519E976C0001AE315 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
-		CE97E7C719E98182001AE315 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
+		CE97E7C519E976C0001AE315 /* SlideFromBottomAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideFromBottomAnimationController.swift; sourceTree = "<group>"; };
+		CE97E7C719E98182001AE315 /* SlideFromBottomController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideFromBottomController.swift; sourceTree = "<group>"; };
 		CEA4CE3919D771AE0042570D /* SiteCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteCellView.xib; sourceTree = "<group>"; };
 		CEA4CE3B19D77B760042570D /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageUpdateDelegate.swift; sourceTree = "<group>"; };
@@ -201,9 +209,13 @@
 				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
 				CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */,
 				CEC4DC4119D910770041CB27 /* NUXView.xib */,
-				CE97E7C519E976C0001AE315 /* CustomPresentationAnimationController.swift */,
-				CE97E7C719E98182001AE315 /* CustomPresentationController.swift */,
+				CE97E7C519E976C0001AE315 /* SlideFromBottomAnimationController.swift */,
+				CE97E7C719E98182001AE315 /* SlideFromBottomController.swift */,
 				CEABA9E819EC869300AF11FA /* Popsicle-Bridging-Header.h */,
+				CE13134619F0A0FD00529935 /* FlyFromTopAnimationController.swift */,
+				CE13134819F0A12900529935 /* FlyFromTopController.swift */,
+				CE13134A19F0A32400529935 /* SiteSettingModalView.xib */,
+				CE13134C19F0A39600529935 /* SiteSettingsModalViewController.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -399,6 +411,7 @@
 				CEA4CE3A19D771AE0042570D /* SiteCellView.xib in Resources */,
 				CEC4DC4219D910770041CB27 /* NUXView.xib in Resources */,
 				CE215C6E19D8ABF500DAFE8C /* PageCellView.xib in Resources */,
+				CE13134B19F0A32400529935 /* SiteSettingModalView.xib in Resources */,
 				CE1F009219D5C5A000B98BF8 /* LaunchScreen.xib in Resources */,
 				CE215C7119D8D5EC00DAFE8C /* Avenir.ttc in Resources */,
 				CE1F008F19D5C5A000B98BF8 /* Images.xcassets in Resources */,
@@ -463,10 +476,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE97E7C819E98182001AE315 /* CustomPresentationController.swift in Sources */,
+				CE13134D19F0A39600529935 /* SiteSettingsModalViewController.swift in Sources */,
+				CE97E7C819E98182001AE315 /* SlideFromBottomController.swift in Sources */,
 				CE1F008A19D5C5A000B98BF8 /* ViewController.swift in Sources */,
-				CE97E7C619E976C0001AE315 /* CustomPresentationAnimationController.swift in Sources */,
+				CE97E7C619E976C0001AE315 /* SlideFromBottomAnimationController.swift in Sources */,
 				CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */,
+				CE13134719F0A0FD00529935 /* FlyFromTopAnimationController.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
 				CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */,
 				CEA4CE4019D8823F0042570D /* UIButtonForRow.swift in Sources */,
@@ -475,6 +490,7 @@
 				CEABA9EB19EC872800AF11FA /* Reachability.m in Sources */,
 				CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */,
 				DB103ABA19D76D1B0061BA94 /* HTMLParser.swift in Sources */,
+				CE13134919F0A12900529935 /* FlyFromTopController.swift in Sources */,
 				DB103AB919D76D1B0061BA94 /* HTMLNode.swift in Sources */,
 				CEFFF1BF19D5FEB900C10EB4 /* Device.swift in Sources */,
 				CEA4CE3E19D7934F0042570D /* StorageUpdateDelegate.swift in Sources */,

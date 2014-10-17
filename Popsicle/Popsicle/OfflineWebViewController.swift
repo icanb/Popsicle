@@ -111,7 +111,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewContr
     func presentationControllerForPresentedViewController(presented: UIViewController!, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController!) -> UIPresentationController! {
         
         if presented == self {
-            return CustomPresentationController(presentedViewController: presented, presentingViewController: presenting)
+            return SlideFromBottomController(presentedViewController: presented, presentingViewController: presenting)
         }
         
         return nil
@@ -120,7 +120,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewContr
     func animationControllerForPresentedController(presented: UIViewController!, presentingController presenting: UIViewController!, sourceController source: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
         
         if presented == self {
-            return CustomPresentationAnimationController(isPresenting: true)
+            return SlideFromBottomAnimationController(isPresenting: true)
         }
         else {
             return nil
@@ -130,7 +130,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewContr
     func animationControllerForDismissedController(dismissed: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
         
         if dismissed == self {
-            return CustomPresentationAnimationController(isPresenting: false)
+            return SlideFromBottomAnimationController(isPresenting: false)
         }
         else {
             return nil
