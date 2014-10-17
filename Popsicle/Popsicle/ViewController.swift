@@ -396,8 +396,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getPageWithIndexRow(indexPath:NSIndexPath) -> PageCache? {
         var indexRow = indexPath.row
         indexRow = indexRow - self.expandedIndex!.row - 1
-        print(indexRow)
-        return self.selectedSite?.pages[indexRow]
+        
+        if(self.selectedSite?.pages.count > indexRow) {
+            return self.selectedSite?.pages[indexRow]
+        }
+        else {
+            return nil
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -446,7 +451,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             
             var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
-            siteNameLabel?.text = page?.title
+            
+            if (page == nil) {
+                siteNameLabel?.text = "No pages available"
+            }
+            else {
+                siteNameLabel?.text = page?.title
+            }
 
             return cell
     
@@ -469,32 +480,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cellFrame.size.width = tableView.frame.size.width
             cell.frame = cellFrame
             
-            var button:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
-            button.setBackgroundImage(image, forState: UIControlState.Normal)
-            button.indexPath = indexPath
+            var bgButton:UIButtonForRow = cell.viewWithTag(2) as UIButtonForRow
+            bgButton.setBackgroundImage(image, forState: UIControlState.Normal)
+            bgButton.indexPath = indexPath
+
 
 
             if (indexPath == expandedIndex) {
                 var imageTop = UIImage(named: "top-site-cell")
                 var insetsTop = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 0.0, right: 12.0)
                 imageTop = imageTop.resizableImageWithCapInsets(insetsTop)
-                button.setBackgroundImage(imageTop, forState: UIControlState.Normal)
+                bgButton.setBackgroundImage(imageTop, forState: UIControlState.Normal)
             }
     
-            var buttonFrame = button.frame
+            var buttonFrame = bgButton.frame
             buttonFrame.size.width = cell.frame.size.width - 12
             buttonFrame.origin.x = 6
-            button.frame = buttonFrame
+            bgButton.frame = buttonFrame
 
             var indexRow = indexPath.row
 
             cell.selectionStyle = UITableViewCellSelectionStyle.None
 
             if (cellType == "localsite") {
+                
+                var settingsButton:UIButtonForRow = cell.viewWithTag(7) as UIButtonForRow
+                settingsButton.indexPath = indexPath
+                var settingsBtnFrame = settingsButton.frame;
+                settingsBtnFrame.origin.x =  bgButton.frame.size.width - 45
+                settingsButton.frame = settingsBtnFrame
+                // bind the event here
+                
+                if (indexPath == expandedIndex) {
+                    settingsButton.hidden = false;
+                }
+                else {
+                    settingsButton.hidden = true;
+                }
+
                 // site cell
                 var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
                 var lastUpdatedLabel:UILabel! = cell.viewWithTag(6) as UILabel
                 var noSiteLabel:UILabel! = cell.viewWithTag(3) as UILabel
+
+                
+                var labelFrame = siteNameLabel.frame
+                labelFrame.size.width = bgButton.frame.size.width - 60;
+                siteNameLabel.frame = labelFrame
 
                 if (self.localSites.count == 0) {
                     siteNameLabel.hidden = true
@@ -521,10 +553,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             else {
                 // remote site cell
                 var remoteSite = self.remoteSites.keys.array[indexRow]
-                
+                var deviceName = self.remoteSites[remoteSite]?.displayName
+
                 var siteNameLabel:UILabel! = cell.viewWithTag(1) as UILabel
+                var deviceNameLabel:UILabel! = cell.viewWithTag(6) as UILabel
+
                 siteNameLabel?.text = remoteSite
-                
+                deviceNameLabel?.text = deviceName
+
                 return cell
             }
 
@@ -622,6 +658,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.selectedSite = self.localSites[indexPath.row]
                 self.nmrPages = getNumberOfPages(self.selectedSite!)
                 
+                if (self.nmrPages == 0) {
+                    // if there are not pages, we need to show
+                    // no pages text
+                    self.nmrPages = 1;
+                }
+
                 var expIndexInt = indexPath.row
                 var indexes:[NSIndexPath] = []
                 for ind in expIndexInt+1...expIndexInt+self.nmrPages {
@@ -721,11 +763,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     return;
                 
             }
-            
-            if (self.nmrPages > 10)  {
-                self.nmrPages = 10
-            }
-
             
             self.tableView.reloadSections(NSIndexSet(index:0), withRowAnimation:UITableViewRowAnimation.Fade)
         }
