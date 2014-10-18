@@ -190,9 +190,9 @@
 		CE1F008419D5C5A000B98BF8 /* Popsicle */ = {
 			isa = PBXGroup;
 			children = (
-				CEABA9EA19EC872800AF11FA /* Reachability.m */,
-				CEABA9E919EC871900AF11FA /* Reachability.h */,
+				CE529CDF19F2D44300150228 /* Animations */,
 				CE215C6F19D8D5DA00DAFE8C /* Resources */,
+				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
 				CEEB020419D6225000B7D759 /* EncodedClasses */,
 				CE1F008B19D5C5A000B98BF8 /* Main.storyboard */,
 				CE1F008719D5C5A000B98BF8 /* AppDelegate.swift */,
@@ -201,18 +201,12 @@
 				CE13134C19F0A39600529935 /* SiteSettingsModalViewController.swift */,
 				CE1F008E19D5C5A000B98BF8 /* Images.xcassets */,
 				CE1F009019D5C5A000B98BF8 /* LaunchScreen.xib */,
-				CE1F008519D5C5A000B98BF8 /* Supporting Files */,
 				CEA4CE3B19D77B760042570D /* StorageManager.swift */,
 				CEA4CE3D19D7934F0042570D /* StorageUpdateDelegate.swift */,
 				CEA4CE3F19D8823F0042570D /* UIButtonForRow.swift */,
 				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
 				CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */,
 				CEC4DC4119D910770041CB27 /* NUXView.xib */,
-				CE97E7C519E976C0001AE315 /* SlideFromBottomAnimationController.swift */,
-				CE97E7C719E98182001AE315 /* SlideFromBottomController.swift */,
-				CEABA9E819EC869300AF11FA /* Popsicle-Bridging-Header.h */,
-				CE13134619F0A0FD00529935 /* FlyFromTopAnimationController.swift */,
-				CE13134819F0A12900529935 /* FlyFromTopController.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -220,6 +214,9 @@
 		CE1F008519D5C5A000B98BF8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEABA9EA19EC872800AF11FA /* Reachability.m */,
+				CEABA9E919EC871900AF11FA /* Reachability.h */,
+				CEABA9E819EC869300AF11FA /* Popsicle-Bridging-Header.h */,
 				CE1F008619D5C5A000B98BF8 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -248,6 +245,17 @@
 				CE215C7019D8D5EC00DAFE8C /* Avenir.ttc */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		CE529CDF19F2D44300150228 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				CE97E7C519E976C0001AE315 /* SlideFromBottomAnimationController.swift */,
+				CE97E7C719E98182001AE315 /* SlideFromBottomController.swift */,
+				CE13134619F0A0FD00529935 /* FlyFromTopAnimationController.swift */,
+				CE13134819F0A12900529935 /* FlyFromTopController.swift */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 		CEEB020419D6225000B7D759 /* EncodedClasses */ = {

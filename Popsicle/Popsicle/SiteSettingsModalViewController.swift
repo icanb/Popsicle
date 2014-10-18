@@ -10,6 +10,10 @@ import UIKit
 
 class SiteSettingsModalViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
+    @IBOutlet var updateBtn: UIButton!
+    @IBOutlet var deleteBtn: UIButton!
+    @IBOutlet var doneBtn: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,18 @@ class SiteSettingsModalViewController: UIViewController, UIViewControllerTransit
     func commonInit() {
         self.modalPresentationStyle = .Custom
         self.transitioningDelegate = self
+    }
+    
+    @IBAction func updateBtnTapped(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func deleteBtnTapped(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func doneBtnTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     // ---- UIViewControllerTransitioningDelegate methods

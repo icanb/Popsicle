@@ -766,8 +766,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return;
                 
             }
-            
-            self.tableView.reloadSections(NSIndexSet(index:0), withRowAnimation:UITableViewRowAnimation.Fade)
+
         }
         
     }

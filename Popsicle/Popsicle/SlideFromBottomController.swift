@@ -50,16 +50,7 @@ class SlideFromBottomController: UIPresentationController {
             self.dimmingView.removeFromSuperview()
         }
     }
-//    
-//    override func frameOfPresentedViewInContainerView() -> CGRect {
-//        // We don't want the presented view to fill the whole container view, so inset it's frame
-//        var frame = self.containerView.bounds;
-//        frame = CGRectInset(frame, 50.0, 50.0)
-//        
-//        return frame
-//    }
-//    
-    
+
     // ---- UIContentContainer protocol methods
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
