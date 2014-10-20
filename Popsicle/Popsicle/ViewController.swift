@@ -110,8 +110,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.customNavigationView.addConstraint(self.layoutConstraintsPortrait!)
         
     }
-    
-    
+
     
     func userCompletedTour() -> Bool {
         var aVal:String? = NSUserDefaults.standardUserDefaults().objectForKey("aValue") as String?
@@ -185,7 +184,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     return
                 }
                 for remoteSite in infoDict[discoveryInfoSitesKey]!.componentsSeparatedByString(",") {
-                    println("YOOOOO")
                     println(remoteSite)
                     if (countElements(remoteSite) > 0) {
                         self.remoteSites[remoteSite] = peerID
@@ -614,13 +612,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (cellType == "page")  {
             // Open the page here
             var page = getPageWithIndexRow(indexPath)
-            //            var sm:StorageManager = self.appDelegate.getStorageManager()
-            //            var site = sm.getSiteWithHostname(host: page.)
             var indexRow = indexPath.row
             indexRow = indexRow - self.expandedIndex!.row - 1
-            //            var site =  self.localSites[indexRow]
+
             self.showWebViewWithSite(page!, site: self.selectedSite!)
-            self.tableView.reloadData()
         }
         else if (cellType == "remotesite") {
             let remotePeerID = self.remoteSites.values.array[indexPath.row]
@@ -659,26 +654,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 self.expandedIndex = indexPath
                 self.selectedSite = self.localSites[indexPath.row]
-                self.nmrPages = getNumberOfPages(self.selectedSite!)
                 
-                if (self.nmrPages == 0) {
-                    // if there are not pages, we need to show
-                    // no pages text
-                    self.nmrPages = 1;
-                }
-                
-                var expIndexInt = indexPath.row
-                var indexes:[NSIndexPath] = []
-                for ind in expIndexInt+1...expIndexInt+self.nmrPages {
-                    println(ind)
-                    indexes.append(NSIndexPath(forRow:ind, inSection:0))
-                }
-                
-                self.tableView.insertRowsAtIndexPaths(indexes,
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
-                    withRowAnimation: UITableViewRowAnimation.Fade)
+                expandSite(self.selectedSite!, atIndex: indexPath)
                 
                 return;
             }
@@ -687,82 +664,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 // tapped on already expanded
                 // delete the old rows
                 
-                var expIndexInt = indexPath.row
-                var indexes:[NSIndexPath] = []
-                
-                for ind in expIndexInt+1...(expIndexInt+self.nmrPages) {
-                    indexes.append(NSIndexPath(forRow:ind, inSection:0))
-                }
-                
-                
-                self.expandedIndex = nil
-                self.selectedSite = nil
-                self.nmrPages = 0
-                
-                self.tableView.deleteRowsAtIndexPaths(indexes,
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                
-                
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                
-                
+                shrinkSite(indexPath)
+
                 return;
             }
             else {
                 // tapped on a different site
                 // delete the old rows
                 // insert new rows
-                var prevInd = self.expandedIndex!.row;
                 var prevNmrPages = self.nmrPages;
-                
                 var expIndexInt = indexPath.row
                 if (indexPath.row >= self.expandedIndex!.row + self.nmrPages) {
                     expIndexInt = indexPath.row - prevNmrPages
                 }
-                println(expIndexInt)
+
                 
-                var indexesToDelete:[NSIndexPath] = []
-                
-                
-                for ind in prevInd+1...(prevInd+self.nmrPages) {
-                    indexesToDelete.append(NSIndexPath(forRow:ind, inSection:0))
-                }
-                
-                
-                self.nmrPages = 0;
-                // delete the old rows
-                self.tableView.deleteRowsAtIndexPaths(indexesToDelete,
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                
-                self.expandedIndex = nil;
-                // reload the selected row
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:prevInd, inSection:0)],
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                
-                // done shrinking the old stuff here
+                shrinkSite(self.expandedIndex!)
                 
                 // start expanding
                 self.expandedIndex = NSIndexPath(forRow: expIndexInt, inSection: indexPath.section)
-                //                    var expIndexInt = self.expandedIndex!.row
-                
-                
                 self.selectedSite = self.localSites[expIndexInt]
-                self.nmrPages = getNumberOfPages(self.selectedSite!)
-                
-                
-                var indexesToInsert:[NSIndexPath] = []
-                
-                for ind in expIndexInt+1...(expIndexInt+self.nmrPages) {
-                    indexesToInsert.append(NSIndexPath(forRow:ind, inSection:0))
-                }
-                
-                // insert the new rows
-                self.tableView.insertRowsAtIndexPaths(indexesToInsert,
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
-                    withRowAnimation: UITableViewRowAnimation.Fade)
-                
+
+                expandSite(self.selectedSite!, atIndex: self.expandedIndex!)
+
                 return;
                 
             }
@@ -771,6 +695,54 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    func expandSite(site: SiteMetadata, atIndex indexPath:NSIndexPath) {
+        
+        self.nmrPages = getNumberOfPages(self.selectedSite!)
+        
+        if (self.nmrPages == 0) {
+            // if there are not pages, we need to show
+            // no pages text
+            self.nmrPages = 1;
+        }
+        
+        var expIndexInt = indexPath.row
+        var indexes:[NSIndexPath] = []
+        for ind in expIndexInt+1...expIndexInt+self.nmrPages {
+            println(ind)
+            indexes.append(NSIndexPath(forRow:ind, inSection:0))
+        }
+        
+        self.tableView.insertRowsAtIndexPaths(indexes,
+            withRowAnimation: UITableViewRowAnimation.Fade)
+        
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
+            withRowAnimation: UITableViewRowAnimation.Fade)
+    }
+    
+
+    func shrinkSite(indexPath:NSIndexPath) {
+
+        var expIndexInt = indexPath.row
+        var indexes:[NSIndexPath] = []
+        
+        for ind in expIndexInt+1...(expIndexInt+self.nmrPages) {
+            indexes.append(NSIndexPath(forRow:ind, inSection:0))
+        }
+
+        self.expandedIndex = nil
+        self.selectedSite = nil
+        self.nmrPages = 0
+        
+        self.tableView.deleteRowsAtIndexPaths(indexes,
+            withRowAnimation: UITableViewRowAnimation.Fade)
+
+        
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow:expIndexInt, inSection:0)],
+            withRowAnimation: UITableViewRowAnimation.Fade)
+
+    }
+    
+
     func getNumberOfPages(site: SiteMetadata) -> Int {
         
         var nmrPages = 0
@@ -783,16 +755,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return nmrPages
     }
-    
+
+
     func storageUpdated(key:String) {
         
         if (key == "current_device") {
             self.localSites = self.appDelegate.device!.cache
+            
+            if !contains(localSites, self.selectedSite!) {
+                self.selectedSite = nil;
+                self.nmrPages = 0
+            }
+
             self.tableView.reloadData()
         }
         
     }
-    
+
+
     func showSettingsForSite(sender: UIButtonForRow) {
 
         var row = sender.indexPath!.row
@@ -800,16 +780,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         let siteSettingsModalViewController:SiteSettingsModalViewController = self.storyboard?.instantiateViewControllerWithIdentifier("siteSettingsModalViewController") as SiteSettingsModalViewController
-        
-//
-//        webViewController.initialPage = page
-//        webViewController.rooSite = site
-        
+        siteSettingsModalViewController.setSite(site)
+
         self.presentViewController(siteSettingsModalViewController, animated:true, completion: nil)
-        
+
     }
-    
-    
+
+
     func showWebViewWithSite(page: PageCache, site: SiteMetadata) {
         
         let webViewController:OfflineWebViewController = self.storyboard?.instantiateViewControllerWithIdentifier("offlineWebViewController") as OfflineWebViewController
@@ -821,6 +798,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+
+
     
     /* Handle Rotation */
     

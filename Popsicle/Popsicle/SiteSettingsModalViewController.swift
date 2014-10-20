@@ -10,11 +10,14 @@ import UIKit
 
 class SiteSettingsModalViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
     @IBOutlet var updateBtn: UIButton!
     @IBOutlet var deleteBtn: UIButton!
     @IBOutlet var doneBtn: UIButton!
     
-    
+    var currentSite:SiteMetadata?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,12 +39,18 @@ class SiteSettingsModalViewController: UIViewController, UIViewControllerTransit
         self.transitioningDelegate = self
     }
     
+    func setSite(site:SiteMetadata) {
+        self.currentSite = site
+    }
+    
     @IBAction func updateBtnTapped(sender: AnyObject) {
-        
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     @IBAction func deleteBtnTapped(sender: AnyObject) {
         
+        appDelegate.storageManager?.deleteSite(self.currentSite!)
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
     @IBAction func doneBtnTapped(sender: AnyObject) {

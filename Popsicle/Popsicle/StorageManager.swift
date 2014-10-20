@@ -15,11 +15,7 @@ class StorageManager {
     var device:Device?
 
     init(device currentDevice:Device?) {
-        
-//        if (self.device != nil) {
-            self.device = currentDevice
-//        }
-
+        self.device = currentDevice
     }
 
     func saveSite(host hostName:String?, port portNmr:String? = "80", rootUrl:String?) -> Bool {
@@ -59,11 +55,13 @@ class StorageManager {
             self.device!.updateStorage()
         }
 
-
-        
-
-
         return true;
+    }
+    
+    func deleteSite(site:SiteMetadata) {
+        // TODO: also delete the .sickle file
+        self.device!.cache = self.device!.cache.filter( {$0 != site})
+        self.device!.updateStorage()
     }
     
     func getSiteWithHostname(host hostName:String?) -> SiteMetadata? {
