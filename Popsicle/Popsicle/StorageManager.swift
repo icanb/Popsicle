@@ -120,7 +120,7 @@ class StorageManager {
             
         page?.title = titleStr!
         page?.html = htmlStr!
-        page?.last_update = NSDate.date()
+        page?.last_update = NSDate()
     
         var cleanPagename = fullUrl!.stringByReplacingOccurrencesOfString(".", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
         var fileName = "/page_"+cleanPagename+".sickle"
@@ -151,10 +151,10 @@ class StorageManager {
         let url = NSURL(string: stringUrl)
         
         // TODO: recursively get shit from links.
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
             let response = NSString(data: data, encoding: NSUTF8StringEncoding)
-            var hyperlinks = self.getHyperlinksFromHtml(response)
+            var hyperlinks = self.getHyperlinksFromHtml(response!)
             // println(hyperlinks)
         }
         

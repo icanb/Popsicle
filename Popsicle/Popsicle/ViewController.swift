@@ -425,8 +425,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             var image = UIImage(named: "full-page-cell")
             var insets = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
-            image = image.resizableImageWithCapInsets(insets)
-            
+            image = image?.resizableImageWithCapInsets(insets)
+
             var cellFrame = cell.frame
             cellFrame.size.width = tableView.frame.size.width
             cell.frame = cellFrame
@@ -443,7 +443,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if (indexPath.row == self.expandedIndex!.row + self.nmrPages) {
                 var imageBottom = UIImage(named: "bottom-page-cell")
                 var insetsBottom = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-                imageBottom = imageBottom.resizableImageWithCapInsets(insetsBottom)
+                imageBottom = imageBottom?.resizableImageWithCapInsets(insetsBottom)
                 button.setBackgroundImage(imageBottom, forState: UIControlState.Normal)
             }
             
@@ -471,7 +471,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             var image = UIImage(named: "full-site-cell")
             var insets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-            image = image.resizableImageWithCapInsets(insets)
+            image = image?.resizableImageWithCapInsets(insets)
             
             
             var cellFrame = cell.frame
@@ -487,7 +487,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if (indexPath == expandedIndex) {
                 var imageTop = UIImage(named: "top-site-cell")
                 var insetsTop = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 0.0, right: 12.0)
-                imageTop = imageTop.resizableImageWithCapInsets(insetsTop)
+                imageTop = imageTop?.resizableImageWithCapInsets(insetsTop)
                 bgButton.setBackgroundImage(imageTop, forState: UIControlState.Normal)
             }
             

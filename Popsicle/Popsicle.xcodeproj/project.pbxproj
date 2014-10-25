@@ -30,6 +30,7 @@
 		CEABA9E319EC839800AF11FA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEABA9E219EC839800AF11FA /* SystemConfiguration.framework */; };
 		CEABA9EB19EC872800AF11FA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CEABA9EA19EC872800AF11FA /* Reachability.m */; };
 		CEC4DC4219D910770041CB27 /* NUXView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC4DC4119D910770041CB27 /* NUXView.xib */; };
+		CEE4DE8C19FB5F460028D9A7 /* CrawlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4DE8B19FB5F460028D9A7 /* CrawlManager.swift */; };
 		CEE606B319D75BFA00ADD3FC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE606B219D75BFA00ADD3FC /* Storable.swift */; };
 		CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */; };
 		CEFFF1BD19D5FEAC00C10EB4 /* PageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */; };
@@ -112,6 +113,7 @@
 		CEABA9E919EC871900AF11FA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		CEABA9EA19EC872800AF11FA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CEC4DC4119D910770041CB27 /* NUXView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NUXView.xib; sourceTree = "<group>"; };
+		CEE4DE8B19FB5F460028D9A7 /* CrawlManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrawlManager.swift; sourceTree = "<group>"; };
 		CEE606B219D75BFA00ADD3FC /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		CEFFF1BA19D5FEA300C10EB4 /* SiteMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteMetadata.swift; sourceTree = "<group>"; };
 		CEFFF1BC19D5FEAC00C10EB4 /* PageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageCache.swift; path = ../PageCache.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				CEA4CE3919D771AE0042570D /* SiteCellView.xib */,
 				CE215C6D19D8ABF500DAFE8C /* PageCellView.xib */,
 				CEC4DC4119D910770041CB27 /* NUXView.xib */,
+				CEE4DE8B19FB5F460028D9A7 /* CrawlManager.swift */,
 			);
 			path = Popsicle;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				CE1F008A19D5C5A000B98BF8 /* ViewController.swift in Sources */,
 				CE97E7C619E976C0001AE315 /* SlideFromBottomAnimationController.swift in Sources */,
 				CEFFF1BB19D5FEA300C10EB4 /* SiteMetadata.swift in Sources */,
+				CEE4DE8C19FB5F460028D9A7 /* CrawlManager.swift in Sources */,
 				CE13134719F0A0FD00529935 /* FlyFromTopAnimationController.swift in Sources */,
 				CE1F008819D5C5A000B98BF8 /* AppDelegate.swift in Sources */,
 				CEA4CE3C19D77B760042570D /* StorageManager.swift in Sources */,

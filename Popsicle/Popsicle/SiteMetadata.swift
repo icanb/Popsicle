@@ -14,7 +14,7 @@ class SiteMetadata : Storable, NSCoding {
     var hostname:String = ""
     var root_url = ""
     var port:String = "80"
-    var last_update: NSDate = NSDate.date()
+    var last_update: NSDate = NSDate()
     var directory_path:String = "/"
     var favicon:String = ""
     var pages: [PageCache] = []
@@ -86,7 +86,7 @@ class SiteMetadata : Storable, NSCoding {
         
         let url = NSURL(string: stringUrl)
         var dynamicCount:Int = count
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             let response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
             var (hyperlinks, title, cssLinks) = self.parseHtml(response)
             
@@ -226,7 +226,7 @@ class SiteMetadata : Storable, NSCoding {
 //            exit(1)
 //        }
         let sanitizedHyperlink = self.sanitizeUrl(cssUrl, hostname: self.hostname, currentPath: stringUrl)
-        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string:sanitizedHyperlink)) {(data, response, error) in
+        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string:sanitizedHyperlink)!) {(data, response, error) in
             //            println(NSString(data: data, encoding: NSUTF8StringEncoding))
             var response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
             

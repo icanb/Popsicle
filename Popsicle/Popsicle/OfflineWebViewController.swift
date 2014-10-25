@@ -27,7 +27,7 @@ class OfflineWebViewController: UIViewController, UIWebViewDelegate, UIViewContr
         self.title = self.initialPage?.title
         var url:NSURL
         if (urlStr != nil) {
-            url = NSURL(string: urlStr!)
+            url = NSURL(string: urlStr!)!
         } else {
             println("SHIT WENT DOWN")
             exit(1)
