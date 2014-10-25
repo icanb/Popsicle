@@ -622,7 +622,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let requestedHostname = self.remoteSites.keys.array[indexPath.row]
             
             let cell = tableView.cellForRowAtIndexPath(indexPath)
-            self.currentlySpinning = cell?.viewWithTag(4) as UIActivityIndicatorView
+            self.currentlySpinning = cell?.viewWithTag(4) as? UIActivityIndicatorView
             self.currentlySpinning!.hidden = false
             self.currentlySpinning!.startAnimating()
             
@@ -762,7 +762,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (key == "current_device") {
             self.localSites = self.appDelegate.device!.cache
             
-            if !contains(localSites, self.selectedSite!) {
+            if (self.selectedSite != nil && !contains(localSites, self.selectedSite!)) {
                 self.selectedSite = nil;
                 self.nmrPages = 0
             }

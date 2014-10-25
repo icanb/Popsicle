@@ -33,5 +33,10 @@ class Storable:NSObject {
         var tuple = (obj:obj, key:key)
         self.updateSubscribers.append((obj, key))
     }
+    
+    class func deleteFileAtPath(path:String) {
+        var manager = NSFileManager.defaultManager()
+        manager.removeItemAtPath(path, error: nil)
+    }
 
 }

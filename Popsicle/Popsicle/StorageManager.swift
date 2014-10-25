@@ -18,15 +18,14 @@ class StorageManager {
         self.device = currentDevice
     }
 
-    func saveSite(host hostName:String?, port portNmr:String? = "80", rootUrl:String?) -> Bool {
+    func saveSite(host hostName:String?, port portNmr:String? = "80", rootUrl:String?) -> SiteMetadata! {
     
         for site in self.device!.cache {
             if (site.hostname == hostName) {
-                return false;
+                return nil;
             }
         }
 
-        
         var cleanHostname = hostName!.stringByReplacingOccurrencesOfString(".", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
         var fileName = "/site_"+cleanHostname+".sickle"
 
@@ -38,24 +37,23 @@ class StorageManager {
         
         if (checkValidation.fileExistsAtPath(storePath)) {
             println("WARNING: here")
-            var existingSite:SiteMetadata = self.getSiteWithHostname(host: hostName)!
-            existingSite.crawl()
-        } else {
-            // Create and save the site
-            var newSite:SiteMetadata = SiteMetadata()
-            newSite.hostname = hostName!
-            newSite.root_url = rootUrl!
-            newSite.port = "80"
-            newSite.storePath = storePath
-            newSite.updateStorage()
-            newSite.crawl()
-
-            // Add the site to the cache and update
-            self.device!.cache.append(newSite)
-            self.device!.updateStorage()
+            Storable.deleteFileAtPath(storePath)
         }
+        
+        // Create and save the site
+        var newSite:SiteMetadata = SiteMetadata()
+        newSite.hostname = hostName!
+        newSite.root_url = rootUrl!
+        newSite.port = "80"
+        newSite.storePath = storePath
+        newSite.updateStorage()
+        
+        // Add the site to the cache and update
+        self.device!.cache.append(newSite)
+        self.device!.updateStorage()
+        
+        return newSite;
 
-        return true;
     }
     
     func deleteSite(site:SiteMetadata) {
@@ -100,7 +98,7 @@ class StorageManager {
         return nil
     }
 
-    func savePageYo(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, url_path urlPath:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> PageCache {
+    func savePage(host hostName:String?, port portNmr:String?, full_url fullUrl:String?, url_path urlPath:String?, parameters param:[String], title titleStr:String?, html htmlStr:String?) -> PageCache {
             
             
         var site:SiteMetadata? = getSiteWithHostname(host: hostName)

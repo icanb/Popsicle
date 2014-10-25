@@ -61,8 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let targetURL:String = getTargetURL(url)
         
         var newUrlComponents:NSURLComponents = NSURLComponents(string:targetURL)!
-        var isNew:Bool? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue, rootUrl:newUrlComponents.path)
+        var siteObj:SiteMetadata? = self.storageManager?.saveSite(host: newUrlComponents.host, port: newUrlComponents.port?.stringValue, rootUrl:newUrlComponents.path)
         
+        CrawlManager.crawl(siteObj!)
+
         return true
     }
     
