@@ -36,8 +36,7 @@ class StorageManager {
         
         
         if (checkValidation.fileExistsAtPath(storePath)) {
-            println("WARNING: here")
-            Storable.deleteFileAtPath(storePath)
+            StorageManager.deleteFileAtPath(storePath)
         }
         
         // Create and save the site
@@ -189,6 +188,11 @@ class StorageManager {
                 println(page.full_url)
             }
         }
+    }
+
+    class func deleteFileAtPath(path:String) {
+        var manager = NSFileManager.defaultManager()
+        manager.removeItemAtPath(path, error: nil)
     }
 
 }

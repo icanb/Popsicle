@@ -22,6 +22,8 @@ class CrawlManager:NSObject {
             return false
         }
         
+        site.isBeingCached = true;
+
         var count:Int = 20
         var depth:Int = 2
     
@@ -80,24 +82,38 @@ class CrawlManager:NSObject {
                 }
             }
         }
-        println(sanitizedUrl)
+
         return sanitizedUrl
     }
 
     
-    class func recursiveCrawl(site:SiteMetadata, url stringUrl: String, primaryKey originalHyperlink:String, countRemaining count:Int, depthRemaining depth:Int) -> Void {
-        
-
-        if (depth == 0) {
-            return
-        }
+    class func recursiveCrawl(site:SiteMetadata, url stringUrl: String, primaryKey originalHyperlink:String, countRemaining count:Int, depthRemaining depth:Int) -> Bool {
         
         let url = NSURL(string: stringUrl)
+
+        
+        println(count)
+
+        if (url == nil || count < 1 || depth < 1) {
+            // when crawling is done, update storage
+            site.doneCaching()
+            return false
+        }
+        
         var dynamicCount:Int = count
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             
-            let response = NSString(data: data, encoding: NSUTF8StringEncoding) as String
-            var (hyperlinks, title, cssLinks) = self.parseHtml(response)
+            if (error != nil || data == nil) {
+                return
+            }
+
+            var response:String? = NSString(data: data, encoding: NSUTF8StringEncoding) as String?
+            
+            if (response == nil) {
+                return;
+            }
+
+            var (hyperlinks, title, cssLinks) = self.parseHtml(response!)
             
             var sm:StorageManager = self.getAppDelegate().getStorageManager()
 
@@ -108,13 +124,13 @@ class CrawlManager:NSObject {
             }
             for hyperlink in hyperlinks {
                 if (dynamicCount < 0) {
-                    break
+                    return
                 }
                 if (site.getPage(hyperlink) == nil) {
-                    dynamicCount--
+                    dynamicCount = dynamicCount - 1
                     let sanitizedHyperlink = self.sanitizeUrl(hyperlink, hostname: site.hostname, currentPath: stringUrl)
                     if (sanitizedHyperlink != "") {
-                        self.recursiveCrawl(site, url:sanitizedHyperlink, primaryKey:hyperlink, countRemaining: count, depthRemaining: depth-1)
+                        self.recursiveCrawl(site, url:sanitizedHyperlink, primaryKey:hyperlink, countRemaining: dynamicCount, depthRemaining: depth-1)
                     }
                     
                 }
@@ -123,6 +139,7 @@ class CrawlManager:NSObject {
         }
         
         task.resume()
+        return true
         
     }
  

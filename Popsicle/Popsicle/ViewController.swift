@@ -61,8 +61,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println(self.session.connectedPeers)
         
         var toBroadcast:[String] = []
+        
         for site in localSites {
             toBroadcast.append(site.hostname)
+            site.subscribeForUpdate(self, key: "site")
         }
         
         self.advertiser = MCNearbyServiceAdvertiser(peer: self.peerID,
@@ -545,10 +547,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     indexRow = indexRow - self.nmrPages
                 }
                 
+                
+                var spinner:UIActivityIndicatorView! = cell?.viewWithTag(4) as? UIActivityIndicatorView
+                spinner.hidden = false
+                
+                var spinnerFrame = spinner.frame;
+                spinnerFrame.origin.x =  bgButton.frame.size.width - 45
+                spinner.frame = spinnerFrame
+                spinner.hidden = false
+
                 var site =  self.localSites[indexRow]
                 siteNameLabel?.text = site.hostname
                 lastUpdatedLabel?.text = getAgoString(site.last_update)
                 
+
+                if (site.isBeingCached == true) {
+                    spinner.hidden = false
+                    spinner.startAnimating()
+
+                }
+                else {
+                    spinner.hidden = true
+                    spinner.stopAnimating()
+                }
+
                 return cell
             }
             else {
@@ -766,8 +788,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.selectedSite = nil;
                 self.nmrPages = 0
             }
+            
+            for site in self.localSites {
+                site.subscribeForUpdate(self, key: "site")
+            }
 
             self.tableView.reloadData()
+        }
+        
+        if (key == "site") {
+            //self.tableView.reloadData()
         }
         
     }

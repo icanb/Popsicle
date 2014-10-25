@@ -5,6 +5,10 @@
 //  Created by Ilter Canberk on 9/27/14.
 //  Copyright (c) 2014 hax. All rights reserved.
 //
+//  This class creates a way to subscribe to updates
+//  on data classes. This way, the UI functions can listen to
+//  the changes instead of constantly polling.
+//
 
 import Foundation
 
@@ -12,7 +16,8 @@ class Storable:NSObject {
 
     var storePath: String?
     var updateSubscribers:[(StorageUpdateDelegate, String)] = []
-    
+    var isBeingCached: Bool?
+
     func updateStorage() {
         if (storePath == nil) {
             println("No store path")
@@ -34,9 +39,14 @@ class Storable:NSObject {
         self.updateSubscribers.append((obj, key))
     }
     
-    class func deleteFileAtPath(path:String) {
-        var manager = NSFileManager.defaultManager()
-        manager.removeItemAtPath(path, error: nil)
+    func doneCaching() {
+        
+        if (isBeingCached == false) {
+            return;
+        }
+
+        isBeingCached = false;
+        self.updateStorage()
     }
 
 }
